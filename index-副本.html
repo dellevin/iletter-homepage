@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="95后，全干开发者">
+    <meta name="keywords" content="Java,Spring,个人博客，微信小程序，博客">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <!-- 百度统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d82271fd27b69793bf97f088c0a87fd4";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+    <!--   今日诗词   -->
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <!-- 网站访问计数 -->
+    <script defer src="https://events.vercount.one/js"></script>
+    <script src="./static/js/axios.min.js"></script>
+    <script type="text/javascript">
+        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+            alert('朋友，上古浏览器不支持呢~');
+        }
+    </script>
+    <title>白荼 - BAITU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', 'STSong', serif;
+            line-height: 1.8;
+            color: #333;
+            padding: 20px;
+            /* 信件背景 */
+            /*background: #eeeeee url(./static/img/bj.png);*/
+            /*background-attachment: fixed;*/
+            /*background-repeat: repeat;*/
+            /* 马赛克方格背景 */
+            background-color: #f0f0f0;
+            background-image: 
+                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),
+                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            margin-bottom: 20px; /* 与底部信息保持距离 */
+            position: relative;
+        }
+
+        /* 头部导航 */
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .nav-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #333;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* 内容区域 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 信纸纹理效果 */
+        .letter-container {
+            background-image: 
+                linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+        }
+
+        /* 通用内容样式 */
+        .content-section {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .content-section h2 {
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 24px;
+        }
+
+        .content-section h3 {
+            margin: 25px 0 15px 0;
+            color: #444;
+            font-size: 18px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* 列表样式 */
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-section li::before {
+            content: "▹";
+            color: #999;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* 联系方式 */
+        .contact-info {
+            margin: 15px 0;
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 网站链接 */
+        .website-links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .website-links a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        /* 工具和游戏网格 */
+        .tools-grid, .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .tool-item, .game-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .tool-name, .game-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tool-desc, .game-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 关于我页面特殊样式 */
+        .about-me-content {
+            text-align: justify;
+        }
+
+        .about-me-content p:first-child {
+            font-size: 18px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .tools-grid, .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .letter-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* 底部版权信息 - 在信纸外部 */
+        #footer-wrap {
+            max-width: 800px;
+            margin: 0 auto 20px auto; /* 添加底部边距 */
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+            /* 添加背景和边框，模仿信纸容器样式 */
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            /* 添加信纸纹理背景 */
+            background-image: 
+            linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+            border-top: 1px solid #eee; /* 添加顶部边框与信纸区分 */
+        }
+        
+        #footer-wrap a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        #footer-wrap a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        
+        #footer-wrap img {
+            width: 50px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        /* 今日诗词样式 */
+        #jinrishici-sentence {
+            position: absolute;
+            top: 111px;
+            right: 40px;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            text-align: right;
+            max-width: 300px;
+        }
+        
+        /* 网站统计样式 */
+        .webinfo {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        .webinfo-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            #jinrishici-sentence {
+                position: static;
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 20px;
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .webinfo {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <!-- 头部导航 -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="about">关于我</div>
+            <div class="nav-tab" data-tab="website">我的网站</div>
+            <div class="nav-tab" data-tab="tools">常用工具</div>
+            <div class="nav-tab" data-tab="games">常玩游戏</div>
+            <div class="nav-tab" data-tab="contact">联系我</div>
+        </div>
+
+        <!-- 今日诗词 -->
+        <div id="jinrishici-sentence">正在加载今日诗词...</div>
+
+        <!-- 关于我内容 -->
+        <div class="tab-content active" id="about-content">
+            <div class="content-section about-me-content">
+                <h2>你好</h2>
+                <p>见字如面，展信舒颜。</p>
+                <p>我叫<strong>白荼</strong>，河北衡水人，土生土长的北方汉子，毕业于一所不知名的二本院校。信息管理与信息系统专业。
+自学java、vue、linux、mysql、python等开发技术和一些软件逆向技术，同时还略懂些PS图片、PR视频、AE特效制作。做过系统，剪过网线，搞过plc耍过单片机，维护修理过服务器，
+运营过公众号和网站等等。可谓是会，但只会一点点。别人都觉得我是个大佬，其实我就是个小菜鸡。</p>     
+                <p>平时的爱好也就是玩玩游戏看看书，刷刷动漫，宅男一个，不爱出门。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客
+并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。</p>
+                
+                <p>作为一个90后，很庆幸我还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！</p>
+            </div>
+        </div>
+
+        <!-- 我的网站内容 -->
+        <div class="tab-content" id="website-content">
+            <div class="content-section">
+                <h2>我的网站</h2>
+                
+                <div class="website-links">
+                    <h3>个人博客</h3>
+                    <a href="https://www.ittoolman.top/" target="_blank">ittoolman.top - Github托管</a>
+                    <a href="https://blog.iletter.top/" target="_blank">blog.iletter.top - typecho用户的最后坚守</a>
+                    <h3>在线应用</h3>
+                    <a href="https://img.iletter.top/" target="_blank">简单图床 - 存一些在线图片</a>
+                    <a href="https://bitwarden.iletter.top/" target="_blank">密码保存 - Bitwarden搭建</a>
+                    <a href="http://frp.iletter.top/" target="_blank">FRP穿透 - Frp穿透管理后台</a>
+                    <a href="http://openlist.iletter.top/" target="_blank">OpenList - 在线云盘的集合</a>
+                    <a href="http://webdav.iletter.top/" target="_blank">WebDav - webdav数据备份</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系我内容 -->
+        <div class="tab-content" id="contact-content">
+            <div class="content-section">
+                <h2>联系我</h2>
+                <p>欢迎通过以下方式与我联系：</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">邮箱：</span>
+                        <span>dellevin99@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">微信：</span>
+                        <span>E-Levin_</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">扣扣：</span>
+                        <span>1754084631</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">地址：</span>
+                        <span>山东省·济南市·市中区</span>
+                    </div>
+                </div>
+                
+                <h3>社交媒体</h3>
+                <div class="website-links">
+                    <a href="https://github.com/dellevin" target="_blank">GitHub</a>
+                    <a href="https://weibo.com/u/6094785105" target="_blank">微博</a>
+                    <a href="https://www.zhihu.com/people/bing-xue-chen-xi-59" target="_blank">知乎</a>
+                    <a href="https://space.bilibili.com/403551212" target="_blank">B站</a>
+                </div>
+                
+                <h3>留言</h3>
+                <p>如果你有任何问题或建议，欢迎去<a href="https://blog.iletter.top/" target="_blank">我的博客</a>给我留言！</p>
+            </div>
+        </div>
+
+        <!-- 工具内容 -->
+        <div class="tab-content" id="tools-content">
+            <div class="content-section">
+                <h2>我的工具</h2>
+                
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-name">Rolan</div>
+                        <div class="tool-desc">应用启动器</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Chrome</div>
+                        <div class="tool-desc">确实好用</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">VS Code</div>
+                        <div class="tool-desc">代码编辑器，轻量高效</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">IntelliJ IDEA</div>
+                        <div class="tool-desc">JAVA代码编辑器</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">PyCharm</div>
+                        <div class="tool-desc">python代码编辑器</div>
+                    </div>
+                     <div class="tool-item">
+                        <div class="tool-name">Android Studio</div>
+                        <div class="tool-desc">安卓软件开发</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">HbuilderX</div>
+                        <div class="tool-desc">写小程序真心不错，vue+js很棒！减少了学习压力</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Navicate</div>
+                        <div class="tool-desc">链接mysql的神器，sqlyog是谁？真不熟。</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Xshell</div>
+                        <div class="tool-desc">链接服务器简单易用配合xftp很好用</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Postman</div>
+                        <div class="tool-desc">API测试与调试工具</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">VMware</div>
+                        <div class="tool-desc">虚拟机管理</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">PhotoShop</div>
+                        <div class="tool-desc">ps图片专用蒙版套索十分好用</div>
+                    </div>
+                    <!--<div class="tool-item">-->
+                    <!--    <div class="tool-name">Blender</div>-->
+                    <!--    <div class="tool-desc">正在学习中......</div>-->
+                    <!--</div>-->
+                    <div class="tool-item">
+                        <div class="tool-name">Obsidian</div>
+                        <div class="tool-desc">知识管理，双链接笔记。本地笔记爱好者的福音。</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Typora</div>
+                        <div class="tool-desc">Markdown编辑器，简洁美观。</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Docker</div>
+                        <div class="tool-desc">容器化部署，环境一致性</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Premiere Pro</div>
+                        <div class="tool-desc">剪辑视频调音做简单的效果，简单易用</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">After Effects</div>
+                        <div class="tool-desc">特效制作神器，就是对显卡和cpu比较不友好</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">CheatEngine</div>
+                        <div class="tool-desc">风灵月影没出来就用它，亦是内存hook的极佳选择</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">x64dbg</div>
+                        <div class="tool-desc">孩子！你想掌握逆向之力嘛！先从x64dbg开始吧！</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">WireGuard</div>
+                        <div class="tool-desc">组网神器，前提是自己搭建</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Syncthing</div>
+                        <div class="tool-desc">文件同步，超级好用，同步笔记的不错选择。</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">NeatReader</div>
+                        <div class="tool-desc">看书软件</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Corel VideoStudio</div>
+                        <div class="tool-desc">万恶的苏州思杰马克丁！还我会声会影</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">网易云音乐</div>
+                        <div class="tool-desc">每天听，每天用，尊贵的年费vip+版权破解Unblock Netease</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">喜马拉雅听书</div>
+                        <div class="tool-desc">每天听，每天用。三体，穷鬼的上下两千年等优秀书籍</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">一本日记</div>
+                        <div class="tool-desc">正经人谁写日记啊！</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Ollama</div>
+                        <div class="tool-desc">本地部署对话AI</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">AnythingLLM</div>
+                        <div class="tool-desc">知识库的极佳选择</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">UVR5</div>
+                        <div class="tool-desc">处理音频的神器</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">Remote Desktop Manager</div>
+                        <div class="tool-desc">超级强大的远控软件</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">SyncClipboard</div>
+                        <div class="tool-desc">剪切板同步，好用，爱用</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name">QtScrcpy</div>
+                        <div class="tool-desc">局域网控制手机的软件</div>
+                    </div>
+                    
+                </div>
+            
+            </div>
+        </div>
+
+        <!-- 游戏内容 -->
+        <div class="tab-content" id="games-content">
+            <div class="content-section">
+                <h2>我常玩的游戏</h2>
+                
+                <div class="games-grid">
+                    <div class="game-item" data-src="https://www.iletter.top/gamepage/yongjiewujian">
+                        <div class="game-name">《永劫无间》</div>
+                        <div class="game-desc">我身无拘，武道无穷</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《我的世界》</div>
+                        <div class="game-desc">开放冒险，独属于社恐人精神世界的乌托邦</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《鬼谷八荒》</div>
+                        <div class="game-desc">立绘优美，故事丰富，沙盒修仙游戏的上乘之作</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《江城创业记》</div>
+                        <div class="game-desc">缝合怪，但是全缝了。战斗、农场、自动化你想要的全都有</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《中国式家长》</div>
+                        <div class="game-desc">我承认我做不好一个孩子，也做不好一个家长</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《师傅》</div>
+                        <div class="game-desc">我这一拳70年的功力，你挡得住吗！</div>
+                    </div>
+                    
+                    <div class="game-item">
+                        <div class="game-name">《王者荣耀》</div>
+                        <div class="game-desc">买了好多皮肤（已退坑）</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《QQ飞车手游》</div>
+                        <div class="game-desc">极致细节，巅峰竞速（已退坑）</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《龙族幻想》</div>
+                        <div class="game-desc">因为龙族入坑的（已退坑）</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-footer">
+            <!--愿你被这个世界温柔以待-->
+            我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生
+        </div>
+    </div>
+
+    <!-- 底部版权信息和网站统计 - 在信纸外部 -->
+    <div id="footer-wrap">
+        <div class="webinfo">
+            <div class="webinfo-item">
+                <div class="webinfo-site-uv-name">本站访客数 :</div>
+                <div class="webinfo-site-uv-count" id="vercount_value_site_uv">-</div>
+            </div>
+            <div class="webinfo-item">
+                <div class="webinfo-site-name">本站总访问量 :</div>
+                <div class="webinfo-site-pv-count" id="vercount_value_site_pv">-</div>
+            </div>
+        </div>
+        <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn" target="_blank">冀ICP备2025122609号</a> &copy;2020 - 2025 Power BY Del Levin </div>
+        <p style="margin-top: 10px">本站由<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="noopener"><img class="alignnone" alt="又拍云logo" style="width: 50px" src="./static/img/又拍云_logo5.png"  ></a>提供CDN加速/云存储服务</p>
+    </div>
+
+    <script>
+        // ==================== 标签切换功能 ==================== 
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 移除所有激活状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            
+             function collectDeviceInfo() {
+                const params = new URLSearchParams();
+                // 基础信息
+                params.append('origin', window.location.origin);
+                params.append('js', navigator.javaEnabled ? '1' : '0');  // 明确传递1或0
+                params.append('cookie', navigator.cookieEnabled ? '1' : '0');  // 明确传递1或0
+                params.append('sw', screen.width);
+                params.append('sh', screen.height);
+                // 新增信息
+                params.append('plugins', navigator.plugins.length);
+                params.append('memory', navigator.deviceMemory || '');
+                params.append('cpu', navigator.platform || '');
+                
+                return params.toString();
+            }
+        });
+    </script>
+</body>
+</html>

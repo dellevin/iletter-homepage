@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="95后，全干开发者">
+    <meta name="keywords" content="Java,Spring,个人博客，微信小程序，博客">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <!-- 百度统计 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d82271fd27b69793bf97f088c0a87fd4";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- umami统计 -->
+    <script defer src="https://umami.iletter.top/script.js"
+        data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script>
+    <!--   今日诗词   -->
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <!-- 网站访问计数 -->
+    <!-- <script defer src="https://events.vercount.one/js"></script> -->
+
+    <script src="./static/js/axios.min.js"></script>
+    <script type="text/javascript">
+        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+            alert('朋友，上古浏览器不支持呢～');
+        }
+    </script>
+    <title>白荼 - BAITU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', 'STSong', serif;
+            line-height: 1.8;
+            color: #333;
+            padding: 20px;
+            /* 信件背景 */
+            /*background: #eeeeee url(./static/img/bj.png);*/
+            /*background-attachment: fixed;*/
+            /*background-repeat: repeat;*/
+            /* 马赛克方格背景 */
+            background-color: #f0f0f0;
+            background-image:
+                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),
+                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            /* 与底部信息保持距离 */
+            position: relative;
+        }
+
+        /* 头部导航 */
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .nav-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #333;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* 内容区域 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 信纸纹理效果 */
+        .letter-container {
+            background-image:
+                linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+        }
+
+        /* 通用内容样式 */
+        .content-section {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .content-section h2 {
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 24px;
+        }
+
+        .content-section h3 {
+            margin: 25px 0 15px 0;
+            color: #444;
+            font-size: 18px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* 列表样式 */
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-section li::before {
+            content: "▹";
+            color: #999;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* 联系方式 */
+        .contact-info {
+            margin: 15px 0;
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 网站链接 */
+        .website-links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .website-links a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        /* 工具和游戏网格 */
+        .tools-grid,
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .tool-item,
+        .game-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .tool-name,
+        .game-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tool-desc,
+        .game-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 关于我页面特殊样式 */
+        .about-me-content {
+            text-align: justify;
+        }
+
+        .about-me-content p:first-child {
+            font-size: 18px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .tools-grid,
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .letter-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* 底部版权信息 - 在信纸外部 */
+        #footer-wrap {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            /* 添加底部边距 */
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+            /* 添加背景和边框，模仿信纸容器样式 */
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            /* 添加信纸纹理背景 */
+            background-image:
+                linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+            border-top: 1px solid #eee;
+            /* 添加顶部边框与信纸区分 */
+        }
+
+        #footer-wrap a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        #footer-wrap a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        #footer-wrap img {
+            width: 50px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        /* 今日诗词样式 */
+        #jinrishici-sentence {
+            position: absolute;
+            top: 111px;
+            right: 40px;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            text-align: right;
+            max-width: 300px;
+        }
+
+        /* 网站统计样式 */
+        .webinfo {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .webinfo-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #jinrishici-sentence {
+                position: static;
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 20px;
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .webinfo {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+
+        /* --- 新增的闲言碎语样式 --- */
+        .memos-container {
+            margin-top: 10px;
+        }
+
+        .memo-item {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .memo-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .memo-content {
+            margin-bottom: 8px;
+            word-break: break-word;
+            /* 防止长单词溢出 */
+        }
+
+        .memo-tags {
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .memo-tag {
+            background-color: #e0e0e0;
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .memo-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .memo-page-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .memo-page-btn:hover:not(.disabled) {
+            background-color: #f0f0f0;
+        }
+
+        .memo-page-btn.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .memo-page-btn.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .memo-loading,
+        .memo-error {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+
+        .memo-attachments {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .memo-attachment-item {
+            flex: 0 0 auto;
+        }
+
+        .memo-attachment-image {
+            max-width: 100px;
+            max-height: 100px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* --- 新增的闲言碎语样式 END --- */
+    </style>
+</head>
+
+<body>
+    <div class="letter-container">
+        <!-- 头部导航 -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="about">关于我</div>
+            <div class="nav-tab" data-tab="website">我的网站</div>
+            <div class="nav-tab" data-tab="tools">常用工具</div>
+            <div class="nav-tab" data-tab="games">常玩游戏</div>
+            <div class="nav-tab" data-tab="memos">闲言碎语</div>
+            <div class="nav-tab" data-tab="contact">联系我</div>
+        </div>
+
+        <!-- 今日诗词 -->
+        <div id="jinrishici-sentence">正在加载今日诗词...</div>
+
+        <!-- 关于我内容 -->
+        <div class="tab-content active" id="about-content">
+            <div class="content-section about-me-content">
+                <h2>你好</h2>
+                <p>见字如面，展信舒颜。</p>
+                <p>我叫<strong>白荼</strong>，河北衡水人，土生土长的北方汉子，毕业于一所不知名的二本院校。信息管理与信息系统专业。
+                    自学java、vue、linux、mysql、python等开发技术和一些软件逆向技术，同时还略懂些PS图片、PR视频、AE特效制作。做过系统，剪过网线，搞过plc耍过单片机，维护修理过服务器，
+                    运营过公众号和网站等等。可谓是会，但只会一点点。别人都觉得我是个大佬，其实我就是个小菜鸡。</p>
+                <p>平时的爱好也就是玩玩游戏看看书，刷刷动漫，宅男一个，不爱出门。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客
+                    并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。</p>
+
+                <p>作为一个90后，很庆幸我还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！</p>
+            </div>
+        </div>
+
+        <!-- 我的网站内容 -->
+        <div class="tab-content" id="website-content">
+            <div class="content-section">
+                <h2>我的网站</h2>
+
+                <div class="website-links">
+                    <h3>个人博客</h3>
+                    <a href="https://www.ittoolman.top/" target="_blank">ittoolman.top - Github托管</a>
+                    <a href="https://blog.iletter.top/" target="_blank">blog.iletter.top - typecho用户的最后坚守</a>
+                    <h3>在线应用</h3>
+                    <a href="https://img.iletter.top/" target="_blank">简单图床 - 图床工具</a>
+                    <a href="http://openlist.iletter.top/" target="_blank">OpenList - 在线云盘合集</a>
+                    <a href="http://beszel.iletter.top/" target="_blank">Beszel - 服务器监控</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系我内容 -->
+        <div class="tab-content" id="contact-content">
+            <div class="content-section">
+                <h2>联系我</h2>
+                <p>欢迎通过以下方式与我联系：</p>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">邮箱：</span>
+                        <span>dellevin99@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">微信：</span>
+                        <span>E-Levin_</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">扣扣：</span>
+                        <span>1754084631</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">地址：</span>
+                        <span>山东省·济南市·市中区</span>
+                    </div>
+                </div>
+
+                <h3>社交媒体</h3>
+                <div class="website-links">
+                    <a href="https://github.com/dellevin" target="_blank">GitHub</a>
+                    <a href="https://weibo.com/u/6094785109999999999" target="_blank">微博</a>
+                    <a href="https://www.zhihu.com/people/bing-xue-chen-xi-59" target="_blank">知乎</a>
+                    <a href="https://space.bilibili.com/403551212" target="_blank">B站</a>
+                    <a href="https://www.52pojie.cn/home.php?mod=space&uid=2059006" target="_blank">52pojie</a>
+                </div>
+                <h3>留言</h3>
+                <p>如果你有任何问题或建议，欢迎<a href="https://blog.iletter.top/401.html" target="_blank">点击此链接</a>去我的博客下面给我留言！</p>
+            </div>
+        </div>
+
+        <!-- 工具内容 -->
+        <div class="tab-content" id="tools-content">
+            <div class="content-section">
+                <h2>我的工具</h2>
+
+                <div id="tools-container" class="tools-grid">
+                    <div class="memo-loading">正在加载工具列表...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏内容 -->
+        <div class="tab-content" id="games-content">
+            <div class="content-section">
+                <h2>我常玩的游戏</h2>
+
+                <div class="games-grid">
+                    <div class="game-item">
+                        <div class="game-name">《永劫无间》</div>
+                        <div class="game-desc">我身无拘，武道无穷</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《我的世界》</div>
+                        <div class="game-desc">这个小盒才是我的永远的家</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《鬼谷八荒》</div>
+                        <div class="game-desc">当互动版的修仙小说看了，很好玩.</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《江城创业记》</div>
+                        <div class="game-desc">缝合怪，但是全缝了。很喜欢的一款游戏</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《中国式家长》</div>
+                        <div class="game-desc">我承认我做不好一个孩子，也做不好一个家长</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《王者荣耀》</div>
+                        <div class="game-desc">买了好多皮肤，和朋友玩才是真快乐（已退坑）</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《QQ飞车手游》</div>
+                        <div class="game-desc">氪了好多，有些后悔了（已退坑）</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《龙族幻想》</div>
+                        <div class="game-desc">因为龙族入坑的，小氪（已退坑）</div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-name">《洛克王国》</div>
+                        <div class="game-desc">还记得小时候拿压岁钱偷偷买点卡（已退坑）</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 闲言碎语内容 -->
+        <div class="tab-content" id="memos-content">
+            <div class="content-section">
+                <h2>闲言碎语</h2>
+                <div id="memos-container" class="memos-container">
+                    <div class="memo-loading">正在加载...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-footer">
+            <!--愿你被这个世界温柔以待-->
+            我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生
+        </div>
+    </div>
+
+    <!-- 底部版权信息和网站统计 - 在信纸外部 -->
+    <div id="footer-wrap">
+        <div class="webinfo">
+            <div class="webinfo-item">
+                <div class="webinfo-site-uv-name">本站访客数 :</div>
+                <div class="webinfo-site-uv-count" id="site_uv">-</div>
+            </div>
+            <div class="webinfo-item">
+                <div class="webinfo-site-name">本站总访问量 :</div>
+                <div class="webinfo-site-pv-count" id="site_pv">-</div>
+            </div>
+        </div>
+        <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
+                target="_blank">冀ICP备2025122609号</a> &copy;2020 - 2025 Power BY Del Levin </div>
+    </div>
+
+    <script>
+        // ========== 工具配置数据 ==========
+        // 将工具数据集中管理
+        const toolsData = [
+            { name: 'Rolan', desc: '应用启动器，从大学用到现在' },
+            { name: 'Chrome', desc: '确实好用,正在想着屎迈进' },
+            { name: 'VS Code', desc: '代码编辑器，轻量?高效!' },
+            { name: 'IntelliJ IDEA', desc: 'JAVA代码编辑器' },
+            { name: 'PyCharm', desc: 'python代码编辑器' },
+            { name: 'Android Studio', desc: '安卓软件开发，一直在学（新建文件夹）' },
+            { name: 'HbuilderX', desc: '写小程序真心不错，vue+js很棒！减少了学习压力' },
+            { name: 'Navicate', desc: '链接mysql的神器，sqlyog是谁？真不熟。' },
+            { name: 'Xshell', desc: '链接服务器简单易用配合xftp很好用' },
+            { name: 'Postman', desc: 'API测试与调试工具' },
+            { name: 'VMware', desc: '虚拟机管理' },
+            { name: 'PhotoShop', desc: 'ps图片专用蒙版套索十分好用' },
+            { name: 'Obsidian', desc: '知识管理，双链接笔记。本地笔记爱好者的福音。' },
+            { name: 'Typora', desc: 'Markdown编辑器，简洁美观。' },
+            { name: 'Docker', desc: '容器化部署，环境一致性' },
+            { name: 'Premiere Pro', desc: '剪辑视频调音做简单的效果，简单易用' },
+            { name: 'After Effects', desc: '特效制作神器，就是对显卡和cpu比较不友好' },
+            { name: 'CheatEngine', desc: '风灵月影没出来就用它，亦是内存hook的极佳选择' },
+            { name: 'x64dbg', desc: '孩子！你想掌握逆向之力嘛！先从x64dbg开始吧！' },
+            { name: 'WireGuard', desc: '组网神器，前提是自己搭建' },
+            { name: 'Syncthing', desc: '文件同步，超级好用，同步笔记的不错选择。' },
+            { name: 'NeatReader', desc: '看书软件' },
+            { name: 'Corel VideoStudio', desc: '万恶的苏州思杰马克丁！还我会声会影' },
+            { name: '网易云音乐', desc: '每天听，每天用，尊贵的年费vip+版权破解Unblock Netease' },
+            { name: '喜马拉雅听书', desc: '每天听，每天用。三体，穷鬼的上下两千年等优秀书籍' },
+            { name: '一本日记', desc: '正经人谁写日记啊！' },
+            { name: 'Ollama', desc: '本地部署对话AI' },
+            { name: 'AnythingLLM', desc: 'AI知识库的极佳选择' },
+            { name: 'UVR5', desc: '处理音频的神器' },
+            { name: 'Remote Desktop Manager', desc: '超级强大的远控软件' },
+            { name: 'SyncClipboard', desc: '剪切板同步，好用，爱用' },
+            { name: 'QtScrcpy', desc: '局域网控制手机的软件' },
+        ];
+        // ========== 渲染工具列表的函数 ==========
+        function renderTools(toolsArray) {
+            const container = document.getElementById('tools-container');
+            if (!container) {
+                console.error("未找到工具容器 #tools-container");
+                return;
+            }
+
+            if (!toolsArray || toolsArray.length === 0) {
+                container.innerHTML = '<div class="memo-error">暂无工具数据</div>'; // 可选：无数据提示
+                return;
+            }
+
+            let html = '';
+            toolsArray.forEach(tool => {
+                html += `
+                    <div class="tool-item">
+                        <div class="tool-name">${tool.name}</div>
+                        <div class="tool-desc">${tool.desc}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ==================== 标签切换功能 ====================
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const tabId = this.getAttribute('data-tab');
+
+                    // 移除所有激活状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            // 点击我的工具函数
+            const toolsTab = document.querySelector('.nav-tab[data-tab="tools"]');
+            const toolsContent = document.getElementById('tools-content');
+            if (toolsTab && toolsContent) {
+                toolsTab.addEventListener('click', function () {
+                    const hasRendered = toolsContent.querySelector('.tool-item') !== null;
+                    if (!hasRendered) {
+                        renderTools(toolsData);
+                    }
+                });
+            } else {
+                console.warn("未找到“我的工具”标签或内容区域，将在页面加载时尝试渲染。");
+                renderTools(toolsData);
+            }
+        });
+
+        // ==================== 闲言碎语 API 加载与分页功能 ====================
+        (function () {
+            // 确保使用 HTTPS
+            const MEMOS_API_BASE = 'https://memos.iletter.top/api/v1/memos';
+            const PAGE_SIZE = 5; // 每页加载的 memo 数量
+
+            let memoData = []; // 存储所有已加载的 memo
+            let allLoaded = false; // 标记是否已加载所有数据
+            let isLoading = false; // 标记是否正在加载，防止重复请求
+            let nextPageToken = null; // 用于 API 分页的 token
+
+            // 获取 DOM 元素
+            const memosTab = document.querySelector('.nav-tab[data-tab="memos"]');
+            const memosContainer = document.getElementById('memos-container');
+            const memosContent = document.getElementById('memos-content');
+
+            // 日期格式化函数 (简单实现)
+            function formatDate(dateStr) {
+                const date = new Date(dateStr);
+                return date.toLocaleString('sv-SE'); // 使用瑞典格式，结果接近 '2026-01-08 00:57:04'
+            }
+
+            // 渲染 Memo 列表 (追加模式)
+            function renderMemos(memos) {
+                if (!memos || memos.length === 0) {
+                    // 如果是首次加载且无数据
+                    if (memoData.length === 0) {
+                        memosContainer.innerHTML = '<div class="memo-error">暂无数据</div>';
+                    }
+                    return;
+                }
+
+                let html = '';
+                memos.forEach(memo => {
+                    const formattedDate = formatDate(memo.displayTime);
+                    const tagsHtml = memo.tags && memo.tags.length > 0 ?
+                        `<div class="memo-tags">${memo.tags.map(tag => `<span class="memo-tag">${tag}</span>`).join('')}</div>`
+                        : '';
+
+                    // 去掉 \n# 及其后面的部分
+                    const contentWithoutHash = memo.content.split('\n#')[0];
+                    // --- 新增: 生成附件 HTML ---
+                    let attachmentsHtml = '';
+                    if (memo.attachments && Array.isArray(memo.attachments) && memo.attachments.length > 0) {
+                        attachmentsHtml = '<div class="memo-attachments">';
+                        memo.attachments.forEach(attachment => {
+                            // 检查附件类型是否为图片
+                            if (attachment.type && attachment.type.startsWith('image/')) {
+                                // 构造缩略图链接
+                                const thumbnailUrl = `https://memos.iletter.top/file/${attachment.name}/${encodeURIComponent(attachment.filename)}?thumbnail=true`
+
+                                attachmentsHtml += `
+                                    <div class="memo-attachment-item">
+                                        <img src="${thumbnailUrl}" alt="${attachment.filename}" class="memo-attachment-image" data-full-url="${'https://memos.iletter.top/file/' + attachment.name + '/' + encodeURIComponent(attachment.filename)}">
+                                    </div>
+                                `;
+                            }
+                            // 如果需要处理其他类型的附件，可以在这里添加 else if 分支
+                            else {
+                                attachmentsHtml += `<a href="https://memos.iletter.top/file/${attachment.name}/${encodeURIComponent(attachment.filename)}" target="_blank">${attachment.filename}</a>`;
+                            }
+                        });
+                        attachmentsHtml += '</div>';
+                    }
+
+
+                    html += `
+                        <div class="memo-item">
+                            <div class="memo-date">${formattedDate}</div>
+                            <div class="memo-content">${contentWithoutHash}</div>
+                            ${attachmentsHtml}
+                            ${tagsHtml}
+                        </div>
+                    `;
+                });
+
+                // 如果是首次加载，则替换容器内容
+                if (memoData.length === memos.length) {
+                    memosContainer.innerHTML = html;
+                } else {
+                    // 否则追加到现有内容之后
+                    memosContainer.insertAdjacentHTML('beforeend', html);
+                }
+            }
+
+            // 加载 Memo 数据 (分页) - 修正后的函数
+            async function loadMemos() {
+                // 防止重复加载或已加载完毕时再次加载
+                if (isLoading || allLoaded) {
+                    console.log("加载状态检查：", { isLoading, allLoaded });
+                    return;
+                }
+                isLoading = true;
+
+                // 显示加载状态 (仅在首次加载时替换，后续加载追加)
+                if (memoData.length === 0) {
+                    memosContainer.innerHTML = '<div class="memo-loading">正在加载...</div>';
+                }
+
+                try {
+                    // 构建 API 请求 URL，确保 pageToken 不为 null 时才添加
+                    const url = new URL(MEMOS_API_BASE);
+                    url.searchParams.set('pageSize', PAGE_SIZE.toString());
+                    url.searchParams.set('orderBy', 'display_time desc');
+                    if (nextPageToken) {
+                        url.searchParams.set('pageToken', nextPageToken);
+                    }
+
+                    // console.log("请求 URL:", url.toString()); // 调试信息
+
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    // console.log("API 响应:", data); // 调试信息
+
+                    const newMemos = data.memos || [];
+                    memoData = memoData.concat(newMemos);
+
+                    // --- 修复的关键逻辑 ---
+                    // 检查 API 返回的 next_page_token 是否为空字符串
+                    if (data.nextPageToken === "") {
+                        allLoaded = true; // 标记为已全部加载
+                        nextPageToken = null; // 清空 token
+                        console.log("检测到 nextPageToken 为空，已全部加载。");
+                    } else {
+                        // 如果不为空，更新 token 以供下次使用
+                        nextPageToken = data.nextPageToken;
+                    }
+
+                    // 渲染新加载的数据
+                    renderMemos(newMemos);
+
+                    // --- 修复的关键逻辑 ---
+                    // 只有在尚未全部加载完时，才渲染加载更多按钮
+                    if (!allLoaded) {
+                        renderLoadMoreButton();
+                    } else {
+                        const loadMoreContainer = document.getElementById('load-more-btn');
+                        if (loadMoreContainer) {
+                            loadMoreContainer.remove();
+                        }
+                        // 数据全部加载完后，可以显示一个提示
+                        memosContainer.insertAdjacentHTML('beforeend', '<div class="memo-error">已加载全部数据</div>');
+                    }
+
+                } catch (error) {
+                    console.error('加载闲言碎语失败:', error);
+                    // 如果是首次加载失败，替换内容
+                    if (memoData.length === 0) {
+                        memosContainer.innerHTML = `<div class="memo-error">加载失败: ${error.message}</div>`;
+                    } else {
+                        // 如果是追加加载失败，提示错误，但保留已有内容
+                        memosContainer.insertAdjacentHTML('beforeend', `<div class="memo-error">加载失败: ${error.message}</div>`);
+                    }
+                } finally {
+                    isLoading = false;
+                }
+            }
+
+            // 渲染“加载更多”按钮
+            function renderLoadMoreButton() {
+                const existingButton = document.getElementById('load-more-btn');
+                if (existingButton) existingButton.remove();
+                const loadMoreButton = document.createElement('div');
+                loadMoreButton.id = 'load-more-btn';
+                loadMoreButton.className = 'memo-pagination';
+                loadMoreButton.innerHTML = `<button class="memo-page-btn" onclick="loadMemos()">加载更多</button>`;
+                memosContainer.appendChild(loadMoreButton);
+            }
+
+            // 为加载更多按钮绑定事件 (使用全局函数)
+            window.loadMemos = loadMemos;
+
+            // 当“闲言碎语”标签被点击时加载数据
+            memosTab.addEventListener('click', function () {
+                // 只有在内容是空的或者首次加载时才调用
+                if (memoData.length === 0) {
+                    loadMemos();
+                }
+            });
+
+            // 初始加载，如果“闲言碎语”是默认激活的标签
+            // 注意：当前默认激活的是 'about' 标签，所以首次加载不会触发
+            // 如果需要默认加载 memos，需要调整默认激活的标签或在此处调用
+            // if (memosContent.classList.contains('active')) {
+            //     loadMemos();
+            // }
+
+        })();
+
+        // ==================== Umami Stats 请求 ====================
+        (async () => {
+            const webid = 'ae6cd64c-5900-49c9-9c22-95cedc24a508'
+            const statsEndpoint = 'https://umami.iletter.top/api/websites/'+webid+'/stats';
+            const startAt = 1768060800000;
+            const endAt = Date.now(); // 当前时间的时间戳（毫秒）
+            const headers = {
+                'Authorization': 'Bearer 3VvA8ETw0ahPhzuNNY+Zxi3agtfOBT2vNRbm0GcPqIyUhm7rExuwj8F8IwiQWcn/rOD2G/TnONPCFIvUECQYp6GuZRTnfOojki533vP/skqf0D6puOZDQQk8Y7ssihXnfyRu5naGhIoj1BCAC7S0D0RiYvzpSYF9zvZqvgxETrCbFazZsqUBolyJd8H2iZiM4Xx3VC+GnkZHZFgQfaaYUvm33a7CLM74PyFpPby63UExMjIPiLQRAOR2hs5wl5JAs5CTYUaq+QHCCz+tWgDQ4FPtIgoZoG8Ugnywv/YEEn1Jv9p3t8ge7m8ttThnPiZWw62PYPWQ3LpFh7nxX9jQX/Y/vaaAyacCoIP5J4VpiClA40GMMptZrThzEQjheegCilb9',
+                'Content-Type': 'application/json'
+            };
+            const params = new URLSearchParams({
+                startAt: startAt.toString(),
+                endAt: endAt.toString()
+            });
+            const requestUrl = `${statsEndpoint}?${params}`;
+
+            try {
+                const response = await fetch(requestUrl, {
+                    method: 'GET',
+                    headers: headers,
+                });
+                if (!response.ok) {
+                    // 如果响应不是 2xx，抛出错误
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
+                }
+
+                const data = await response.json();
+                // console.log('Umami Stats 请求成功:', data);
+                // 浏览量    data.pageviews.value
+                // 访问次数  data.visits.value
+                // 访客      data.visitors.value
+                document.getElementById('site_uv').textContent = JSON.stringify(data.visitors.value) + "人";
+                document.getElementById('site_pv').textContent = JSON.stringify(data.pageviews.value) + "次";
+            } catch (error) {
+                console.error('获取 Umami Stats 数据时发生错误:', error); // 控制台输出错误信息
+            }
+        })();
+    </script>
+</body>
+
+</html>
