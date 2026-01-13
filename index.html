@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN"> <!-- 初始语言设为中文 -->
 
 <head>
     <meta charset="UTF-8">
@@ -17,21 +17,344 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <!-- 多语言 -->
+    <script src="./static/js/translations.js"></script>
     <!-- umami统计 -->
     <script defer src="https://umami.iletter.top/script.js"
         data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script>
     <!--   今日诗词   -->
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <!-- 网站访问计数 -->
-    <!-- <script defer src="https://events.vercount.one/js"></script> -->
-
     <script src="./static/js/axios.min.js"></script>
     <script type="text/javascript">
         if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
             alert('朋友，上古浏览器不支持呢～');
         }
     </script>
-    <title>白荼 - BAITU</title>
+    <title data-i18n="page_title">白荼 - BAITU</title>
+</head>
+
+<body>
+    <div class="letter-container">
+        <!-- 语言切换按钮 -->
+        <div class="lang-switch-container">
+            <img id="lang-switch-btn" src="./static/img/中文.png" alt="Switch Language" title="切换语言" />
+        </div>
+
+        <!-- 头部导航 -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="about"><span data-i18n="nav_about">关于我</span></div>
+            <div class="nav-tab" data-tab="website"><span data-i18n="nav_website">我的网站</span></div>
+            <div class="nav-tab" data-tab="tools"><span data-i18n="nav_tools">常用工具</span></div>
+            <div class="nav-tab" data-tab="games"><span data-i18n="nav_games">常玩游戏</span></div>
+            <div class="nav-tab" data-tab="memos"><span data-i18n="nav_memos">闲言碎语</span></div>
+            <div class="nav-tab" data-tab="contact"><span data-i18n="nav_contact">联系我</span></div>
+        </div>
+
+        <!-- 今日诗词 -->
+        <div id="jinrishici-sentence">正在加载今日诗词...</div>
+
+        <!-- 关于我内容 -->
+        <div class="tab-content active" id="about-content">
+
+            <div class="content-section about-me-content">
+                <h2 data-i18n="hello">你好</h2>
+                <p data-i18n="greeting">见字如面，展信舒颜。</p>
+                <p data-i18n="about_me_p1">我叫<strong
+                        data-i18n="my_name">白荼</strong>，河北衡水人，土生土长的北方汉子，毕业于一所不知名的二本院校。信息管理与信息系统专业。
+                    自学java、vue、linux、mysql、python等开发技术和一些软件逆向技术，同时还略懂些PS图片、PR视频、AE特效制作。做过系统，剪过网线，搞过plc耍过单片机，维护修理过服务器，运营过公众号和网站等等。可谓是会，但只会一点点。别人都觉得我是个大佬，其实我就是个小菜鸡。但我不会气馁，努力成为一个大佬的。正如永劫无间刘炼的一句话“天下万般之绝学，莫过于恒心。
+                    ”</p>
+                <p data-i18n="about_me_p2">
+                    平时的爱好也就是玩玩游戏，看看书，刷刷动漫，不爱出门，肥宅一个。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。
+                </p>
+                <p data-i18n="about_me_p3">本站秉承简约风格，采用纯HTML，Umami做网站底部的uv/pv
+                    ，闲言碎语模块使用memos接口。同时使用堡塔云WAF防护，nginx缓存加速网站静态资源。如果您有兴趣，可以直接下载本站的 <a
+                        href="https://gitea.iletter.top/dellevin/BaiTu-homepage"
+                        target="_blank">https://gitea.iletter.top/dellevin/BaiTu-homepage </a>并使用。</p>
+                <p data-i18n="about_me_p4">作为一个99年的码农，很庆幸我在工作之后还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！</p>
+            </div>
+
+        </div>
+
+        <!-- 我的网站内容 -->
+        <div class="tab-content" id="website-content">
+            <div class="content-section">
+                <h2 data-i18n="my_website_h2">我的网站</h2>
+
+                <div class="website-links">
+                    <h3 data-i18n="personal_blog_h3">个人博客</h3>
+                    <a href="https://www.ittoolman.top/" target="_blank" data-i18n="personal_blog_link1"
+                        data-i18n-attr="href">ittoolman.top - Github托管</a>
+                    <a href="https://blog.iletter.top/" target="_blank" data-i18n="personal_blog_link2"
+                        data-i18n-attr="href">blog.iletter.top - typecho用户的最后坚守</a>
+                    <h3 data-i18n="online_apps_h3">在线应用</h3>
+                    <a href="https://img.iletter.top/" target="_blank" data-i18n="online_app_link1"
+                        data-i18n-attr="href">简单图床 - 图床工具</a>
+                    <a href="https://gitea.iletter.top/" target="_blank" data-i18n="online_app_link2"
+                        data-i18n-attr="href">Gitea - 私人git托管仓库</a>
+                    <a href="http://openlist.iletter.top/" target="_blank" data-i18n="online_app_link3"
+                        data-i18n-attr="href">OpenList - 在线云盘合集</a>
+                    <a href="http://beszel.iletter.top/" target="_blank" data-i18n="online_app_link4"
+                        data-i18n-attr="href">Beszel - 服务器监控</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系我内容 -->
+        <div class="tab-content" id="contact-content">
+            <div class="content-section">
+                <h2 data-i18n="contact_me_h2">联系我</h2>
+                <p data-i18n="contact_intro">欢迎通过以下方式与我联系：</p>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label" data-i18n="email_label">邮箱：</span>
+                        <span>dellevin99@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label" data-i18n="wechat_label">微信：</span>
+                        <span>E-Levin_</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label" data-i18n="qq_label">扣扣：</span>
+                        <span>1754084631</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label" data-i18n="address_label">地址：</span>
+                        <span data-i18n="address_value">山东省·济南市·市中区</span>
+                    </div>
+                </div>
+
+                <h3 data-i18n="social_media_h3">社交媒体</h3>
+                <div class="website-links">
+                    <a href="https://github.com/dellevin" target="_blank" data-i18n="social_link1"
+                        data-i18n-attr="href">GitHub</a>
+                    <a href="https://weibo.com/u/6094785109999999999" target="_blank" data-i18n="social_link2"
+                        data-i18n-attr="href">微博</a>
+                    <a href="https://www.zhihu.com/people/bing-xue-chen-xi-59" target="_blank" data-i18n="social_link3"
+                        data-i18n-attr="href">知乎</a>
+                    <a href="https://space.bilibili.com/403551212" target="_blank" data-i18n="social_link4"
+                        data-i18n-attr="href">B站</a>
+                    <a href="https://www.52pojie.cn/home.php?mod=space&uid=2059006" target="_blank"
+                        data-i18n="social_link5" data-i18n-attr="href">52pojie</a>
+                </div>
+                <h3 data-i18n="leave_message_h3">留言</h3>
+                <p data-i18n="leave_message_p"><a href="https://blog.iletter.top/401.html" target="_blank"
+                        data-i18n="leave_message_link" data-i18n-attr="href">点击此链接</a>去我的博客下面给我留言！</p>
+            </div>
+        </div>
+
+        <!-- 工具内容 -->
+        <div class="tab-content" id="tools-content">
+            <div class="content-section">
+                <h2 data-i18n="my_tools_h2">我的工具</h2>
+
+                <div id="tools-container" class="tools-grid">
+                    <div class="memo-loading" data-i18n="loading_tools">正在加载工具列表...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏内容 -->
+        <div class="tab-content" id="games-content">
+            <div class="content-section">
+                <h2 data-i18n="my_games_h2">我常玩的游戏</h2>
+                <div id="games-container" class="games-grid">
+                    <div class="memo-loading" data-i18n="loading_games">正在加载游戏列表...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 闲言碎语内容 -->
+        <div class="tab-content" id="memos-content">
+            <div class="content-section">
+                <h2 data-i18n="memos_h2">闲言碎语</h2>
+                <div id="memos-container" class="memos-container">
+                    <div class="memo-loading" data-i18n="loading_memos">正在加载...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="letter-footer">
+            <span data-i18n="footer_text">我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生</span>
+        </div>
+    </div>
+
+    <!-- 底部版权信息和网站统计 - 在信纸外部 -->
+    <div id="footer-wrap">
+        <div class="webinfo">
+            <div class="webinfo-item">
+                <div class="webinfo-site-uv-name" data-i18n="visitor_count_label">本站访客数 :</div>
+                <div class="webinfo-site-uv-count" id="site_uv">-</div>
+            </div>
+            <div class="webinfo-item">
+                <div class="webinfo-site-name" data-i18n="visit_count_label">本站总访问量 :</div>
+                <div class="webinfo-site-pv-count" id="site_pv">-</div>
+            </div>
+        </div>
+        <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
+                target="_blank">冀ICP备2025122609号</a> &copy;<span>2020 - 2026</span> <span>Power BY</span> <span>Del Levin </span>
+        </div>
+    </div>
+
+    <script>
+        // ========== 语言切换逻辑 ==========
+        if (typeof translations === 'undefined') {
+            console.error('Translations file (translations.js) is not loaded!');
+        }
+        const switchButton = document.getElementById('lang-switch-btn');
+        const LANG_KEY = 'preferred_language';
+        function switchLanguage() {
+            let currentLang = localStorage.getItem(LANG_KEY) || 'zh';
+            let newLang = currentLang === 'zh' ? 'en' : 'zh';
+
+            localStorage.setItem(LANG_KEY, newLang);
+            updatePageContent(newLang);
+            updateLanguageIcon(newLang);
+            document.documentElement.lang = newLang;
+
+            location.reload();
+        }
+
+        function updatePageContent(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = translations[lang][key];
+                if (translation !== undefined) {
+                    // 检查是否需要更新 href 属性
+                    if (element.hasAttribute('data-i18n-attr') && element.getAttribute('data-i18n-attr') === 'href') {
+                        // 如果是 a 标签，更新 href 和内容
+                        if (element.tagName.toLowerCase() === 'a') {
+                            element.href = translation;
+                            element.innerHTML = translation;
+                        } else {
+                            element.textContent = translation;
+                        }
+                    } else {
+                        element.innerHTML = translation; // 使用 innerHTML 以保留 <strong> 等标签
+                    }
+                } else {
+                    console.warn(`Translation key '${key}' not found for language '${lang}'`);
+                }
+            });
+        }
+        function updateLanguageIcon(lang) {
+            if (lang === 'zh') {
+                switchButton.src = './static/img/中文.png';
+                switchButton.alt = 'Switch to English';
+                switchButton.title = '切换到英文';
+            } else {
+                switchButton.src = './static/img/英文.png';
+                switchButton.alt = 'Switch to Chinese';
+                switchButton.title = '切换到中文';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedLang = localStorage.getItem(LANG_KEY) || 'zh';
+            updatePageContent(savedLang);
+            updateLanguageIcon(savedLang);
+            document.documentElement.lang = savedLang;
+            switchButton.addEventListener('click', switchLanguage);
+        });
+
+
+
+        // ==================== Umami Stats 请求 ====================
+        (async () => {
+            const webid = "ae6cd64c-5900-49c9-9c22-95cedc24a508";
+            const statsEndpoint =
+                "https://umami.iletter.top/api/websites/" + webid + "/stats";
+            const startAt = 1768060800000;
+            const endAt = Date.now(); // 当前时间的时间戳（毫秒）
+            const headers = {
+                Authorization:
+                    "Bearer 3VvA8ETw0ahPhzuNNY+Zxi3agtfOBT2vNRbm0GcPqIyUhm7rExuwj8F8IwiQWcn/rOD2G/TnONPCFIvUECQYp6GuZRTnfOojki533vP/skqf0D6puOZDQQk8Y7ssihXnfyRu5naGhIoj1BCAC7S0D0RiYvzpSYF9zvZqvgxETrCbFazZsqUBolyJd8H2iZiM4Xx3VC+GnkZHZFgQfaaYUvm33a7CLM74PyFpPby63UExMjIPiLQRAOR2hs5wl5JAs5CTYUaq+QHCCz+tWgDQ4FPtIgoZoG8Ugnywv/YEEn1Jv9p3t8ge7m8ttThnPiZWw62PYPWQ3LpFh7nxX9jQX/Y/vaaAyacCoIP5J4VpiClA40GMMptZrThzEQjheegCilb9",
+                "Content-Type": "application/json",
+            };
+            const params = new URLSearchParams({
+                startAt: startAt.toString(),
+                endAt: endAt.toString(),
+            });
+            const requestUrl = `${statsEndpoint}?${params}`;
+
+            try {
+                const response = await fetch(requestUrl, {
+                    method: "GET",
+                    headers: headers,
+                });
+                if (!response.ok) {
+                    // 如果响应不是 2xx，抛出错误
+                    const errorText = await response.text();
+                    throw new Error(
+                        `HTTP error! status: ${response.status}, details: ${errorText}`
+                    );
+                }
+
+                const data = await response.json();
+                // console.log('Umami Stats 请求成功:', data);
+                // 浏览量    data.pageviews.value
+                // 访问次数  data.visits.value
+                // 访客      data.visitors.value
+                document.getElementById("site_uv").textContent = JSON.stringify(
+                    data.visitors.value
+                );
+                document.getElementById("site_pv").textContent = JSON.stringify(
+                    data.pageviews.value
+                );
+            } catch (error) {
+                console.error("获取 Umami Stats 数据时发生错误:", error); // 控制台输出错误信息
+            }
+        })();
+    </script>
+    <script src="./static/js/game_my.js"></script>
+    <script src="./static/js/tools_my.js"></script>
+    <script src="./static/js/memos.js"></script>
+    <script>
+        // ==================== 标签切换功能 ====================
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const tabId = this.getAttribute('data-tab');
+                    // 移除所有激活状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            // 点击我的工具函数
+            const toolsTab = document.querySelector('.nav-tab[data-tab="tools"]');
+            const toolsContent = document.getElementById('tools-content');
+            if (toolsTab && toolsContent) {
+                toolsTab.addEventListener('click', function () {
+                    const hasRendered = toolsContent.querySelector('.tool-item') !== null;
+                    if (!hasRendered) {
+                        renderTools(toolsData);
+                    }
+                });
+            } else {
+                console.warn("未找到“我的工具”标签或内容区域，将在页面加载时尝试渲染。");
+                renderTools(toolsData);
+            }
+            // 点击常玩游戏函数
+            const gamesTab = document.querySelector('.nav-tab[data-tab="games"]');
+            const gamesContent = document.getElementById('games-content');
+            if (gamesTab && gamesContent) {
+                gamesTab.addEventListener('click', function () {
+                    const hasRendered = gamesContent.querySelector('.game-item') !== null;
+                    if (!hasRendered) {
+                        renderGames(gamesData);
+                    }
+                });
+            } else {
+                console.warn("未找到“常玩游戏”标签或内容区域。");
+                renderGames(gamesData);
+            }
+        });
+    </script>
     <style>
         * {
             margin: 0;
@@ -44,17 +367,17 @@
             line-height: 1.8;
             color: #333;
             padding: 20px;
-            /* 信件背景 */
-            /*background: #eeeeee url(./static/img/bj.png);*/
-            /*background-attachment: fixed;*/
-            /*background-repeat: repeat;*/
-            /* 马赛克方格背景 */
-            background-color: #f0f0f0;
-            background-image:
-                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),
-                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
-            background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
+            /* 信件背景（图片） */
+            background: #eeeeee url(./static/img/bj.png);
+            background-attachment: fixed;
+            background-repeat: repeat;
+            /* 信件背景（马赛克方格） */
+            /*background-color: #f0f0f0;*/
+            /*background-image:*/
+            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),*/
+            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);*/
+            /*background-size: 20px 20px;*/
         }
 
         .letter-container {
@@ -65,8 +388,27 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-radius: 2px;
             margin-bottom: 20px;
-            /* 与底部信息保持距离 */
             position: relative;
+        }
+
+        /* 语言切换按钮样式 */
+        .lang-switch-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+
+        .lang-switch-container img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .lang-switch-container img:hover {
+            opacity: 1.0;
         }
 
         /* 头部导航 */
@@ -224,7 +566,6 @@
             margin-bottom: 25px;
         }
 
-        /* 响应式设计 */
         @media (max-width: 768px) {
             .letter-container {
                 padding: 20px;
@@ -244,8 +585,15 @@
             .games-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* 移动端调整语言按钮位置 */
+            .lang-switch-container {
+                top: 5px;
+                right: 5px;
+            }
         }
 
+        /* 信纸底部页脚描述 */
         .letter-footer {
             text-align: center;
             margin-top: 60px;
@@ -259,21 +607,17 @@
         #footer-wrap {
             max-width: 800px;
             margin: 0 auto 20px auto;
-            /* 添加底部边距 */
             text-align: center;
             padding: 20px;
             color: #999;
             font-size: 12px;
-            /* 添加背景和边框，模仿信纸容器样式 */
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-radius: 2px;
-            /* 添加信纸纹理背景 */
             background-image:
                 linear-gradient(transparent 29px, #f0f0f0 30px);
             background-size: 100% 30px;
             border-top: 1px solid #eee;
-            /* 添加顶部边框与信纸区分 */
         }
 
         #footer-wrap a {
@@ -436,511 +780,6 @@
 
         /* --- 新增的闲言碎语样式 END --- */
     </style>
-</head>
-
-<body>
-    <div class="letter-container">
-        <!-- 头部导航 -->
-        <div class="nav-tabs">
-            <div class="nav-tab active" data-tab="about">关于我</div>
-            <div class="nav-tab" data-tab="website">我的网站</div>
-            <div class="nav-tab" data-tab="tools">常用工具</div>
-            <div class="nav-tab" data-tab="games">常玩游戏</div>
-            <div class="nav-tab" data-tab="memos">闲言碎语</div>
-            <div class="nav-tab" data-tab="contact">联系我</div>
-        </div>
-
-        <!-- 今日诗词 -->
-        <div id="jinrishici-sentence">正在加载今日诗词...</div>
-
-        <!-- 关于我内容 -->
-        <div class="tab-content active" id="about-content">
-            <div class="content-section about-me-content">
-                <h2>你好</h2>
-                <p>见字如面，展信舒颜。</p>
-                <p>我叫<strong>白荼</strong>，河北衡水人，土生土长的北方汉子，毕业于一所不知名的二本院校。信息管理与信息系统专业。
-                    自学java、vue、linux、mysql、python等开发技术和一些软件逆向技术，同时还略懂些PS图片、PR视频、AE特效制作。做过系统，剪过网线，搞过plc耍过单片机，维护修理过服务器，
-                    运营过公众号和网站等等。可谓是会，但只会一点点。别人都觉得我是个大佬，其实我就是个小菜鸡。</p>
-                <p>平时的爱好也就是玩玩游戏看看书，刷刷动漫，宅男一个，不爱出门。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客
-                    并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。</p>
-
-                <p>作为一个90后，很庆幸我还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！</p>
-            </div>
-        </div>
-
-        <!-- 我的网站内容 -->
-        <div class="tab-content" id="website-content">
-            <div class="content-section">
-                <h2>我的网站</h2>
-
-                <div class="website-links">
-                    <h3>个人博客</h3>
-                    <a href="https://www.ittoolman.top/" target="_blank">ittoolman.top - Github托管</a>
-                    <a href="https://blog.iletter.top/" target="_blank">blog.iletter.top - typecho用户的最后坚守</a>
-                    <h3>在线应用</h3>
-                    <a href="https://img.iletter.top/" target="_blank">简单图床 - 图床工具</a>
-                    <a href="http://openlist.iletter.top/" target="_blank">OpenList - 在线云盘合集</a>
-                    <a href="http://beszel.iletter.top/" target="_blank">Beszel - 服务器监控</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 联系我内容 -->
-        <div class="tab-content" id="contact-content">
-            <div class="content-section">
-                <h2>联系我</h2>
-                <p>欢迎通过以下方式与我联系：</p>
-
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-label">邮箱：</span>
-                        <span>dellevin99@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">微信：</span>
-                        <span>E-Levin_</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">扣扣：</span>
-                        <span>1754084631</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">地址：</span>
-                        <span>山东省·济南市·市中区</span>
-                    </div>
-                </div>
-
-                <h3>社交媒体</h3>
-                <div class="website-links">
-                    <a href="https://github.com/dellevin" target="_blank">GitHub</a>
-                    <a href="https://weibo.com/u/6094785109999999999" target="_blank">微博</a>
-                    <a href="https://www.zhihu.com/people/bing-xue-chen-xi-59" target="_blank">知乎</a>
-                    <a href="https://space.bilibili.com/403551212" target="_blank">B站</a>
-                    <a href="https://www.52pojie.cn/home.php?mod=space&uid=2059006" target="_blank">52pojie</a>
-                </div>
-                <h3>留言</h3>
-                <p>如果你有任何问题或建议，欢迎<a href="https://blog.iletter.top/401.html" target="_blank">点击此链接</a>去我的博客下面给我留言！</p>
-            </div>
-        </div>
-
-        <!-- 工具内容 -->
-        <div class="tab-content" id="tools-content">
-            <div class="content-section">
-                <h2>我的工具</h2>
-
-                <div id="tools-container" class="tools-grid">
-                    <div class="memo-loading">正在加载工具列表...</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 游戏内容 -->
-        <div class="tab-content" id="games-content">
-            <div class="content-section">
-                <h2>我常玩的游戏</h2>
-
-                <div class="games-grid">
-                    <div class="game-item">
-                        <div class="game-name">《永劫无间》</div>
-                        <div class="game-desc">我身无拘，武道无穷</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《我的世界》</div>
-                        <div class="game-desc">这个小盒才是我的永远的家</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《鬼谷八荒》</div>
-                        <div class="game-desc">当互动版的修仙小说看了，很好玩.</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《江城创业记》</div>
-                        <div class="game-desc">缝合怪，但是全缝了。很喜欢的一款游戏</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《中国式家长》</div>
-                        <div class="game-desc">我承认我做不好一个孩子，也做不好一个家长</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《王者荣耀》</div>
-                        <div class="game-desc">买了好多皮肤，和朋友玩才是真快乐（已退坑）</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《QQ飞车手游》</div>
-                        <div class="game-desc">氪了好多，有些后悔了（已退坑）</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《龙族幻想》</div>
-                        <div class="game-desc">因为龙族入坑的，小氪（已退坑）</div>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-name">《洛克王国》</div>
-                        <div class="game-desc">还记得小时候拿压岁钱偷偷买点卡（已退坑）</div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- 闲言碎语内容 -->
-        <div class="tab-content" id="memos-content">
-            <div class="content-section">
-                <h2>闲言碎语</h2>
-                <div id="memos-container" class="memos-container">
-                    <div class="memo-loading">正在加载...</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="letter-footer">
-            <!--愿你被这个世界温柔以待-->
-            我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生
-        </div>
-    </div>
-
-    <!-- 底部版权信息和网站统计 - 在信纸外部 -->
-    <div id="footer-wrap">
-        <div class="webinfo">
-            <div class="webinfo-item">
-                <div class="webinfo-site-uv-name">本站访客数 :</div>
-                <div class="webinfo-site-uv-count" id="site_uv">-</div>
-            </div>
-            <div class="webinfo-item">
-                <div class="webinfo-site-name">本站总访问量 :</div>
-                <div class="webinfo-site-pv-count" id="site_pv">-</div>
-            </div>
-        </div>
-        <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
-                target="_blank">冀ICP备2025122609号</a> &copy;2020 - 2025 Power BY Del Levin </div>
-    </div>
-
-    <script>
-        // ========== 工具配置数据 ==========
-        // 将工具数据集中管理
-        const toolsData = [
-            { name: 'Rolan', desc: '应用启动器，从大学用到现在' },
-            { name: 'Chrome', desc: '确实好用,正在想着屎迈进' },
-            { name: 'VS Code', desc: '代码编辑器，轻量?高效!' },
-            { name: 'IntelliJ IDEA', desc: 'JAVA代码编辑器' },
-            { name: 'PyCharm', desc: 'python代码编辑器' },
-            { name: 'Android Studio', desc: '安卓软件开发，一直在学（新建文件夹）' },
-            { name: 'HbuilderX', desc: '写小程序真心不错，vue+js很棒！减少了学习压力' },
-            { name: 'Navicate', desc: '链接mysql的神器，sqlyog是谁？真不熟。' },
-            { name: 'Xshell', desc: '链接服务器简单易用配合xftp很好用' },
-            { name: 'Postman', desc: 'API测试与调试工具' },
-            { name: 'VMware', desc: '虚拟机管理' },
-            { name: 'PhotoShop', desc: 'ps图片专用蒙版套索十分好用' },
-            { name: 'Obsidian', desc: '知识管理，双链接笔记。本地笔记爱好者的福音。' },
-            { name: 'Typora', desc: 'Markdown编辑器，简洁美观。' },
-            { name: 'Docker', desc: '容器化部署，环境一致性' },
-            { name: 'Premiere Pro', desc: '剪辑视频调音做简单的效果，简单易用' },
-            { name: 'After Effects', desc: '特效制作神器，就是对显卡和cpu比较不友好' },
-            { name: 'CheatEngine', desc: '风灵月影没出来就用它，亦是内存hook的极佳选择' },
-            { name: 'x64dbg', desc: '孩子！你想掌握逆向之力嘛！先从x64dbg开始吧！' },
-            { name: 'WireGuard', desc: '组网神器，前提是自己搭建' },
-            { name: 'Syncthing', desc: '文件同步，超级好用，同步笔记的不错选择。' },
-            { name: 'NeatReader', desc: '看书软件' },
-            { name: 'Corel VideoStudio', desc: '万恶的苏州思杰马克丁！还我会声会影' },
-            { name: '网易云音乐', desc: '每天听，每天用，尊贵的年费vip+版权破解Unblock Netease' },
-            { name: '喜马拉雅听书', desc: '每天听，每天用。三体，穷鬼的上下两千年等优秀书籍' },
-            { name: '一本日记', desc: '正经人谁写日记啊！' },
-            { name: 'Ollama', desc: '本地部署对话AI' },
-            { name: 'AnythingLLM', desc: 'AI知识库的极佳选择' },
-            { name: 'UVR5', desc: '处理音频的神器' },
-            { name: 'Remote Desktop Manager', desc: '超级强大的远控软件' },
-            { name: 'SyncClipboard', desc: '剪切板同步，好用，爱用' },
-            { name: 'QtScrcpy', desc: '局域网控制手机的软件' },
-        ];
-        // ========== 渲染工具列表的函数 ==========
-        function renderTools(toolsArray) {
-            const container = document.getElementById('tools-container');
-            if (!container) {
-                console.error("未找到工具容器 #tools-container");
-                return;
-            }
-
-            if (!toolsArray || toolsArray.length === 0) {
-                container.innerHTML = '<div class="memo-error">暂无工具数据</div>'; // 可选：无数据提示
-                return;
-            }
-
-            let html = '';
-            toolsArray.forEach(tool => {
-                html += `
-                    <div class="tool-item">
-                        <div class="tool-name">${tool.name}</div>
-                        <div class="tool-desc">${tool.desc}</div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // ==================== 标签切换功能 ====================
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = document.querySelectorAll('.nav-tab');
-            const contents = document.querySelectorAll('.tab-content');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function () {
-                    const tabId = this.getAttribute('data-tab');
-
-                    // 移除所有激活状态
-                    tabs.forEach(t => t.classList.remove('active'));
-                    contents.forEach(c => c.classList.remove('active'));
-
-                    // 添加当前激活状态
-                    this.classList.add('active');
-                    document.getElementById(`${tabId}-content`).classList.add('active');
-                });
-            });
-            // 点击我的工具函数
-            const toolsTab = document.querySelector('.nav-tab[data-tab="tools"]');
-            const toolsContent = document.getElementById('tools-content');
-            if (toolsTab && toolsContent) {
-                toolsTab.addEventListener('click', function () {
-                    const hasRendered = toolsContent.querySelector('.tool-item') !== null;
-                    if (!hasRendered) {
-                        renderTools(toolsData);
-                    }
-                });
-            } else {
-                console.warn("未找到“我的工具”标签或内容区域，将在页面加载时尝试渲染。");
-                renderTools(toolsData);
-            }
-        });
-
-        // ==================== 闲言碎语 API 加载与分页功能 ====================
-        (function () {
-            // 确保使用 HTTPS
-            const MEMOS_API_BASE = 'https://memos.iletter.top/api/v1/memos';
-            const PAGE_SIZE = 5; // 每页加载的 memo 数量
-
-            let memoData = []; // 存储所有已加载的 memo
-            let allLoaded = false; // 标记是否已加载所有数据
-            let isLoading = false; // 标记是否正在加载，防止重复请求
-            let nextPageToken = null; // 用于 API 分页的 token
-
-            // 获取 DOM 元素
-            const memosTab = document.querySelector('.nav-tab[data-tab="memos"]');
-            const memosContainer = document.getElementById('memos-container');
-            const memosContent = document.getElementById('memos-content');
-
-            // 日期格式化函数 (简单实现)
-            function formatDate(dateStr) {
-                const date = new Date(dateStr);
-                return date.toLocaleString('sv-SE'); // 使用瑞典格式，结果接近 '2026-01-08 00:57:04'
-            }
-
-            // 渲染 Memo 列表 (追加模式)
-            function renderMemos(memos) {
-                if (!memos || memos.length === 0) {
-                    // 如果是首次加载且无数据
-                    if (memoData.length === 0) {
-                        memosContainer.innerHTML = '<div class="memo-error">暂无数据</div>';
-                    }
-                    return;
-                }
-
-                let html = '';
-                memos.forEach(memo => {
-                    const formattedDate = formatDate(memo.displayTime);
-                    const tagsHtml = memo.tags && memo.tags.length > 0 ?
-                        `<div class="memo-tags">${memo.tags.map(tag => `<span class="memo-tag">${tag}</span>`).join('')}</div>`
-                        : '';
-
-                    // 去掉 \n# 及其后面的部分
-                    const contentWithoutHash = memo.content.split('\n#')[0];
-                    // --- 新增: 生成附件 HTML ---
-                    let attachmentsHtml = '';
-                    if (memo.attachments && Array.isArray(memo.attachments) && memo.attachments.length > 0) {
-                        attachmentsHtml = '<div class="memo-attachments">';
-                        memo.attachments.forEach(attachment => {
-                            // 检查附件类型是否为图片
-                            if (attachment.type && attachment.type.startsWith('image/')) {
-                                // 构造缩略图链接
-                                const thumbnailUrl = `https://memos.iletter.top/file/${attachment.name}/${encodeURIComponent(attachment.filename)}?thumbnail=true`
-
-                                attachmentsHtml += `
-                                    <div class="memo-attachment-item">
-                                        <img src="${thumbnailUrl}" alt="${attachment.filename}" class="memo-attachment-image" data-full-url="${'https://memos.iletter.top/file/' + attachment.name + '/' + encodeURIComponent(attachment.filename)}">
-                                    </div>
-                                `;
-                            }
-                            // 如果需要处理其他类型的附件，可以在这里添加 else if 分支
-                            else {
-                                attachmentsHtml += `<a href="https://memos.iletter.top/file/${attachment.name}/${encodeURIComponent(attachment.filename)}" target="_blank">${attachment.filename}</a>`;
-                            }
-                        });
-                        attachmentsHtml += '</div>';
-                    }
-
-
-                    html += `
-                        <div class="memo-item">
-                            <div class="memo-date">${formattedDate}</div>
-                            <div class="memo-content">${contentWithoutHash}</div>
-                            ${attachmentsHtml}
-                            ${tagsHtml}
-                        </div>
-                    `;
-                });
-
-                // 如果是首次加载，则替换容器内容
-                if (memoData.length === memos.length) {
-                    memosContainer.innerHTML = html;
-                } else {
-                    // 否则追加到现有内容之后
-                    memosContainer.insertAdjacentHTML('beforeend', html);
-                }
-            }
-
-            // 加载 Memo 数据 (分页) - 修正后的函数
-            async function loadMemos() {
-                // 防止重复加载或已加载完毕时再次加载
-                if (isLoading || allLoaded) {
-                    console.log("加载状态检查：", { isLoading, allLoaded });
-                    return;
-                }
-                isLoading = true;
-
-                // 显示加载状态 (仅在首次加载时替换，后续加载追加)
-                if (memoData.length === 0) {
-                    memosContainer.innerHTML = '<div class="memo-loading">正在加载...</div>';
-                }
-
-                try {
-                    // 构建 API 请求 URL，确保 pageToken 不为 null 时才添加
-                    const url = new URL(MEMOS_API_BASE);
-                    url.searchParams.set('pageSize', PAGE_SIZE.toString());
-                    url.searchParams.set('orderBy', 'display_time desc');
-                    if (nextPageToken) {
-                        url.searchParams.set('pageToken', nextPageToken);
-                    }
-
-                    // console.log("请求 URL:", url.toString()); // 调试信息
-
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.json();
-                    // console.log("API 响应:", data); // 调试信息
-
-                    const newMemos = data.memos || [];
-                    memoData = memoData.concat(newMemos);
-
-                    // --- 修复的关键逻辑 ---
-                    // 检查 API 返回的 next_page_token 是否为空字符串
-                    if (data.nextPageToken === "") {
-                        allLoaded = true; // 标记为已全部加载
-                        nextPageToken = null; // 清空 token
-                        console.log("检测到 nextPageToken 为空，已全部加载。");
-                    } else {
-                        // 如果不为空，更新 token 以供下次使用
-                        nextPageToken = data.nextPageToken;
-                    }
-
-                    // 渲染新加载的数据
-                    renderMemos(newMemos);
-
-                    // --- 修复的关键逻辑 ---
-                    // 只有在尚未全部加载完时，才渲染加载更多按钮
-                    if (!allLoaded) {
-                        renderLoadMoreButton();
-                    } else {
-                        const loadMoreContainer = document.getElementById('load-more-btn');
-                        if (loadMoreContainer) {
-                            loadMoreContainer.remove();
-                        }
-                        // 数据全部加载完后，可以显示一个提示
-                        memosContainer.insertAdjacentHTML('beforeend', '<div class="memo-error">已加载全部数据</div>');
-                    }
-
-                } catch (error) {
-                    console.error('加载闲言碎语失败:', error);
-                    // 如果是首次加载失败，替换内容
-                    if (memoData.length === 0) {
-                        memosContainer.innerHTML = `<div class="memo-error">加载失败: ${error.message}</div>`;
-                    } else {
-                        // 如果是追加加载失败，提示错误，但保留已有内容
-                        memosContainer.insertAdjacentHTML('beforeend', `<div class="memo-error">加载失败: ${error.message}</div>`);
-                    }
-                } finally {
-                    isLoading = false;
-                }
-            }
-
-            // 渲染“加载更多”按钮
-            function renderLoadMoreButton() {
-                const existingButton = document.getElementById('load-more-btn');
-                if (existingButton) existingButton.remove();
-                const loadMoreButton = document.createElement('div');
-                loadMoreButton.id = 'load-more-btn';
-                loadMoreButton.className = 'memo-pagination';
-                loadMoreButton.innerHTML = `<button class="memo-page-btn" onclick="loadMemos()">加载更多</button>`;
-                memosContainer.appendChild(loadMoreButton);
-            }
-
-            // 为加载更多按钮绑定事件 (使用全局函数)
-            window.loadMemos = loadMemos;
-
-            // 当“闲言碎语”标签被点击时加载数据
-            memosTab.addEventListener('click', function () {
-                // 只有在内容是空的或者首次加载时才调用
-                if (memoData.length === 0) {
-                    loadMemos();
-                }
-            });
-
-            // 初始加载，如果“闲言碎语”是默认激活的标签
-            // 注意：当前默认激活的是 'about' 标签，所以首次加载不会触发
-            // 如果需要默认加载 memos，需要调整默认激活的标签或在此处调用
-            // if (memosContent.classList.contains('active')) {
-            //     loadMemos();
-            // }
-
-        })();
-
-        // ==================== Umami Stats 请求 ====================
-        (async () => {
-            const webid = 'ae6cd64c-5900-49c9-9c22-95cedc24a508'
-            const statsEndpoint = 'https://umami.iletter.top/api/websites/'+webid+'/stats';
-            const startAt = 1768060800000;
-            const endAt = Date.now(); // 当前时间的时间戳（毫秒）
-            const headers = {
-                'Authorization': 'Bearer 3VvA8ETw0ahPhzuNNY+Zxi3agtfOBT2vNRbm0GcPqIyUhm7rExuwj8F8IwiQWcn/rOD2G/TnONPCFIvUECQYp6GuZRTnfOojki533vP/skqf0D6puOZDQQk8Y7ssihXnfyRu5naGhIoj1BCAC7S0D0RiYvzpSYF9zvZqvgxETrCbFazZsqUBolyJd8H2iZiM4Xx3VC+GnkZHZFgQfaaYUvm33a7CLM74PyFpPby63UExMjIPiLQRAOR2hs5wl5JAs5CTYUaq+QHCCz+tWgDQ4FPtIgoZoG8Ugnywv/YEEn1Jv9p3t8ge7m8ttThnPiZWw62PYPWQ3LpFh7nxX9jQX/Y/vaaAyacCoIP5J4VpiClA40GMMptZrThzEQjheegCilb9',
-                'Content-Type': 'application/json'
-            };
-            const params = new URLSearchParams({
-                startAt: startAt.toString(),
-                endAt: endAt.toString()
-            });
-            const requestUrl = `${statsEndpoint}?${params}`;
-
-            try {
-                const response = await fetch(requestUrl, {
-                    method: 'GET',
-                    headers: headers,
-                });
-                if (!response.ok) {
-                    // 如果响应不是 2xx，抛出错误
-                    const errorText = await response.text();
-                    throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
-                }
-
-                const data = await response.json();
-                // console.log('Umami Stats 请求成功:', data);
-                // 浏览量    data.pageviews.value
-                // 访问次数  data.visits.value
-                // 访客      data.visitors.value
-                document.getElementById('site_uv').textContent = JSON.stringify(data.visitors.value) + "人";
-                document.getElementById('site_pv').textContent = JSON.stringify(data.pageviews.value) + "次";
-            } catch (error) {
-                console.error('获取 Umami Stats 数据时发生错误:', error); // 控制台输出错误信息
-            }
-        })();
-    </script>
 </body>
 
 </html>
