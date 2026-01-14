@@ -1,0 +1,83 @@
+/* 悬浮框主体 */
+.game-detail-tooltip {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    display: none;
+    transition: opacity 0.2s ease; 
+}
+
+/* 悬浮框内容 */
+.tooltip-content {
+    width: 100%; 
+}
+
+/* 悬浮框头部 */
+.tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.tooltip-header h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* 悬浮框关闭按钮 */
+.tooltip-close {
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #aaa;
+    line-height: 1;
+    padding: 5px;
+}
+
+.tooltip-close:hover {
+    color: #333;
+}
+
+/* 悬浮框正文 */
+.tooltip-body p {
+    margin: 8px 0;
+    line-height: 1.5;
+    word-break: break-word; 
+}
+
+.tooltip-body strong {
+    color: #555;
+}
+
+.tooltip-body em {
+    color: #666;
+    font-style: normal;
+}
+
+/* 悬浮框图片容器 */
+.tooltip-images {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* 悬浮框图片项 */
+.tooltip-image-item {
+    max-width: 200px; 
+    max-height: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+/* --- 游戏详情悬浮框 (Tooltip) 样式 END --- */

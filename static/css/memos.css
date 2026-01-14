@@ -1,0 +1,96 @@
+ /* --- 闲言碎语样式 --- */
+        .memos-container {
+            margin-top: 10px;
+        }
+
+        .memo-item {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .memo-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .memo-content {
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .memo-tags {
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .memo-tag {
+            background-color: #e0e0e0;
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .memo-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .memo-page-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .memo-page-btn:hover:not(.disabled) {
+            background-color: #f0f0f0;
+        }
+
+        .memo-page-btn.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .memo-page-btn.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .memo-loading,
+        .memo-error {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+
+        .memo-attachments {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .memo-attachment-item {
+            flex: 0 0 auto;
+        }
+
+        .memo-attachment-image {
+            max-width: 100px;
+            max-height: 100px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* --- 新增的闲言碎语样式 END --- */

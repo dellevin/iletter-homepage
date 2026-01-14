@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="95后，全干开发者">
-    <meta name="keywords" content="Java,Spring,个人博客，微信小程序，博客">
+    <meta name="keywords" content="Java,Spring,个人博客，微信小程序，博客，技术文章，编程，开发者，白荼，Del Levin">
     <link rel="shortcut icon" href="./favicon.ico">
+    <script type="text/javascript">
+        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+            alert('朋友，上古浏览器不支持呢～');
+        }
+    </script>
+    <!--   今日诗词   -->
+    <!-- <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->   
     <!-- 百度统计 -->
-    <script>
+    <!-- <script>
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");
@@ -15,23 +22,20 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
-    </script>
-    <!-- 多语言 -->
-    <script src="./static/js/translations.js"></script>
+    </script> -->
     <!-- umami统计 -->
-    <script defer src="https://umami.iletter.top/anyjs"
-        data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script>
-    <!--   今日诗词   -->
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <!-- <script defer src="https://umami.iletter.top/anyjs" data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script> -->
+    <!-- 多语言 -->
+    <script src="./static/js/language/zh.js"></script>
+    <script src="./static/js/language/en.js"></script>
     <script src="./static/js/axios.min.js"></script>
-    <script type="text/javascript">
-        if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-            alert('朋友，上古浏览器不支持呢～');
-        }
-    </script>
+    <style>
+        @import url("./static/css/main.css");
+        @import url("./static/css/memos.css");
+        @import url("./static/css/game_dialog.css");
+    </style>
     <title data-i18n="page_title">白荼 - BAITU</title>
 </head>
-
 <body>
     <div class="letter-container">
         <!-- 语言切换按钮 -->
@@ -41,63 +45,22 @@
 
         <!-- 头部导航 -->
         <div class="nav-tabs">
-            <div class="nav-tab active" data-tab="about"><span data-i18n="nav_about">关于我</span></div>
-            <div class="nav-tab" data-tab="website"><span data-i18n="nav_website">我的网站</span></div>
-            <div class="nav-tab" data-tab="tools"><span data-i18n="nav_tools">常用工具</span></div>
-            <div class="nav-tab" data-tab="games"><span data-i18n="nav_games">常玩游戏</span></div>
-            <div class="nav-tab" data-tab="memos"><span data-i18n="nav_memos">闲言碎语</span></div>
-            <div class="nav-tab" data-tab="contact"><span data-i18n="nav_contact">联系我</span></div>
+            <div class="nav-tab active" data-tab="about"><span data-i18n="nav_about"></span></div>
+            <div class="nav-tab" data-tab="website"><span data-i18n="nav_website"></span></div>
+            <div class="nav-tab" data-tab="tools"><span data-i18n="nav_tools"></span></div>
+            <div class="nav-tab" data-tab="games"><span data-i18n="nav_games"></span></div>
+            <div class="nav-tab" data-tab="memos"><span data-i18n="nav_memos"></span></div>
+            <div class="nav-tab" data-tab="contact"><span data-i18n="nav_contact"></span></div>
         </div>
 
         <!-- 今日诗词 -->
         <div id="jinrishici-sentence">正在加载今日诗词...</div>
 
-        <!-- 关于我内容 -->
-        <div class="tab-content active" id="about-content">
-
-            <div class="content-section about-me-content">
-                <h2 data-i18n="hello"></h2>
-                <p data-i18n="greeting"></p>
-                <p data-i18n="about_me_p1">
-                    <strong data-i18n="my_name"></strong>
-                </p>
-                <p data-i18n="about_me_p2">
-                </p>
-                <p data-i18n="about_me_p3"></p>
-                <p data-i18n="about_me_p4"></p>
-            </div>
-        </div>
-
-        <!-- 我的网站内容 -->
-        <div class="tab-content" id="website-content">
-            <div class="content-section">
-                <h2 data-i18n="my_website_h2">我的网站</h2>
-
-                <div class="website-links">
-                    <h3 data-i18n="personal_blog_h3">个人博客</h3>
-                    <a href="https://www.ittoolman.top/" target="_blank" data-i18n="personal_blog_link1"
-                        data-i18n-attr="href">ittoolman.top - Github托管</a>
-                    <a href="https://blog.iletter.top/" target="_blank" data-i18n="personal_blog_link2"
-                        data-i18n-attr="href">blog.iletter.top - typecho用户的最后坚守</a>
-                    <h3 data-i18n="online_apps_h3">在线应用</h3>
-                    <a href="https://img.iletter.top/" target="_blank" data-i18n="online_app_link1"
-                        data-i18n-attr="href">简单图床 - 图床工具</a>
-                    <a href="https://gitea.iletter.top/" target="_blank" data-i18n="online_app_link2"
-                        data-i18n-attr="href">Gitea - 私人git托管仓库</a>
-                    <a href="http://openlist.iletter.top/" target="_blank" data-i18n="online_app_link3"
-                        data-i18n-attr="href">OpenList - 在线云盘合集</a>
-                    <a href="http://beszel.iletter.top/" target="_blank" data-i18n="online_app_link4"
-                        data-i18n-attr="href">Beszel - 服务器监控</a>
-                </div>
-            </div>
-        </div>
-
         <!-- 联系我内容 -->
         <div class="tab-content" id="contact-content">
             <div class="content-section">
-                <h2 data-i18n="contact_me_h2">联系我</h2>
-                <p data-i18n="contact_intro">欢迎通过以下方式与我联系：</p>
-
+                <h2 data-i18n="contact_me_h2"></h2>
+                <p data-i18n="contact_intro"></p>
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="contact-label" data-i18n="email_label">邮箱：</span>
@@ -135,6 +98,26 @@
                         data-i18n="leave_message_link" data-i18n-attr="href">点击此链接</a>去我的博客下面给我留言！</p>
             </div>
         </div>
+        
+        <!-- 关于我内容 -->
+        <div class="tab-content active" id="about-content">
+            <div class="content-section about-me-content">
+                <h2 data-i18n="hello"></h2>
+                <p data-i18n="greeting"></p>
+                <p data-i18n="about_me_p1"></p>
+                <p data-i18n="about_me_p2"></p>
+                <p data-i18n="about_me_p3"></p>
+                <p data-i18n="about_me_p4"></p>
+            </div>
+        </div>
+
+        <!-- 我的网站内容 -->
+        <div class="tab-content" id="website-content">
+            <div class="content-section">
+                <h2 data-i18n="my_website_h2"></h2>
+                <div class="website-links" id="dynamic-website-links"></div>
+            </div>
+        </div>
 
         <!-- 工具内容 -->
         <div class="tab-content" id="tools-content">
@@ -168,7 +151,7 @@
         </div>
 
         <div class="letter-footer">
-            <span data-i18n="footer_text">我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生</span>
+            <span data-i18n="footer_text"></span>
         </div>
     </div>
 
@@ -188,9 +171,12 @@
                 target="_blank">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del Levin </span>
         </div>
     </div>
-
     <script>
         // ========== 语言切换逻辑 ==========
+        const translations = {
+            'zh': translationsZH,
+            'en': translationsEN
+        };
         if (typeof translations === 'undefined') {
             console.error('Translations file (translations.js) is not loaded!');
         }
@@ -207,7 +193,6 @@
 
             location.reload();
         }
-
         function updatePageContent(lang) {
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(element => {
@@ -238,527 +223,13 @@
             document.documentElement.lang = savedLang;
             switchButton.addEventListener('click', switchLanguage);
         });
-
-        // ==================== Umami Stats 请求 ====================
-        (async () => {
-            const webid = "ae6cd64c-5900-49c9-9c22-95cedc24a508";
-            const statsEndpoint =
-                "https://umami.iletter.top/api/websites/" + webid + "/stats";
-            const startAt = 1768060800000;
-            const endAt = Date.now(); // 当前时间的时间戳（毫秒）
-            const headers = {
-                Authorization:
-                    "Bearer 3VvA8ETw0ahPhzuNNY+Zxi3agtfOBT2vNRbm0GcPqIyUhm7rExuwj8F8IwiQWcn/rOD2G/TnONPCFIvUECQYp6GuZRTnfOojki533vP/skqf0D6puOZDQQk8Y7ssihXnfyRu5naGhIoj1BCAC7S0D0RiYvzpSYF9zvZqvgxETrCbFazZsqUBolyJd8H2iZiM4Xx3VC+GnkZHZFgQfaaYUvm33a7CLM74PyFpPby63UExMjIPiLQRAOR2hs5wl5JAs5CTYUaq+QHCCz+tWgDQ4FPtIgoZoG8Ugnywv/YEEn1Jv9p3t8ge7m8ttThnPiZWw62PYPWQ3LpFh7nxX9jQX/Y/vaaAyacCoIP5J4VpiClA40GMMptZrThzEQjheegCilb9",
-                "Content-Type": "application/json",
-            };
-            const params = new URLSearchParams({
-                startAt: startAt.toString(),
-                endAt: endAt.toString(),
-            });
-            const requestUrl = `${statsEndpoint}?${params}`;
-
-            try {
-                const response = await fetch(requestUrl, {
-                    method: "GET",
-                    headers: headers,
-                });
-                if (!response.ok) {
-                    // 如果响应不是 2xx，抛出错误
-                    const errorText = await response.text();
-                    throw new Error(
-                        `HTTP error! status: ${response.status}, details: ${errorText}`
-                    );
-                }
-
-                const data = await response.json();
-                // 浏览量    data.pageviews.value
-                // 访问次数  data.visits.value
-                // 访客      data.visitors.value
-                document.getElementById("site_uv").textContent = JSON.stringify(
-                    data.visitors.value
-                );
-                document.getElementById("site_pv").textContent = JSON.stringify(
-                    data.pageviews.value
-                );
-            } catch (error) {
-                console.error("获取 Umami Stats 数据时发生错误:", error); // 控制台输出错误信息
-            }
-        })();
     </script>
+    <script src="./static/js/anypage.js"></script>
     <script src="./static/js/game_my.js"></script>
     <script src="./static/js/tools_my.js"></script>
     <script src="./static/js/memos.js"></script>
-    <script>
-        // ==================== 标签切换功能 ====================
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = document.querySelectorAll('.nav-tab');
-            const contents = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function () {
-                    const tabId = this.getAttribute('data-tab');
-                    // 移除所有激活状态
-                    tabs.forEach(t => t.classList.remove('active'));
-                    contents.forEach(c => c.classList.remove('active'));
-                    // 添加当前激活状态
-                    this.classList.add('active');
-                    document.getElementById(`${tabId}-content`).classList.add('active');
-                });
-            });
-            // 点击我的工具函数
-            const toolsTab = document.querySelector('.nav-tab[data-tab="tools"]');
-            const toolsContent = document.getElementById('tools-content');
-            if (toolsTab && toolsContent) {
-                toolsTab.addEventListener('click', function () {
-                    const hasRendered = toolsContent.querySelector('.tool-item') !== null;
-                    if (!hasRendered) {
-                        renderTools(toolsData);
-                    }
-                });
-            } else {
-                console.warn("未找到“我的工具”标签或内容区域，将在页面加载时尝试渲染。");
-                renderTools(toolsData);
-            }
-            // 点击常玩游戏函数
-            const gamesTab = document.querySelector('.nav-tab[data-tab="games"]');
-            const gamesContent = document.getElementById('games-content');
-            if (gamesTab && gamesContent) {
-                gamesTab.addEventListener('click', function () {
-                    const hasRendered = gamesContent.querySelector('.game-item') !== null;
-                    if (!hasRendered) {
-                        renderGames(gamesData);
-                    }
-                });
-            } else {
-                console.warn("未找到“常玩游戏”标签或内容区域。");
-                renderGames(gamesData);
-            }
-        });
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', 'STSong', serif;
-            line-height: 1.8;
-            color: #333;
-            padding: 20px;
-            background-position: 0 0, 10px 10px;
-            /* 信件背景（图片） */
-            background: #eeeeee url(./static/img/bj.png);
-            background-attachment: fixed;
-            background-repeat: repeat;
-            /* 信件背景（马赛克方格） */
-            /*background-color: #f0f0f0;*/
-            /*background-image:*/
-            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),*/
-            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);*/
-            /*background-size: 20px 20px;*/
-        }
-
-        .letter-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        /* 语言切换按钮样式 */
-        .lang-switch-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 100;
-        }
-
-        .lang-switch-container img {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .lang-switch-container img:hover {
-            opacity: 1.0;
-        }
-
-        /* 头部导航 */
-        .nav-tabs {
-            display: flex;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 30px;
-        }
-
-        .nav-tab {
-            padding: 15px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-
-        .nav-tab:hover {
-            background-color: #f5f5f5;
-        }
-
-        .nav-tab.active {
-            border-bottom-color: #333;
-            color: #333;
-            font-weight: bold;
-        }
-
-        /* 内容区域 */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* 信纸纹理效果 */
-        .letter-container {
-            background-image:
-                linear-gradient(transparent 29px, #f0f0f0 30px);
-            background-size: 100% 30px;
-        }
-
-        /* 通用内容样式 */
-        .content-section {
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .content-section h2 {
-            margin-bottom: 20px;
-            color: #222;
-            font-size: 24px;
-        }
-
-        .content-section h3 {
-            margin: 25px 0 15px 0;
-            color: #444;
-            font-size: 18px;
-        }
-
-        .content-section p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        /* 列表样式 */
-        .content-section ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 15px 0;
-        }
-
-        .content-section li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .content-section li::before {
-            content: "▹";
-            color: #999;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        /* 联系方式 */
-        .contact-info {
-            margin: 15px 0;
-        }
-
-        .contact-item {
-            margin-bottom: 10px;
-        }
-
-        .contact-label {
-            font-weight: bold;
-            color: #555;
-        }
-
-        /* 网站链接 */
-        .website-links a {
-            display: inline-block;
-            margin-right: 20px;
-            color: #666;
-            text-decoration: none;
-            margin-bottom: 10px;
-        }
-
-        .website-links a:hover {
-            color: #333;
-            text-decoration: underline;
-        }
-
-        /* 工具和游戏网格 */
-        .tools-grid,
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .tool-item,
-        .game-item {
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            background-color: #fafafa;
-        }
-
-        .tool-name,
-        .game-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .tool-desc,
-        .game-desc {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* 关于我页面特殊样式 */
-        .about-me-content {
-            text-align: justify;
-        }
-
-        .about-me-content p:first-child {
-            font-size: 18px;
-            font-style: italic;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .letter-container {
-                padding: 20px;
-                margin: 10px;
-            }
-
-            .nav-tabs {
-                flex-wrap: wrap;
-            }
-
-            .nav-tab {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .tools-grid,
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* 移动端调整语言按钮位置 */
-            .lang-switch-container {
-                top: 5px;
-                right: 5px;
-            }
-        }
-
-        /* 信纸底部页脚描述 */
-        .letter-footer {
-            text-align: center;
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* 底部版权信息 - 在信纸外部 */
-        #footer-wrap {
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-            text-align: center;
-            padding: 20px;
-            color: #999;
-            font-size: 12px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            background-image:
-                linear-gradient(transparent 29px, #f0f0f0 30px);
-            background-size: 100% 30px;
-            border-top: 1px solid #eee;
-        }
-
-        #footer-wrap a {
-            color: #666;
-            text-decoration: none;
-        }
-
-        #footer-wrap a:hover {
-            color: #333;
-            text-decoration: underline;
-        }
-
-        #footer-wrap img {
-            width: 50px;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-
-        /* 今日诗词样式 */
-        #jinrishici-sentence {
-            position: absolute;
-            top: 111px;
-            right: 40px;
-            font-size: 14px;
-            font-style: italic;
-            color: #666;
-            text-align: right;
-            max-width: 300px;
-        }
-
-        /* 网站统计样式 */
-        .webinfo {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            font-size: 12px;
-            color: #999;
-            margin-top: 10px;
-        }
-
-        .webinfo-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        @media (max-width: 768px) {
-            #jinrishici-sentence {
-                position: static;
-                text-align: center;
-                max-width: 100%;
-                margin-bottom: 20px;
-                padding: 10px;
-                font-size: 13px;
-            }
-
-            .webinfo {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-        }
-
-        /* --- 新增的闲言碎语样式 --- */
-        .memos-container {
-            margin-top: 10px;
-        }
-
-        .memo-item {
-            background-color: #fafafa;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .memo-date {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
-        }
-
-        .memo-content {
-            margin-bottom: 8px;
-            word-break: break-word;
-            /* 防止长单词溢出 */
-        }
-
-        .memo-tags {
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        .memo-tag {
-            background-color: #e0e0e0;
-            color: #666;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 12px;
-            margin-right: 5px;
-        }
-
-        .memo-pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .memo-page-btn {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        .memo-page-btn:hover:not(.disabled) {
-            background-color: #f0f0f0;
-        }
-
-        .memo-page-btn.active {
-            background-color: #333;
-            color: white;
-            border-color: #333;
-        }
-
-        .memo-page-btn.disabled {
-            color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .memo-loading,
-        .memo-error {
-            text-align: center;
-            padding: 20px;
-            color: #999;
-        }
-
-        .memo-attachments {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .memo-attachment-item {
-            flex: 0 0 auto;
-        }
-
-        .memo-attachment-image {
-            max-width: 100px;
-            max-height: 100px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* --- 新增的闲言碎语样式 END --- */
-    </style>
+    <script src="./static/js/my-websites.js"></script>
+    <script src="./static/js/tabchange.js"></script>
 </body>
 
 </html>

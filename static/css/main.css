@@ -1,0 +1,324 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', 'STSong', serif;
+            line-height: 1.8;
+            color: #333;
+            padding: 20px;
+            background-position: 0 0, 10px 10px;
+            /* 信件背景（图片） */
+            background: #eeeeee url(../img/bj.png);
+            background-attachment: fixed;
+            background-repeat: repeat;
+            /* 信件背景（马赛克方格） */
+            /*background-color: #f0f0f0;*/
+            /*background-image:*/
+            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),*/
+            /*    linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);*/
+            /*background-size: 20px 20px;*/
+        }
+
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* 语言切换按钮样式 */
+        .lang-switch-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+
+        .lang-switch-container img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .lang-switch-container img:hover {
+            opacity: 1.0;
+        }
+
+        /* 头部导航 */
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .nav-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .nav-tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #333;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* 内容区域 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 信纸纹理效果 */
+        .letter-container {
+            background-image:
+                linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+        }
+
+        /* 通用内容样式 */
+        .content-section {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .content-section h2 {
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 24px;
+        }
+
+        .content-section h3 {
+            margin: 25px 0 15px 0;
+            color: #444;
+            font-size: 18px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* 列表样式 */
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-section li::before {
+            content: "▹";
+            color: #999;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* 联系方式 */
+        .contact-info {
+            margin: 15px 0;
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 网站链接 */
+        .website-links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .website-links a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        /* 工具和游戏网格 */
+        .tools-grid,
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .tool-item,
+        .game-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .tool-name,
+        .game-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tool-desc,
+        .game-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 关于我页面特殊样式 */
+        .about-me-content {
+            text-align: justify;
+        }
+
+        .about-me-content p:first-child {
+            font-size: 18px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .tools-grid,
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* 移动端调整语言按钮位置 */
+            .lang-switch-container {
+                top: 5px;
+                right: 5px;
+            }
+        }
+
+        /* 信纸底部页脚描述 */
+        .letter-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* 底部版权信息 - 在信纸外部 */
+        #footer-wrap {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 12px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            background-image:
+                linear-gradient(transparent 29px, #f0f0f0 30px);
+            background-size: 100% 30px;
+            border-top: 1px solid #eee;
+        }
+
+        #footer-wrap a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        #footer-wrap a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        #footer-wrap img {
+            width: 50px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        /* 今日诗词样式 */
+        #jinrishici-sentence {
+            position: absolute;
+            top: 111px;
+            right: 40px;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            text-align: right;
+            max-width: 300px;
+        }
+
+        /* 网站统计样式 */
+        .webinfo {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .webinfo-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #jinrishici-sentence {
+                position: static;
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 20px;
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .webinfo {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
