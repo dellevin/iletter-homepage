@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN"> <!-- 初始语言设为中文 -->
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +19,7 @@
     <!-- 多语言 -->
     <script src="./static/js/translations.js"></script>
     <!-- umami统计 -->
-    <script defer src="https://umami.iletter.top/script.js"
+    <script defer src="https://umami.iletter.top/anyjs"
         data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script>
     <!--   今日诗词   -->
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
@@ -57,22 +56,16 @@
         <div class="tab-content active" id="about-content">
 
             <div class="content-section about-me-content">
-                <h2 data-i18n="hello">你好</h2>
-                <p data-i18n="greeting">见字如面，展信舒颜。</p>
-                <p data-i18n="about_me_p1">我叫<strong
-                        data-i18n="my_name">白荼</strong>，河北衡水人，土生土长的北方汉子，毕业于一所不知名的二本院校。信息管理与信息系统专业。
-                    自学java、vue、linux、mysql、python等开发技术和一些软件逆向技术，同时还略懂些PS图片、PR视频、AE特效制作。做过系统，剪过网线，搞过plc耍过单片机，维护修理过服务器，运营过公众号和网站等等。可谓是会，但只会一点点。别人都觉得我是个大佬，其实我就是个小菜鸡。但我不会气馁，努力成为一个大佬的。正如永劫无间刘炼的一句话“天下万般之绝学，莫过于恒心。
-                    ”</p>
-                <p data-i18n="about_me_p2">
-                    平时的爱好也就是玩玩游戏，看看书，刷刷动漫，不爱出门，肥宅一个。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。
+                <h2 data-i18n="hello"></h2>
+                <p data-i18n="greeting"></p>
+                <p data-i18n="about_me_p1">
+                    <strong data-i18n="my_name"></strong>
                 </p>
-                <p data-i18n="about_me_p3">本站秉承简约风格，采用纯HTML，Umami做网站底部的uv/pv
-                    ，闲言碎语模块使用memos接口。同时使用堡塔云WAF防护，nginx缓存加速网站静态资源。如果您有兴趣，可以直接下载本站的 <a
-                        href="https://gitea.iletter.top/dellevin/BaiTu-homepage"
-                        target="_blank">https://gitea.iletter.top/dellevin/BaiTu-homepage </a>并使用。</p>
-                <p data-i18n="about_me_p4">作为一个99年的码农，很庆幸我在工作之后还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！</p>
+                <p data-i18n="about_me_p2">
+                </p>
+                <p data-i18n="about_me_p3"></p>
+                <p data-i18n="about_me_p4"></p>
             </div>
-
         </div>
 
         <!-- 我的网站内容 -->
@@ -192,7 +185,7 @@
             </div>
         </div>
         <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
-                target="_blank">冀ICP备2025122609号</a> &copy;<span>2020 - 2026</span> <span>Power BY</span> <span>Del Levin </span>
+                target="_blank">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del Levin </span>
         </div>
     </div>
 
@@ -221,18 +214,7 @@
                 const key = element.getAttribute('data-i18n');
                 const translation = translations[lang][key];
                 if (translation !== undefined) {
-                    // 检查是否需要更新 href 属性
-                    if (element.hasAttribute('data-i18n-attr') && element.getAttribute('data-i18n-attr') === 'href') {
-                        // 如果是 a 标签，更新 href 和内容
-                        if (element.tagName.toLowerCase() === 'a') {
-                            element.href = translation;
-                            element.innerHTML = translation;
-                        } else {
-                            element.textContent = translation;
-                        }
-                    } else {
-                        element.innerHTML = translation; // 使用 innerHTML 以保留 <strong> 等标签
-                    }
+                     element.innerHTML = translation;
                 } else {
                     console.warn(`Translation key '${key}' not found for language '${lang}'`);
                 }
@@ -256,8 +238,6 @@
             document.documentElement.lang = savedLang;
             switchButton.addEventListener('click', switchLanguage);
         });
-
-
 
         // ==================== Umami Stats 请求 ====================
         (async () => {
@@ -291,7 +271,6 @@
                 }
 
                 const data = await response.json();
-                // console.log('Umami Stats 请求成功:', data);
                 // 浏览量    data.pageviews.value
                 // 访问次数  data.visits.value
                 // 访客      data.visitors.value
