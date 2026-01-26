@@ -12,7 +12,6 @@
     // 获取 DOM 元素
     const memosTab = document.querySelector('.nav-tab[data-tab="memos"]');
     const memosContainer = document.getElementById("memos-container");
-    const memosContent = document.getElementById("memos-content");
 
     // 日期格式化函数 (简单实现)
     function formatDate(dateStr) {

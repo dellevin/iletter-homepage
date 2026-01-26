@@ -1,9 +1,11 @@
 const translationsEN = {
+    'footprint_map_h2': '足迹',// 添加这个
                 'page_title': 'BaiTu - BAITU',
                 'nav_about': 'About Me',
                 'nav_website': 'My Websites',
                 'nav_tools': 'Tools',
                 'nav_games': 'Games',
+                'nav_footprint':'Footprints',
                 'nav_memos': 'Memos',
                 'nav_contact': 'Contact Me',
                 'hello': 'Hello',

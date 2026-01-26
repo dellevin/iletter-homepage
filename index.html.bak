@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +12,9 @@
         }
     </script>
     <!--   今日诗词   -->
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> 
     <!-- 百度统计 -->
-    <script>
+     <script>
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");
@@ -25,9 +24,7 @@
         })();
     </script>
     <!-- umami统计 -->
-    <script defer src="https://umami.iletter.top/anyjs" data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script>
-    <!-- ECharts 库 -->
-    <script src="./static/js/echarts/echarts.min.js"></script>
+     <script defer src="https://umami.iletter.top/anyjs" data-website-id="ae6cd64c-5900-49c9-9c22-95cedc24a508"></script> 
     <!-- 多语言 -->
     <script src="./static/js/language/zh.js"></script>
     <script src="./static/js/language/en.js"></script>
@@ -39,7 +36,6 @@
     </style>
     <title data-i18n="page_title">白荼 - BAITU</title>
 </head>
-
 <body>
     <div class="letter-container">
         <!-- 语言切换按钮 -->
@@ -53,9 +49,6 @@
             <div class="nav-tab" data-tab="website"><span data-i18n="nav_website"></span></div>
             <div class="nav-tab" data-tab="tools"><span data-i18n="nav_tools"></span></div>
             <div class="nav-tab" data-tab="games"><span data-i18n="nav_games"></span></div>
-
-            <div class="nav-tab" data-tab="footprint"><span data-i18n="nav_footprint"></span></div>
-
             <div class="nav-tab" data-tab="memos"><span data-i18n="nav_memos"></span></div>
             <div class="nav-tab" data-tab="contact"><span data-i18n="nav_contact"></span></div>
         </div>
@@ -105,7 +98,7 @@
                         data-i18n="leave_message_link" data-i18n-attr="href">点击此链接</a>去我的博客下面给我留言！</p>
             </div>
         </div>
-
+        
         <!-- 关于我内容 -->
         <div class="tab-content active" id="about-content">
             <div class="content-section about-me-content">
@@ -147,11 +140,6 @@
             </div>
         </div>
 
-        <!-- 历史足迹 (地图) -->
-        <div id="footprint-content" class="tab-content">
-
-        </div>
-
         <!-- 闲言碎语内容 -->
         <div class="tab-content" id="memos-content">
             <div class="content-section">
@@ -180,8 +168,7 @@
             </div>
         </div>
         <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
-                target="_blank">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del
-                Levin </span>
+                target="_blank">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del Levin </span>
         </div>
     </div>
     <script>
@@ -212,7 +199,7 @@
                 const key = element.getAttribute('data-i18n');
                 const translation = translations[lang][key];
                 if (translation !== undefined) {
-                    element.innerHTML = translation;
+                     element.innerHTML = translation;
                 } else {
                     console.warn(`Translation key '${key}' not found for language '${lang}'`);
                 }
@@ -242,7 +229,6 @@
     <script src="./static/js/tools_my.js"></script>
     <script src="./static/js/memos.js"></script>
     <script src="./static/js/my-websites.js"></script>
-    <script src="./static/js/map-footprint.js"></script>
     <script src="./static/js/tabchange.js"></script>
 </body>
 

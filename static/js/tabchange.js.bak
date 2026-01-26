@@ -5,17 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   tabs.forEach((tab) => {
     tab.addEventListener("click", function () {
       const tabId = this.getAttribute("data-tab");
-      // 在切换之前，如果当前是足迹页且地图已存在，销毁旧地图实例 (ECharts 版本)
-      const currentActiveTab = document.querySelector(".nav-tab.active");
-      if (
-        currentActiveTab &&
-        currentActiveTab.getAttribute("data-tab") === "footprint" &&
-        typeof MapFootprintModule !== "undefined"
-      ) {
-        MapFootprintModule.destroyMap(); // 销毁之前的 ECharts 实例
-        console.log("切换标签前已销毁旧地图实例");
-      }
-
       // 移除所有激活状态
       tabs.forEach((t) => t.classList.remove("active"));
       contents.forEach((c) => c.classList.remove("active"));
@@ -67,39 +56,5 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.warn("未找到“常玩游戏”标签或内容区域。");
     renderGames(gamesData);
-  }
-
-  // 点击足迹函数 (新增)
-  const footprintTab = document.querySelector('.nav-tab[data-tab="footprint"]');
-  const footprintContent = document.getElementById("footprint-content");
-  if (footprintTab && footprintContent) {
-    footprintTab.addEventListener("click", function () {
-      // 如果 MapFootprintModule 已加载（即 map-footprint.js 已成功执行）
-      if (typeof MapFootprintModule !== "undefined") {
-        // 调用模块中的 renderMap 函数来渲染地图
-        MapFootprintModule.renderMap(footprintContent);
-      } else {
-        // 如果模块未定义，说明 map-footprint.js 可能未加载或加载失败
-        console.error(
-          "MapFootprintModule 未定义，请确保 map-footprint.js 已正确加载且在 tabchange.js 之前。",
-        );
-        // 可以选择显示错误信息给用户
-        footprintContent.innerHTML =
-          '<p data-i18n="error_loading_map">加载地图失败，请刷新页面重试。</p>';
-        // 如果需要更新国际化文本，可以在这里处理
-        if (typeof translations !== "undefined") {
-          const errorElement = footprintContent.querySelector(
-            '[data-i18n="error_loading_map"]',
-          );
-          if (errorElement) {
-            const savedLang = localStorage.getItem(LANG_KEY) || "zh";
-            const translation = translations[savedLang]["error_loading_map"];
-            if (translation) errorElement.textContent = translation;
-          }
-        }
-      }
-    });
-  } else {
-    console.warn("未找到“足迹”标签或内容区域。");
   }
 });
