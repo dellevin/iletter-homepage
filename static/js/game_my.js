@@ -1,67 +1,112 @@
-// ========== 游戏配置数据 ==========
+// ========== 游戏配置数据 (包含中英双语) ==========
 const gamesData = [
-  { id: 0, name: "《永劫无间》111", desc: "我身无拘，武道无穷" },
-  { id: 1, name: "《我的世界》", desc: "这个小盒才是我的永远的家" },
-  { id: 2, name: "《鬼谷八荒》", desc: "当互动版的修仙小说看了，很好玩." },
+  { 
+    id: 0, 
+    name_zh: "《永劫无间》", 
+    desc_zh: "我身无拘，武道无穷", 
+    name_en: "Naraka", 
+    desc_en: "My body knows no bounds, martial arts are endless." 
+  },
+  { 
+    id: 1, 
+    name_zh: "《我的世界》", 
+    desc_zh: "这个小盒才是我的永远的家", 
+    name_en: "Minecraft", 
+    desc_en: "This little box is my forever home." 
+  },
+  { 
+    id: 2, 
+    name_zh: "《鬼谷八荒》", 
+    desc_zh: "当互动版的修仙小说看了，很好玩.", 
+    name_en: "Gorogoa Bahuang", 
+    desc_en: "Treat it as an interactive cultivation novel. Very fun." 
+  },
   {
     id: 3,
-    name: "《江城创业记》",
-    desc: "缝合怪，但是全缝了。很喜欢的一款游戏",
+    name_zh: "《江城创业记》",
+    desc_zh: "缝合怪，但是全缝了。很喜欢的一款游戏",
+    name_en: "Jiangcheng Entrepreneurship Story",
+    desc_en: "A mashup, but it's fully integrated. A game I really like."
   },
   {
     id: 4,
-    name: "《中国式家长》",
-    desc: "我承认我做不好一个孩子，也做不好一个家长",
+    name_zh: "《中国式家长》",
+    desc_zh: "我承认我做不好一个孩子，也做不好一个家长",
+    name_en: "Chinese Parents",
+    desc_en: "I admit I can't be a good child or a good parent."
   },
   {
     id: 5,
-    name: "《王者荣耀》",
-    desc: "买了好多皮肤，和朋友玩才是真快乐（已退坑）",
+    name_zh: "《王者荣耀》",
+    desc_zh: "买了好多皮肤，和朋友玩才是真快乐（已退坑）",
+    name_en: "Honor of Kings",
+    desc_en: "Bought lots of skins. Real joy is playing with friends. (Quitted)"
   },
   {
     id: 6,
-    name: "《QQ飞车手游》",
-    desc: "氪了好多，有些后悔了，太耗注意力了（已退坑）",
+    name_zh: "《QQ飞车手游》",
+    desc_zh: "氪了好多，有些后悔了，太耗注意力了（已退坑）",
+    name_en: "QQ Speed Mobile",
+    desc_en: "Spent a lot, somewhat regretful. Too attention-consuming. (Quitted)"
   },
-  { id: 7, name: "《龙族幻想》", desc: "因为龙族入坑的，江南老贼！（已退坑）" },
+  { 
+    id: 7, 
+    name_zh: "《龙族幻想》", 
+    desc_zh: "因为龙族入坑的！（已退坑）", 
+    name_en: "Dragon Raja Mobile", 
+    desc_en: "Got into it because of Dragon Raja novels! (Quitted)" 
+  },
   {
     id: 8,
-    name: "《洛克王国》",
-    desc: "还记得小时候拿压岁钱偷偷买点卡（已退坑）",
+    name_zh: "《洛克王国》",
+    desc_zh: "还记得小时候拿压岁钱偷偷买点卡（已退坑）",
+    name_en: "Roco Kingdom",
+    desc_en: "Still remember secretly buying cards with New Year money as a kid. (Quitted)"
   },
   {
     id: 9,
-    name: "《造梦西游》",
-    desc: "造梦3从小学玩到大学，现在还时不时的回味一下（已退坑）",
+    name_zh: "《造梦西游》",
+    desc_zh: "造梦3从小学玩到大学，现在还时不时的回味一下（已退坑）",
+    name_en: "Zao Meng Xi You",
+    desc_en: "Zao Meng 3 from elementary to university. Still reminisce sometimes. (Quitted)"
   },
   {
-    id:10,
-    name:'《Street Fighter 6》',
-    desc: "街霸6，超级炎炎舞！outfit3是真好看。",
+    id: 10,
+    name_zh: '《街头霸王6》',
+    desc_zh: "街霸6，超级炎炎舞！outfit3是真好看。",
+    name_en: 'Street Fighter 6',
+    desc_en: "SF6, Super En'en Bu! Outfit 3 is truly nice-looking."
   },
   {
-    id:11,
-    name:'《WorldBox》',
-    desc: "世界盒子，无意间发现的一款游戏，可惜价格太贵了。",
+    id: 11,
+    name_zh: '《世界盒子》',
+    desc_zh: "世界盒子，无意间发现的一款游戏，可惜价格太贵了。",
+    name_en: 'WorldBox',
+    desc_en: "WorldBox, a game discovered by accident. Unfortunately, the price is too high."
   },
   {
-    id:12,
-    name:'《无人深空》',
-    desc: "难以想象的开放遨游！这次，我的目标是星辰大海！",
+    id: 12,
+    name_zh: '《无人深空》',
+    desc_zh: "难以想象的开放遨游！这次，我的目标是星辰大海！",
+    name_en: 'No Man\'s Sky',
+    desc_en: "Inconceivably open exploration! This time, my goal is the starry sea!"
   },
   {
-    id:13,
-    name:'《戴森球计划》',
-    desc: "没有蓝图玩的，把自己恶心坏了。主打一个自动化",
+    id: 13,
+    name_zh: '《戴森球计划》',
+    desc_zh: "没有蓝图玩的，把自己恶心坏了。主打一个自动化",
+    name_en: 'Dyson Sphere Program',
+    desc_en: "Played without blueprints, made myself sick. All about automation."
   },
 ];
 
-// ========== 游戏详情数据 ==========
+// ========== 游戏详情数据 (包含中英双语) ==========
 const gameDetailData = {
   0: {
     id: "游戏ID: 42956400140163",
     rank: "<strong>历史最高段位：</strong>无相龙王",
-    detailDesc: "我希望能玩一辈子永劫无间！",
+    detailDesc_zh: "我希望能玩一辈子永劫无间！",
+    detailDesc_en: "I hope to play Naraka forever!",
     images: [
       "./static/img/game/yjwj/yjwj_chuanyun.png",
       "./static/img/game/yjwj/yjwj_xiafeng.png",
@@ -69,9 +114,10 @@ const gameDetailData = {
     ],
   },
   1: {
-    id: "levin9992@qq.com",
+    id: "游戏id：levin9992@qq.com",
     rank: "",
-    detailDesc: "我自己精神的自留地！我幻想中的乌托邦",
+    detailDesc_zh: "我自己精神的自留地！我幻想中的乌托邦",
+    detailDesc_en: "My spiritual private land! My imagined utopia",
     images: [
       "./static/img/game/wodeshijie/1.jpg",
       "./static/img/game/wodeshijie/2.jpg",
@@ -81,7 +127,8 @@ const gameDetailData = {
   2: {
     id: "",
     rank: "<strong>历史最高段位：</strong>登仙",
-    detailDesc: "好玩！爱玩！立绘非常好看！",
+    detailDesc_zh: "好玩！爱玩！立绘非常好看！",
+    detailDesc_en: "Fun! Love playing! The illustrations are very nice!",
     images: [
       "./static/img/game/guigubahuang/1.jpg",
       "./static/img/game/guigubahuang/2.jpg",
@@ -91,7 +138,8 @@ const gameDetailData = {
   6: {
     id: "",
     rank: "<strong>历史最高段位：</strong>传奇车神",
-    detailDesc: "巅峰竞速！可惜我的天行者被割韭菜了。。。",
+    detailDesc_zh: "巅峰竞速！可惜我的天行者被割韭菜了。。。",
+    detailDesc_en: "Peak racing! Pity my Sky Walker was scalped...",
     images: [
       "./static/img/game/qqspead/qqspead1.jpg",
       "./static/img/game/qqspead/qqspead2.jpg",
@@ -99,8 +147,7 @@ const gameDetailData = {
   },
 };
 
-let currentlyOpenTooltip = null; // 用于跟踪当前打开的tooltip
-
+let currentlyOpenTooltip = null;
 // ========== 显示/隐藏游戏详情的函数 (Tooltip 版本) ==========
 function toggleGameDetailTooltip(gameElement, gameIndex) {
   // 如果点击的是同一个游戏，且tooltip是打开的，则关闭它
@@ -128,15 +175,15 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
     const detail = gameDetailData[gameIndex];
     const currentLang = localStorage.getItem("preferred_language") || "zh";
 
-    const nameKey = `game_name_${gameIndex}`;
-    const descKey = `game_desc_${gameIndex}`;
-    const gameName =
-      typeof translations !== "undefined" && translations[currentLang]
-        ? translations[currentLang][nameKey] || gamesData[gameIndex].name
-        : gamesData[gameIndex].name;
+    // 根据当前语言选择游戏名称和描述
+    const gameEntry = gamesData.find(game => game.id === gameIndex);
+    const gameName = currentLang === 'en' ? gameEntry?.name_en : gameEntry?.name_zh;
+    const gameDesc = currentLang === 'en' ? gameEntry?.desc_en : gameEntry?.desc_zh;
 
     let tooltipContentHtml = "";
     if (detail) {
+      // 根据当前语言选择详情描述
+      const detailDesc = currentLang === 'en' ? detail.detailDesc_en : detail.detailDesc_zh;
       tooltipContentHtml = `
                 <div class="tooltip-content">
                     <div class="tooltip-header">
@@ -146,7 +193,7 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
                     <div class="tooltip-body">
                         <p><strong>${detail.id}</strong></p>
                         <p> ${detail.rank}</p>
-                        <p><em>${detail.detailDesc}</em></p>
+                        <p><em>${detailDesc}</em></p>
                         ${
                           detail.images && detail.images.length > 0
                             ? `<div class="tooltip-images">
@@ -158,6 +205,8 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
                 </div>
             `;
     } else {
+      // 使用根据语言变量生成的消息
+      const noDetailMsg = currentLang === 'en' ? 'The author has not written information yet~ Please wait patiently!' : '博主暂未书写信息～请耐心等待哦！';
       tooltipContentHtml = `
                 <div class="tooltip-content">
                     <div class="tooltip-header">
@@ -165,7 +214,7 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
                         <span class="tooltip-close">&times;</span>
                     </div>
                     <div class="tooltip-body">
-                        <p style="color: #999; font-style: italic;">博主暂未书写信息～请耐心等待哦！</p>
+                        <p style="color: #999; font-style: italic;">${noDetailMsg}</p>
                     </div>
                 </div>
             `;
@@ -201,9 +250,9 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-  // 计算tooltip的位置 (例如，出现在游戏项下方)
-  const top = rect.bottom + scrollTop + 10; // 10px 间隙
-  const left = rect.left + scrollLeft; // 与游戏项左侧对齐
+  // 计算tooltip的位置
+  const top = rect.bottom + scrollTop + 10;
+  const left = rect.left + scrollLeft;
 
   tooltipDiv.style.top = `${top}px`;
   tooltipDiv.style.left = `${left}px`;
@@ -248,32 +297,28 @@ function renderGames(gamesArray) {
     return;
   }
 
-  if (!gamesArray || gamesArray.length === 0) {
-    container.innerHTML =
-      '<div class="memo-error" data-i18n="no_games_data">暂无游戏数据</div>';
-    return;
+  // 检查数组是否为空或未定义/未初始化
+  const arrayToRender = gamesArray || gamesData;
+  if (!arrayToRender || !Array.isArray(arrayToRender) || arrayToRender.length === 0) {
+    const currentLang = localStorage.getItem("preferred_language") || "zh";
+    let noDataMessage = currentLang === 'en' ? 'No games data available.' : '暂无游戏数据';
+    container.innerHTML = `<div class="memo-error">${noDataMessage}</div>`;
+    return; 
   }
 
   const currentLang = localStorage.getItem("preferred_language") || "zh";
 
   let html = "";
-  gamesArray.forEach((game, index) => {
-    const nameKey = `game_name_${index}`;
-    const descKey = `game_desc_${index}`;
-    const nameTranslation =
-      typeof translations !== "undefined" && translations[currentLang]
-        ? translations[currentLang][nameKey] || game.name
-        : game.name;
-    const descTranslation =
-      typeof translations !== "undefined" && translations[currentLang]
-        ? translations[currentLang][descKey] || game.desc
-        : game.desc;
+  arrayToRender.forEach((game, index) => {
+    // 根据当前语言选择对应的名称和描述
+    const name = currentLang === 'en' ? game.name_en : game.name_zh;
+    const desc = currentLang === 'en' ? game.desc_en : game.desc_zh;
 
     // 为每个游戏项添加点击事件，并传递其索引
     html += `
-        <div class="game-item" data-game-index="${index}">
-            <div class="game-name">${nameTranslation}</div>
-            <div class="game-desc">${descTranslation}</div>
+        <div class="game-item" data-game-index="${game.id}"> <!-- 使用 game.id 而不是 index -->
+            <div class="game-name">${name}</div>
+            <div class="game-desc">${desc}</div>
         </div>
     `;
   });
@@ -285,13 +330,13 @@ function renderGames(gamesArray) {
   gameItems.forEach((item) => {
     item.addEventListener("click", function (event) {
       event.stopPropagation(); // 阻止点击事件冒泡到document，避免立即关闭
-      const gameIndex = parseInt(this.getAttribute("data-game-index"));
+      const gameIndex = parseInt(this.getAttribute("data-game-index")); // 获取 game.id
       toggleGameDetailTooltip(this, gameIndex);
     });
   });
 }
 
 // ========== 初始化 ==========
-document.addEventListener("DOMContentLoaded", function () {
-  renderGames(gamesData);
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   renderGames();
+// });

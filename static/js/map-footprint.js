@@ -14,22 +14,88 @@ const MapFootprintModule = (() => {
   // --- 数据 ---
   // 注意：这里的坐标可能需要根据你实际访问的城市进行微调
   const visitedPlaces = [
-    { name: "济南市", value: [117.024961, 36.682788], province: "山东省" },
-    { name: "青岛市", value: [120.384423, 36.065918], province: "山东省" },
-    { name: "淄博市", value: [118.055915, 36.813547], province: "山东省" },
-    { name: "潍坊市", value: [119.162775, 36.705759], province: "山东省" },
+    {
+      name: "济南市",
+      province: "山东省",
+      value: [117.024961, 36.682788],
+      desc:'正在这里努力打工！',
+      imgList: [
+        "./static/img/location/jinan/1.jpg",
+        "./static/img/location/jinan/2.jpg",
+        "./static/img/location/jinan/3.jpg",
+        "./static/img/location/jinan/4.jpg",
+      ],
+    },
+    { 
+      name: "青岛市", 
+      value: [120.384423, 36.065918], 
+      province: "山东省" ,
+      desc:'这是我人生第一次看见海，我永远不会忘记。同样的还有你们。',
+      imgList: [
+        "./static/img/location/qingdao/1.jpg",
+        "./static/img/location/qingdao/2.jpg",
+        "./static/img/location/qingdao/3.jpg",
+      ],
+    },
+    { 
+      name: "淄博市", 
+      desc:'也算是吃上淄博烧烤了。',
+      value: [118.055915, 36.813547], 
+      province: "山东省" 
+    },
+    { 
+      name: "潍坊市", 
+      desc:'风筝节！不错不错！',
+      value: [119.162775, 36.705759], 
+      province: "山东省" 
+    },
 
-    { name: "保定市", value: [115.482331, 38.867657], province: "河北省" },
-    { name: "衡水市", value: [115.665996, 37.739574], province: "河北省" },
-    { name: "沧州市", value: [116.838581, 38.308094], province: "河北省" },
-    { name: "石家庄市", value: [114.514891, 38.042309], province: "河北省" },
-    { name: "张家口市", value: [114.886714, 40.811943], province: "河北省" },
+    { 
+      name: "保定市", 
+      desc:'大学四年，那是最自由的时候。',
+      value: [115.482331, 38.867657], 
+      province: "河北省" 
+    },
+    { name: "衡水市", 
+      desc: '生我养我的地方，也是埋葬我的地方',
+      value: [115.665996, 37.739574], province: "河北省" },
+    { name: "沧州市", 
+      desc: 'hei ！你一定要幸福啊！带着我们几个的祝福，走下去啊！',
+      value: [116.838581, 38.308094], province: "河北省" },
+    { 
+      name: "廊坊市", 
+      value: [116.704374, 39.523949], 
+      province: "河北省" ,
+      desc:'五一寻友，一起夜间烧烤，宿醉到天明',
+      imgList: [
+        "./static/img/location/langfang/1.jpg",
+        "./static/img/location/langfang/2.jpg",
+        "./static/img/location/langfang/3.jpg",
+      ],
+    },
+    { name: "石家庄市", 
+      desc: '我曾经来过。',
+      value: [114.514891, 38.042309], province: "河北省" },
+    { name: "张家口市", 
+      desc: '三个准大学生，傻傻的做七八个小时的绿皮火车来到这里，只为某人一份未知的爱情。',
+      value: [114.886714, 40.811943], province: "河北省" },
 
-    { name: "洛阳市", value: [112.454174, 34.618139], province: "河南省" },
+    { name: "洛阳市", 
+      province: "河南省",
+      value: [112.454174, 34.618139], 
+      desc:'群山巍峨，银装素裹，不虚此行',
+      imgList: [
+        "./static/img/location/luoyang/1.jpg",
+        "./static/img/location/luoyang/2.jpg",
+        "./static/img/location/luoyang/3.jpg",
+      ],
+    },
 
     { name: "昌平区", value: [116.235904, 40.218086], province: "北京市" },
 
-    { name: "杭州市", value: [120.153576, 30.287459], province: "浙江省" },
+    { name: "杭州市", 
+      desc: '细雨朦胧的西湖才是最美的。',
+      value: [120.153576, 30.287459], province: "浙江省" },
 
     { name: "苏州市", value: [120.585316, 31.298886], province: "江苏省" },
     { name: "扬州市", value: [119.421003, 32.393159], province: "江苏省" },
@@ -41,11 +107,9 @@ const MapFootprintModule = (() => {
   // 省份名称到其 GeoJSON 文件名的映射 (需要根据你的文件名调整)
   const provinceNameToGeoFile = {
     北京市: "北京市.geojson",
-
     山东省: "山东省.geojson",
     河北省: "河北省.geojson",
     河南省: "河南省.geojson",
-
     浙江省: "浙江省.geojson",
     江苏省: "江苏省.geojson",
   };
@@ -106,8 +170,48 @@ const MapFootprintModule = (() => {
             },
           },
           tooltip: {
+            // --- 核心修改：Formatter 函数 ---
             formatter: function (params) {
-              return ` ${params.data.name}<br/>坐标: [ ${params.data.value[0].toFixed(4)},  ${params.data.value[1].toFixed(4)}]`;
+              // 确保 params.data 存在
+              if (!params.data) {
+                return params.name || "未知地点"; // 如果没有数据，至少显示名称或默认文字
+              }
+
+              // 获取地点名称和坐标
+              const name = params.data.name || "未知地点";
+              const longitude =
+                params.data.value && params.data.value[0]
+                  ? params.data.value[0].toFixed(4)
+                  : "N/A";
+              const latitude =
+                params.data.value && params.data.value[1]
+                  ? params.data.value[1].toFixed(4)
+                  : "N/A";
+
+              // 初始化 tooltip 内容字符串
+              let tooltipHtml = `${name}<br/>坐标: [${longitude}, ${latitude}]<br/>`; // 添加一些换行和分割
+              // 如果还需要显示其他描述信息（例如可以从 params.data 中获取），可以在此处添加
+              const description = params.data.desc || "博主也不知道说啥了。。。";
+              if (description) {
+                tooltipHtml += `<strong>描述:</strong>${description}<br/>`;
+              }
+              // 获取图片列表
+              const imageList = params.data.imgList; // 直接从数据对象获取 imgList
+
+              // 检查是否有图片列表且不为空
+              if (Array.isArray(imageList) && imageList.length > 0) {
+                // 添加标题
+                tooltipHtml += "<strong>照片:</strong><br/>";
+                // 遍历图片列表，生成 HTML 图像标签
+                imageList.forEach((imgSrc) => {
+                  tooltipHtml += `<img src="${imgSrc}" alt="${name} 图片" style="max-width: 150px; max-height: 100px; margin: 5px; border-radius: 4px;" onerror="this.style.display='none';"/>`;
+                });
+              } else {
+                // 如果没有图片或 imgList 不存在/为空，则显示提示
+                tooltipHtml += "<strong>照片:</strong>看来博主不是很爱拍照~";
+              }
+
+              return tooltipHtml; // 返回构建好的 HTML 字符串
             },
           },
         },
@@ -140,40 +244,28 @@ const MapFootprintModule = (() => {
         centerCoord = [116.407395, 40.3];
       }
 
-      console.log(firstPlaceInProvince.value);
-
       titleText = ` ${provinceCode} - “印迹”`;
-
       // 过滤出属于当前省份的足迹点
       filteredVisitedPlaces = visitedPlaces.filter(
         (place) => place.province === provinceCode,
       );
-
-      // --- 为省份地图准备高亮数据 ---
-      // 提取当前省份内访问过的城市名称
-      const visitedCitiesInProvince = filteredVisitedPlaces.map(
-        (place) => place.name,
-      );
       // 构造 map 系列的数据，访问过的城市 value 设为 1，未访问的可以设为 0
       // 为了实现高亮，我们只需要列出访问过的城市即可，未访问的城市会使用默认颜色
-      const provinceMapData = visitedCitiesInProvince.map((cityName) => ({
-        name: cityName, // GeoJSON 中区域的名称必须与此 name 匹配
+      const provinceMapData = filteredVisitedPlaces.map((city) => ({
+        name: city.name,
+        desc:city.desc || "",
+        imgList:city.imgList || [],
         value: 1, // 值为 1 表示访问过，用于 visualMap 区分
       }));
-
+      // console.log(provinceMapData)
       // --- 配置 visualMap ---
       visualMapConfig = {
         show: false, // 通常不显示 visualMap 组件条
         min: 0, // 最小值
         max: 1, // 最大值
         inRange: {
-          // 当 data 中 item.value 为 1 时，使用的颜色
           color: ["#FF6B6B"], // 高亮颜色 (访问过的城市)
         },
-        // outOfRange: {
-        //     // 当 value 超出范围或未定义时，使用的颜色
-        //     // 此颜色由 series.itemStyle.areaColor 控制
-        // },
         calculable: true,
       };
 
@@ -204,6 +296,7 @@ const MapFootprintModule = (() => {
             // areaColor: '#ffcccc', // 也可以设置悬停颜色，但会受 visualMap 影响
           },
         },
+
         // 数据驱动颜色
         data: provinceMapData,
         // 默认样式（未在 data 中定义的区域将使用此样式）
@@ -239,35 +332,7 @@ const MapFootprintModule = (() => {
         },
       },
       tooltip: {
-        trigger: "item",
-        formatter: function (params) {
-          if (params.seriesType === "scatter" && level === "country") {
-            // 国家地图的足迹点 tooltip
-            if (params.value && params.value.length >= 2) {
-              return (
-                params.name +
-                "<br/>经度: " +
-                params.value[0].toFixed(4) +
-                "<br/>纬度: " +
-                params.value[1].toFixed(4)
-              );
-            }
-            return params.name;
-          } else if (params.seriesType === "map" && level === "province") {
-            // 省份地图的区域 tooltip
-            // params.value 是 data 中对应的 value
-            const status = params.value === 1 ? "访问过" : "未访问";
-            return `区域:  ${params.name}<br/>状态:  ${status}`;
-          } else if (
-            params.componentType === "geo" &&
-            level === "province" &&
-            params.componentSubType === "map"
-          ) {
-            // 省份地图的 geo 区域 tooltip (如果需要)
-            return `点击返回全国:  ${params.name}`;
-          }
-          return params.name;
-        },
+
       },
       // geo 组件配置
       geo:
@@ -420,7 +485,7 @@ const MapFootprintModule = (() => {
     button.id = "map-back-button";
     button.textContent = "⬅返回全国地图";
     button.style.position = "absolute";
-    button.style.top = "10px";
+    button.style.top = "50px";
     button.style.left = "10px";
     button.style.zIndex = 1000; // 确保按钮在图表之上
     button.style.padding = "2px 5px"; // 减少内边距以更接近纯文本
@@ -544,9 +609,9 @@ const MapFootprintModule = (() => {
     const mapDiv = document.createElement("div");
     mapDiv.id = getMapContainerId();
     mapDiv.style.width = "100%";
-    mapDiv.style.height = "600px";
+    mapDiv.style.height = "90vh";
     mapDiv.style.marginTop = "20px";
-    mapDiv.style.position = "relative"; // 为绝对定位的按钮提供参考
+    mapDiv.style.position = "relative";
     contentDiv.appendChild(mapDiv);
 
     // 加载 GeoJSON 并初始化地图
@@ -587,30 +652,29 @@ function showModal() {
   document.getElementById("modalOverlay").style.display = "block";
 }
 
-
 const closeModal = () => {
-    document.getElementById('modalOverlay').style.display = 'none';
+  document.getElementById("modalOverlay").style.display = "none";
 };
 // --- 页面加载完成后执行 ---
-document.addEventListener('DOMContentLoaded', function() {
-    // 获取遮罩层和内容区域元素
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalContent = document.getElementById('modalContent');
+document.addEventListener("DOMContentLoaded", function () {
+  // 获取遮罩层和内容区域元素
+  const modalOverlay = document.getElementById("modalOverlay");
+  const modalContent = document.getElementById("modalContent");
 
-    // 定义点击遮罩层的处理函数
-    function handleOverlayClick(event) {
-        // 检查点击的目标是否是遮罩层本身（而不是它的子元素，比如里面的 p 或 button）
-        if (event.target === modalOverlay) {
-            closeModal(); // 如果是，就关闭弹窗
-        }
+  // 定义点击遮罩层的处理函数
+  function handleOverlayClick(event) {
+    // 检查点击的目标是否是遮罩层本身（而不是它的子元素，比如里面的 p 或 button）
+    if (event.target === modalOverlay) {
+      closeModal(); // 如果是，就关闭弹窗
     }
+  }
 
-    // 为遮罩层添加点击事件监听器
-    modalOverlay.addEventListener('click', handleOverlayClick);
+  // 为遮罩层添加点击事件监听器
+  modalOverlay.addEventListener("click", handleOverlayClick);
 
-    // --- 示例：如何显示弹窗 (供参考) ---
-    // window.showModal = function() {
-    //     modalOverlay.style.display = 'block';
-    //     // 注意：如果每次都显示，事件监听器只需要添加一次，或者在这里检查是否已存在
-    // }
+  // --- 示例：如何显示弹窗 (供参考) ---
+  // window.showModal = function() {
+  //     modalOverlay.style.display = 'block';
+  //     // 注意：如果每次都显示，事件监听器只需要添加一次，或者在这里检查是否已存在
+  // }
 });

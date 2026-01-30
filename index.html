@@ -53,9 +53,7 @@
             <div class="nav-tab" data-tab="website"><span data-i18n="nav_website"></span></div>
             <div class="nav-tab" data-tab="tools"><span data-i18n="nav_tools"></span></div>
             <div class="nav-tab" data-tab="games"><span data-i18n="nav_games"></span></div>
-
             <div class="nav-tab" data-tab="footprint"><span data-i18n="nav_footprint"></span></div>
-
             <div class="nav-tab" data-tab="memos"><span data-i18n="nav_memos"></span></div>
             <div class="nav-tab" data-tab="contact"><span data-i18n="nav_contact"></span></div>
         </div>
@@ -122,7 +120,9 @@
         <div class="tab-content" id="website-content">
             <div class="content-section">
                 <h2 data-i18n="my_website_h2"></h2>
-                <div class="website-links" id="dynamic-website-links"></div>
+                <div class="website-links" id="dynamic-website-links">
+                    <div class="memo-loading" data-i18n="loading_website"></div>
+                </div>
             </div>
         </div>
 
@@ -130,9 +130,8 @@
         <div class="tab-content" id="tools-content">
             <div class="content-section">
                 <h2 data-i18n="my_tools_h2">我的工具</h2>
-
                 <div id="tools-container" class="tools-grid">
-                    <div class="memo-loading" data-i18n="loading_tools">正在加载工具列表...</div>
+                    <div class="memo-loading" data-i18n="loading_tools"></div>
                 </div>
             </div>
         </div>
@@ -142,7 +141,7 @@
             <div class="content-section">
                 <h2 data-i18n="my_games_h2">我常玩的游戏</h2>
                 <div id="games-container" class="games-grid">
-                    <div class="memo-loading" data-i18n="loading_games">正在加载游戏列表...</div>
+                    <div class="memo-loading" data-i18n="loading_games"></div>
                 </div>
             </div>
         </div>
@@ -159,7 +158,7 @@
             <div class="content-section">
                 <h2 data-i18n="memos_h2">闲言碎语</h2>
                 <div id="memos-container" class="memos-container">
-                    <div class="memo-loading" data-i18n="loading_memos">正在加载...</div>
+                    <div class="memo-loading" data-i18n="loading_memos"></div>
                 </div>
             </div>
         </div>
@@ -173,11 +172,11 @@
     <div id="footer-wrap">
         <div class="webinfo">
             <div class="webinfo-item">
-                <div class="webinfo-site-uv-name" data-i18n="visitor_count_label">本站访客数 :</div>
+                <div class="webinfo-site-uv-name" data-i18n="visitor_count_label"></div>
                 <div class="webinfo-site-uv-count" id="site_uv">-</div>
             </div>
             <div class="webinfo-item">
-                <div class="webinfo-site-name" data-i18n="visit_count_label">本站总访问量 :</div>
+                <div class="webinfo-site-name" data-i18n="visit_count_label"></div>
                 <div class="webinfo-site-pv-count" id="site_pv">-</div>
             </div>
         </div>
@@ -190,8 +189,7 @@
     <div id="modalOverlay"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000;cursor: pointer; ">
         <div id="modalContent"
-            style="
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
     background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: center; cursor: default; ">
             <p>博主是个宅男，还没去过哦～</p>
         </div>
@@ -252,8 +250,8 @@
     <script src="./static/js/anypage.js"></script>
     <script src="./static/js/game_my.js"></script>
     <script src="./static/js/tools_my.js"></script>
+    <script src="./static/js/websites_my.js"></script>
     <script src="./static/js/memos.js"></script>
-    <script src="./static/js/my-websites.js"></script>
     <script src="./static/js/map-footprint.js"></script>
     <script src="./static/js/tabchange.js"></script>
 </body>
