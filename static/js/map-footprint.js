@@ -193,7 +193,7 @@ const MapFootprintModule = (() => {
               // 如果还需要显示其他描述信息（例如可以从 params.data 中获取），可以在此处添加
               const description = params.data.desc || "博主也不知道说啥了。。。";
               if (description) {
-                tooltipHtml += `<strong>描述:</strong>${description}<br/>`;
+                tooltipHtml += `<strong>描述: </strong>${description}<br/>`;
               }
               // 获取图片列表
               const imageList = params.data.imgList; // 直接从数据对象获取 imgList
@@ -201,14 +201,14 @@ const MapFootprintModule = (() => {
               // 检查是否有图片列表且不为空
               if (Array.isArray(imageList) && imageList.length > 0) {
                 // 添加标题
-                tooltipHtml += "<strong>照片:</strong><br/>";
+                tooltipHtml += "<strong>照片: </strong><br/>";
                 // 遍历图片列表，生成 HTML 图像标签
                 imageList.forEach((imgSrc) => {
                   tooltipHtml += `<img src="${imgSrc}" alt="${name} 图片" style="max-width: 150px; max-height: 100px; margin: 5px; border-radius: 4px;" onerror="this.style.display='none';"/>`;
                 });
               } else {
                 // 如果没有图片或 imgList 不存在/为空，则显示提示
-                tooltipHtml += "<strong>照片:</strong>看来博主不是很爱拍照~";
+                tooltipHtml += "<strong>照片: </strong>看来博主不是很爱拍照~";
               }
 
               return tooltipHtml; // 返回构建好的 HTML 字符串
@@ -253,11 +253,11 @@ const MapFootprintModule = (() => {
       // 为了实现高亮，我们只需要列出访问过的城市即可，未访问的城市会使用默认颜色
       const provinceMapData = filteredVisitedPlaces.map((city) => ({
         name: city.name,
-        desc:city.desc || "",
-        imgList:city.imgList || [],
+        desc: city.desc || "",
+        imgList: city.imgList || [],
         value: 1, // 值为 1 表示访问过，用于 visualMap 区分
       }));
-      // console.log(provinceMapData)
+      
       // --- 配置 visualMap ---
       visualMapConfig = {
         show: false, // 通常不显示 visualMap 组件条
@@ -270,7 +270,6 @@ const MapFootprintModule = (() => {
       };
 
       // --- 创建省份地图系列 (用于高亮城市) ---
-      // 关键修改：将 map 系列的 clickHandler 禁用，让 geo 组件处理点击
       const provinceMapSeries = {
         // name: "访问过的城市",
         type: "map",
@@ -278,7 +277,7 @@ const MapFootprintModule = (() => {
         roam: roamSetting,
         zoom: zoomLevel,
         center: centerCoord,
-        silent: true, // 设置为 true，使 map 系列不响应鼠标事件，避免干扰 geo 的点击返回
+        silent: false, // 设置为 false，允许响应鼠标事件以显示 tooltip
         label: {
           show: true, // 可以选择是否显示城市名称标签
           color: "#000", // 标签颜色
@@ -305,6 +304,43 @@ const MapFootprintModule = (() => {
           borderColor: "#333",
           borderWidth: 0.5,
         },
+        // 添加 tooltip 配置到 series 级别
+        tooltip: {
+          trigger: 'item',
+          formatter: function(params) {
+            // 检查是否有数据
+            if (!params.data) {
+              return params.name || "未知城市";
+            }
+            
+            const cityName = params.data.name || params.name || "未知城市";
+            let tooltipHtml = `<div style="font-weight: bold; font-size: 14px; margin-bottom: 8px;">${cityName}</div>`;
+            
+            // 如果这个城市在 visitedPlaces 中有记录
+            const placeData = visitedPlaces.find(p => p.name === cityName && p.province === provinceCode);
+            if (placeData) {
+              // 显示描述
+              const description = placeData.desc || "暂无描述";
+              tooltipHtml += `<div style="margin-bottom: 8px; color: #666; font-size: 12px;">${description}</div>`;
+              
+              // 显示图片
+              if (placeData.imgList && placeData.imgList.length > 0) {
+                tooltipHtml += `<div style="display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px;">`;
+                placeData.imgList.forEach((imgSrc) => {
+                  tooltipHtml += `
+                    <img src="${imgSrc}" 
+                         alt="${cityName}" 
+                         style="width: 60px; height: 60px; object-fit: cover; 
+                                border-radius: 4px; border: 1px solid #ddd;" />
+                  `;
+                });
+                tooltipHtml += `</div>`;
+              }
+            }
+            
+            return tooltipHtml;
+          }
+        }
       };
 
       // 将省份地图系列和 geo 组件添加到配置中
@@ -332,7 +368,14 @@ const MapFootprintModule = (() => {
         },
       },
       tooltip: {
-
+        trigger: 'item',
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        borderColor: '#ddd',
+        borderWidth: 1,
+        textStyle: {
+          color: '#333'
+        },
+        extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px;'
       },
       // geo 组件配置
       geo:

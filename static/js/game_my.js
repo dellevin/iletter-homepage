@@ -135,6 +135,26 @@ const gameDetailData = {
       "./static/img/game/guigubahuang/3.jpg",
     ],
   },
+  3: {
+    id: "",
+    rank: "",
+    detailDesc_zh: "游戏玩法大杂烩，好玩，爱玩！",
+    detailDesc_en: "Fun! Love playing! The game is very nice!",
+    images: [
+      "./static/img/game/jiangchengchuangyeji/1.png",
+      "./static/img/game/jiangchengchuangyeji/2.png",
+    ],
+  },
+  5: {
+    id: "游戏id：一口氰化物",
+    rank: "<strong>历史最高段位：</strong>星耀",
+    detailDesc_zh: "有你们，才是真正的荣耀",
+    detailDesc_en: "",
+    images: [
+      "./static/img/game/wangzherongyao/wangzherongyao1.jpg",
+      "./static/img/game/wangzherongyao/wangzherongyao2.jpg",
+    ],
+  },
   6: {
     id: "",
     rank: "<strong>历史最高段位：</strong>传奇车神",
@@ -143,6 +163,15 @@ const gameDetailData = {
     images: [
       "./static/img/game/qqspead/qqspead1.jpg",
       "./static/img/game/qqspead/qqspead2.jpg",
+    ],
+  },
+  7: {
+    id: "游戏id：chisty",
+    rank: "",
+    detailDesc_zh: "不好玩，但是满足了我的剧情幻想。",
+    detailDesc_en: "",
+    images: [
+      "./static/img/game/longzuhuanxiang/longzuhuanxiang1.jpg",
     ],
   },
 };

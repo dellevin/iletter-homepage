@@ -54,7 +54,7 @@ const translationsZH = {
   loading_memos: "正在加载闲言碎语...",
   loading_website:"正在加载网站...",
   // 底部
-  footer_text: "我虽然是个废物,但我仍然选择用自己喜欢的方式度过自己的余生",
+  footer_text: "我虽然是个废物，但我仍然选择用自己喜欢的方式度过自己的余生",
   visitor_count_label: "本站访客数 :",
   visit_count_label: "本站总访问量 :",
 };

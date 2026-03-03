@@ -192,8 +192,72 @@
 
     // 为加载更多按钮绑定事件 (使用全局函数)
     window.loadMemos = loadMemos;
-
-    // 当“闲言碎语”标签被点击时加载数据
+    
+    // 图片点击放大功能
+    function initImageZoom() {
+        // 使用事件委托，监听整个容器
+        memosContainer.addEventListener('click', function (e) {
+            // 检查是否点击到了图片
+            if (e.target.classList.contains('memo-attachment-image')) {
+                const fullUrl = e.target.getAttribute('data-full-url');
+                if (fullUrl) {
+                    showImageModal(fullUrl);
+                }
+            }
+        });
+    }
+    
+    // 显示图片放大模态框
+    function showImageModal(imageUrl) {
+        // 创建模态框
+        const modal = document.createElement('div');
+        modal.id = 'image-zoom-modal';
+        modal.style.cssText = `
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        `;
+    
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.style.cssText = `
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        `;
+    
+        modal.appendChild(img);
+        document.body.appendChild(modal);
+    
+        // 点击关闭
+        modal.addEventListener('click', function () {
+            modal.remove();
+        });
+    
+        // ESC 键关闭
+        function handleEsc(e) {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', handleEsc);
+            }
+        }
+        document.addEventListener('keydown', handleEsc);
+    }
+    
+    // 初始化图片放大功能
+    initImageZoom();
+    
+    // 当"闲言碎语"标签被点击时加载数据
     memosTab.addEventListener("click", function () {
         // 只有在内容是空的或者首次加载时才调用
         if (memoData.length === 0) {
