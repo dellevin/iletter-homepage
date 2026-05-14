@@ -144,12 +144,12 @@ const MapFootprintModule = (() => {
 
     if (level === "country") {
       geoMapName = COUNTRY_MAP_NAME;
-      roamSetting = false; // 启用缩放和平移
-      zoomLevel = 1.1;
+      roamSetting = true; // 启用缩放和平移
+      zoomLevel = 1.2;
       centerCoord = [104.06, 32]; // 中国中心
       titleText = "";
       filteredVisitedPlaces = visitedPlaces; // 显示所有足迹
-
+    
       // 国家地图：保持原有的 geo 和 scatter 配置
       seriesConfig = [
         {
@@ -160,14 +160,13 @@ const MapFootprintModule = (() => {
           symbol: "pin",
           symbolSize: 18,
           itemStyle: {
-            color: "#FF6B6B",
-            borderColor: "#fff",
-            borderWidth: 1,
+            color: "#333",
           },
           emphasis: {
             itemStyle: {
-              color: "#dd4444",
+              color: "#000",
             },
+            symbolSize: 22
           },
           tooltip: {
             // --- 核心修改：Formatter 函数 ---
@@ -176,7 +175,7 @@ const MapFootprintModule = (() => {
               if (!params.data) {
                 return params.name || "未知地点"; // 如果没有数据，至少显示名称或默认文字
               }
-
+    
               // 获取地点名称和坐标
               const name = params.data.name || "未知地点";
               const longitude =
@@ -187,30 +186,36 @@ const MapFootprintModule = (() => {
                 params.data.value && params.data.value[1]
                   ? params.data.value[1].toFixed(4)
                   : "N/A";
-
+    
               // 初始化 tooltip 内容字符串
-              let tooltipHtml = `${name}<br/>坐标: [${longitude}, ${latitude}]<br/>`; // 添加一些换行和分割
+              let tooltipHtml = `<div style="padding: 5px;">`;
+              tooltipHtml += `<div style="font-weight: bold; font-size: 14px; margin-bottom: 6px; color: #333;">${name}</div>`;
+              tooltipHtml += `<div style="font-size: 11px; color: #999; margin-bottom: 8px;">[${longitude}, ${latitude}]</div>`;
+                  
               // 如果还需要显示其他描述信息（例如可以从 params.data 中获取），可以在此处添加
               const description = params.data.desc || "博主也不知道说啥了。。。";
               if (description) {
-                tooltipHtml += `<strong>描述: </strong>${description}<br/>`;
+                tooltipHtml += `<div style="margin-bottom: 10px; padding: 6px; background: #f9f9f9; border-radius: 3px; font-size: 12px; color: #666; line-height: 1.5; border-left: 2px solid #333;">${description}</div>`;
               }
               // 获取图片列表
               const imageList = params.data.imgList; // 直接从数据对象获取 imgList
-
+    
               // 检查是否有图片列表且不为空
               if (Array.isArray(imageList) && imageList.length > 0) {
                 // 添加标题
-                tooltipHtml += "<strong>照片: </strong><br/>";
+                tooltipHtml += "<div style='font-weight: bold; margin-bottom: 6px; color: #333; font-size: 12px;'>照片:</div>";
+                tooltipHtml += "<div style='display: flex; gap: 4px; flex-wrap: wrap;'>";
                 // 遍历图片列表，生成 HTML 图像标签
                 imageList.forEach((imgSrc) => {
-                  tooltipHtml += `<img src="${imgSrc}" alt="${name} 图片" style="max-width: 150px; max-height: 100px; margin: 5px; border-radius: 4px;" onerror="this.style.display='none';"/>`;
+                  tooltipHtml += `<img src="${imgSrc}" alt="${name} 图片" style="width: 60px; height: 60px; object-fit: cover; border-radius: 3px; border: 1px solid #eee; box-shadow: 0 1px 2px rgba(0,0,0,0.1);" onerror="this.style.display='none';"/>`;
                 });
+                tooltipHtml += "</div>";
               } else {
                 // 如果没有图片或 imgList 不存在/为空，则显示提示
-                tooltipHtml += "<strong>照片: </strong>看来博主不是很爱拍照~";
+                tooltipHtml += "<div style='color: #999; font-size: 11px;'>暂无照片</div>";
               }
-
+                  
+              tooltipHtml += `</div>`;
               return tooltipHtml; // 返回构建好的 HTML 字符串
             },
           },
@@ -280,19 +285,21 @@ const MapFootprintModule = (() => {
         silent: false, // 设置为 false，允许响应鼠标事件以显示 tooltip
         label: {
           show: true, // 可以选择是否显示城市名称标签
-          color: "#000", // 标签颜色
+          color: "#333", // 使用主题色
           fontSize: 10,
+          fontWeight: 'normal'
         },
         emphasis: {
           label: {
             // 悬停时标签效果
             show: true,
             fontWeight: "bold",
+            fontSize: 11,
+            color: '#333'
           },
           itemStyle: {
             // 悬停时区域效果
-            opacity: 0.8, // 降低透明度
-            // areaColor: '#ffcccc', // 也可以设置悬停颜色，但会受 visualMap 影响
+            opacity: 0.9,
           },
         },
 
@@ -300,9 +307,9 @@ const MapFootprintModule = (() => {
         data: provinceMapData,
         // 默认样式（未在 data 中定义的区域将使用此样式）
         itemStyle: {
-          areaColor: "#eef2ff", // 未访问区域的默认颜色
-          borderColor: "#333",
-          borderWidth: 0.5,
+          areaColor: "#f5f5f5", // 浅灰色
+          borderColor: "#ddd",
+          borderWidth: 1,
         },
         // 添加 tooltip 配置到 series 级别
         tooltip: {
@@ -314,30 +321,34 @@ const MapFootprintModule = (() => {
             }
             
             const cityName = params.data.name || params.name || "未知城市";
-            let tooltipHtml = `<div style="font-weight: bold; font-size: 14px; margin-bottom: 8px;">${cityName}</div>`;
+            let tooltipHtml = `<div style="padding: 8px;">`;
+            tooltipHtml += `<div style="font-weight: bold; font-size: 15px; margin-bottom: 8px; color: #333;">${cityName}</div>`;
             
             // 如果这个城市在 visitedPlaces 中有记录
             const placeData = visitedPlaces.find(p => p.name === cityName && p.province === provinceCode);
             if (placeData) {
               // 显示描述
               const description = placeData.desc || "暂无描述";
-              tooltipHtml += `<div style="margin-bottom: 8px; color: #666; font-size: 12px;">${description}</div>`;
+              tooltipHtml += `<div style="margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 4px; font-size: 12px; color: #666; line-height: 1.5; border-left: 2px solid #333;">${description}</div>`;
               
               // 显示图片
               if (placeData.imgList && placeData.imgList.length > 0) {
-                tooltipHtml += `<div style="display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px;">`;
+                tooltipHtml += `<div style='font-weight: bold; margin-bottom: 8px; color: #333; font-size: 12px;'>照片 (${placeData.imgList.length}张):</div>`;
+                tooltipHtml += `<div style="display: flex; gap: 5px; flex-wrap: wrap;">`;
                 placeData.imgList.forEach((imgSrc) => {
                   tooltipHtml += `
                     <img src="${imgSrc}" 
                          alt="${cityName}" 
                          style="width: 60px; height: 60px; object-fit: cover; 
-                                border-radius: 4px; border: 1px solid #ddd;" />
+                                border-radius: 4px; border: 1px solid #eee; 
+                                box-shadow: 0 1px 3px rgba(0,0,0,0.1);" />
                   `;
                 });
                 tooltipHtml += `</div>`;
               }
             }
             
+            tooltipHtml += `</div>`;
             return tooltipHtml;
           }
         }
@@ -356,26 +367,34 @@ const MapFootprintModule = (() => {
 
     // 构建最终的 option
     const option = {
+      backgroundColor: '#fff', // 纯白背景，符合信纸风格
       title: {
         text: titleText,
         subtext: "读万卷书，不如行万里路。见多才会识广～",
         left: "center",
+        top: 20,
         textStyle: {
           fontSize: 18,
+          fontWeight: 'normal',
+          color: '#333', // 使用主题色
         },
         subtextStyle: {
           fontSize: 12,
+          color: '#999', // 使用浅灰色
         },
       },
       tooltip: {
         trigger: 'item',
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        borderColor: '#ddd',
+        backgroundColor: 'rgba(255, 255, 255, 0.98)',
+        borderColor: '#eee', // 使用浅灰色边框
         borderWidth: 1,
+        borderRadius: 4,
+        padding: 10,
         textStyle: {
-          color: '#333'
+          color: '#333',
+          fontSize: 13
         },
-        extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 6px;'
+        extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 4px;' // 轻微阴影
       },
       // geo 组件配置
       geo:
@@ -387,15 +406,26 @@ const MapFootprintModule = (() => {
               center: centerCoord,
               emphasis: {
                 itemStyle: {
-                  areaColor: "#f0f0f0", // geo 强调样式，当没有 series 时生效
-                  borderColor: "#409EFF",
-                  borderWidth: 1,
+                  areaColor: "#f5f5f5", // 悬停时浅灰色
+                  borderColor: "#666",
+                  borderWidth: 1.5,
                 },
+                label: {
+                  show: true,
+                  color: '#333',
+                  fontSize: 11
+                }
               },
               itemStyle: {
-                areaColor: "#eef2ff", // geo 默认样式，当没有 series 时生效
-                borderColor: "#333",
+                areaColor: "#fafafa", // 默认浅灰背景
+                borderColor: "#ddd",
+                borderWidth: 1,
               },
+              label: {
+                show: true,
+                color: '#666',
+                fontSize: 10
+              }
             }
           : {
               // 省份地图的 geo 配置
@@ -412,9 +442,15 @@ const MapFootprintModule = (() => {
               },
               emphasis: {
                 itemStyle: {
-                  areaColor: "rgba(64, 158, 255, 0.2)", // 可选：点击时的视觉反馈
-                  borderColor: "transparent",
+                  areaColor: "rgba(0, 0, 0, 0.05)", // 悬停时轻微灰色
+                  borderColor: "#666",
+                  borderWidth: 1.5,
                 },
+                label: {
+                  show: true,
+                  color: '#333',
+                  fontWeight: 'bold'
+                }
               },
             },
       series: seriesConfig, // 使用构建好的 series 配置
