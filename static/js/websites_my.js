@@ -31,11 +31,11 @@ const websitesData = [
                 linkText_zh: 'Gitea - 私人git托管仓库',
                 linkText_en: 'Gitea - Private Git Repository'
             },
-            {
-                url: 'http://openlist.iletter.top/',
-                linkText_zh: 'OpenList - 在线云盘合集',
-                linkText_en: 'OpenList - Online Cloud Disk Collection'
-            },
+            // {
+            //     url: 'http://openlist.iletter.top/',
+            //     linkText_zh: 'OpenList - 在线云盘合集',
+            //     linkText_en: 'OpenList - Online Cloud Disk Collection'
+            // },
             {
                 url: 'http://umami.iletter.top/',
                 linkText_zh: 'Umami - 网站访问分析',

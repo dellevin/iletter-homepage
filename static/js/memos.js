@@ -116,7 +116,7 @@
             // 构建 API 请求 URL，确保 pageToken 不为 null 时才添加
             const url = new URL(MEMOS_API_BASE);
             url.searchParams.set("pageSize", PAGE_SIZE.toString());
-            url.searchParams.set("orderBy", "display_time desc");
+            url.searchParams.set("orderBy", "create_time  desc");
             if (nextPageToken) {
                 url.searchParams.set("pageToken", nextPageToken);
             }
