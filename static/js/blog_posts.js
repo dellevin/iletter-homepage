@@ -142,35 +142,47 @@
 
     // 追加文章
     function appendPosts(posts) {
-        const container = document.querySelector('.blog-posts-container');
-        const loadMoreBtn = document.querySelector('.load-more-btn');
-        const oldTip = document.querySelector('.load-complete');
+        const containers = document.querySelectorAll('.blog-posts-container');
+        const loadMoreBtns = document.querySelectorAll('.load-more-btn');
+        const oldTips = document.querySelectorAll('.load-complete');
 
-        if (!container) return;
+        if (containers.length === 0) {
+            console.error('未找到 .blog-posts-container 容器');
+            return;
+        }
 
-        posts.forEach(post => {
-            const div = document.createElement('div');
-            div.innerHTML = renderPostItem(post);
-            container.appendChild(div.firstElementChild);
+        // 向所有容器追加新文章
+        containers.forEach(container => {
+            posts.forEach(post => {
+                const div = document.createElement('div');
+                div.innerHTML = renderPostItem(post);
+                container.appendChild(div.firstElementChild);
+            });
         });
 
-        // 移除旧的加载更多按钮和提示
-        if (loadMoreBtn) loadMoreBtn.remove();
-        if (oldTip) oldTip.remove();
+        // 移除所有旧的加载更多按钮和提示
+        loadMoreBtns.forEach(btn => btn.remove());
+        oldTips.forEach(tip => tip.remove());
 
-        // 添加新的加载更多按钮或提示
+        // 向所有容器后添加新的加载更多按钮或提示
         if (hasMore) {
-            const btn = document.createElement('button');
-            btn.className = 'load-more-btn';
-            btn.textContent = '点击加载更多';
-            btn.onclick = window.loadMoreBlogPosts;
-            container.after(btn);
+            containers.forEach(container => {
+                const btn = document.createElement('button');
+                btn.className = 'load-more-btn';
+                btn.textContent = '点击加载更多';
+                btn.onclick = window.loadMoreBlogPosts;
+                container.after(btn);
+            });
         } else {
-            const tip = document.createElement('div');
-            tip.className = 'load-complete';
-            tip.textContent = '已显示全部';
-            container.after(tip);
+            containers.forEach(container => {
+                const tip = document.createElement('div');
+                tip.className = 'load-complete';
+                tip.textContent = '已显示全部';
+                container.after(tip);
+            });
         }
+        
+        console.log(`成功追加 ${posts.length} 篇文章到 ${containers.length} 个容器，当前页码: ${currentPage}`);
     }
 
     // 渲染单个文章项

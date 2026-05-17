@@ -70,4 +70,8 @@ const translationsEN = {
   guestbook_submit_success: "Message submitted successfully!",
   guestbook_submit_error: "Failed to submit message, please try again",
   guestbook_required_nickname: "Please enter a nickname",
+  // Top-right buttons
+  btn_guestbook: "Guestbook",
+  btn_blog_posts: "Blog Posts",
+  blog_latest_posts: "Latest Posts",
 };

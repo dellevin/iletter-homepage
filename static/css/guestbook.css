@@ -9,7 +9,7 @@
 /* 博客文章按钮容器 */
 .blog-posts-btn-container {
     position: fixed;
-    top: 95px;
+    top: 115px;
     right: 80px;
     z-index: 999;
 }
@@ -19,14 +19,14 @@
     background: #fff;
     border: 1px solid #e8e8e8;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 4px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -35,20 +35,20 @@
     background: #fff;
     border: 1px solid #e8e8e8;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 4px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .btn-label {
-    font-size: 12px;
+    font-size: 13px;
     color: #666;
     line-height: 1;
 }
@@ -62,8 +62,8 @@
 
 .guestbook-btn svg,
 .blog-posts-btn svg {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
 }
 
 .guestbook-btn svg path,

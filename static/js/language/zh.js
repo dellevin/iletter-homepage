@@ -70,4 +70,8 @@ const translationsZH = {
   guestbook_submit_success: "留言提交成功！",
   guestbook_submit_error: "留言提交失败，请重试",
   guestbook_required_nickname: "请输入昵称",
+  // 右上角按钮
+  btn_guestbook: "留言板",
+  btn_blog_posts: "博客文章",
+  blog_latest_posts: "最新文章",
 };
