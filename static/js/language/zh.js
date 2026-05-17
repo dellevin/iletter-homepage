@@ -73,8 +73,8 @@ const translationsZH = {
   // 右上角按钮
   btn_guestbook: "留言板",
   btn_blog_posts: "博客文章",
-  btn_photo_album: "人生相册",
+  btn_photo_album: "旅途剪影",
   blog_latest_posts: "最新文章",
   photo_latest_photos: "最新照片",
-  photo_album_title: "人生相册",
+  photo_album_title: "旅途剪影",
 };

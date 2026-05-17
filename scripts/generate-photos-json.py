@@ -9,8 +9,10 @@ from datetime import datetime
 
 # ==================== 配置区域 ====================
 # 请在此处指定你的照片目录和输出文件路径
-DEFAULT_PHOTOS_DIR = Path("/www/wwwroot/www.iletter.top/static/img/photos")
-DEFAULT_OUTPUT_FILE = Path("/www/wwwroot/www.iletter.top/static/img/photos/photos.json")
+# DEFAULT_PHOTOS_DIR = Path("/www/wwwroot/www.iletter.top/static/img/photos")
+# DEFAULT_OUTPUT_FILE = Path("/www/wwwroot/www.iletter.top/static/img/photos/photos.json")
+DEFAULT_PHOTOS_DIR = Path("D:\\UserData\\Desktop\\my_proj\\www.iletter.top\\static\\img\\photos")
+DEFAULT_OUTPUT_FILE = Path("D:\\UserData\\Desktop\\my_proj\\www.iletter.top\\static\\img\\photos\\photos.json")
 # ================================================
 
 # 支持的图片格式

@@ -73,8 +73,8 @@ const translationsEN = {
   // Top-right buttons
   btn_guestbook: "Guestbook",
   btn_blog_posts: "Blog Posts",
-  btn_photo_album: "Photo Album",
+  btn_photo_album: "Travel Shadows",
   blog_latest_posts: "Latest Posts",
   photo_latest_photos: "Latest Photos",
-  photo_album_title: "Photo Album",
+  photo_album_title: "Travel Shadows",
 };

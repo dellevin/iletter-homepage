@@ -14,7 +14,7 @@
     z-index: 999;
 }
 
-/* 人生相册按钮容器 */
+/* 旅途剪影按钮容器 */
 .photo-album-btn-container {
     position: fixed;
     top: 210px;
@@ -808,7 +808,7 @@
     font-size: 10px;
 }
 
-/* 人生相册预览面板样式 - 列表模式 */
+/* 旅途剪影预览面板样式 - 列表模式 */
 .photo-album-container {
     padding: 10px;
 }
@@ -832,7 +832,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 人生相册瀑布流布局 */
+/* 旅途剪影瀑布流布局 */
 .photo-album-grid {
     column-count: 3;
     column-gap: 15px;
@@ -863,6 +863,8 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
                 box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0; /* 占位背景色 */
+    min-height: 200px; /* 最小高度，防止塌陷 */
 }
 
 .photo-album-item:hover {
@@ -874,7 +876,8 @@
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0; /* 初始隐藏，加载完再显示 */
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .photo-album-item:hover img {

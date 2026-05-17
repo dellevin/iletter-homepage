@@ -1,4 +1,4 @@
-// ==================== 人生相册功能 ====================
+// ==================== 旅途剪影功能 ====================
 (function() {
     // DOM 元素
     const photoAlbumBtn = document.getElementById('photo-album-btn');
@@ -12,6 +12,12 @@
     let allPhotos = [];
     let currentPhotoIndex = 0; // 当前查看的照片索引
     const PHOTO_BASE_PATH = './static/img/photos/';
+    
+    // 分页加载配置
+    const PAGE_SIZE = 10; // 每页加载数量
+    let currentPage = 1; // 当前页码
+    let hasMore = true; // 是否还有更多数据
+    let isLoading = false; // 是否正在加载中
 
     // 初始化
     function init() {
@@ -84,16 +90,65 @@
                 photoAlbumList.innerHTML = previewHtml;
             }
 
-            // 完整弹窗：瀑布流布局显示所有照片
+            // 完整弹窗：瀑布流布局显示当前页的照片
+            const startIndex = (currentPage - 1) * PAGE_SIZE;
+            const endIndex = Math.min(currentPage * PAGE_SIZE, photos.length);
+            const currentPhotos = photos.slice(startIndex, endIndex);
+            
+            // 如果不是重置，先获取已有的网格容器
+            const existingGrid = !isReset ? document.querySelector('.photo-album-grid') : null;
+            
+            if (existingGrid && !isReset) {
+                // 1. 彻底清理旧的按钮和提示
+                const oldControls = document.querySelectorAll('.load-more-btn, .load-complete');
+                oldControls.forEach(el => el.remove());
+
+                // 2. 追加新照片到现有网格
+                currentPhotos.forEach((photo, index) => {
+                    const globalIndex = startIndex + index;
+                    const div = document.createElement('div');
+                    div.className = 'photo-album-item';
+                    div.onclick = () => window.openPhotoLightbox(globalIndex);
+                    div.innerHTML = `
+                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy" onload="this.style.opacity=1">
+                    `;
+                    existingGrid.appendChild(div);
+                });
+                
+                // 3. 添加新的按钮/提示
+                if (hasMore) {
+                    const btn = document.createElement('button');
+                    btn.className = 'load-more-btn';
+                    btn.textContent = '点击加载更多';
+                    btn.onclick = window.loadMorePhotos;
+                    existingGrid.after(btn);
+                } else {
+                    const tip = document.createElement('div');
+                    tip.className = 'load-complete';
+                    tip.textContent = '已显示全部';
+                    existingGrid.after(tip);
+                }
+                return; // 提前返回
+            }
+            
+            // 首次渲染：创建完整的 HTML
             html = '<div class="photo-album-grid">';
-            photos.forEach((photo, index) => {
+            currentPhotos.forEach((photo, index) => {
+                const globalIndex = startIndex + index;
                 html += `
-                    <div class="photo-album-item" onclick="window.openPhotoLightbox(${index})">
-                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy">
+                    <div class="photo-album-item" onclick="window.openPhotoLightbox(${globalIndex})">
+                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy" onload="this.style.opacity=1">
                     </div>
                 `;
             });
             html += '</div>';
+            
+            // 添加加载更多按钮或提示
+            if (hasMore) {
+                html += `<button class="load-more-btn" onclick="window.loadMorePhotos()">点击加载更多</button>`;
+            } else {
+                html += '<div class="load-complete">已显示全部</div>';
+            }
         }
 
         if (photoAlbumBody) photoAlbumBody.innerHTML = html;
@@ -103,6 +158,15 @@
     function openFullModal() {
         photoAlbumFullModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // 重置分页状态
+        currentPage = 1;
+        hasMore = allPhotos.length > PAGE_SIZE;
+        
+        // 清空弹窗内容，避免重复渲染
+        if (photoAlbumBody) photoAlbumBody.innerHTML = '';
+        
+        renderPhotos(allPhotos, false);
     }
 
     // 关闭完整弹窗
@@ -232,6 +296,22 @@
             }, 300);
         }
     }
+
+    // 加载更多照片
+    window.loadMorePhotos = function() {
+        if (isLoading || !hasMore) return;
+        
+        isLoading = true;
+        currentPage++;
+        
+        // 判断是否还有更多数据
+        hasMore = currentPage * PAGE_SIZE < allPhotos.length;
+        
+        renderPhotos(allPhotos, false);
+        isLoading = false;
+    };
+
+
 
     // DOM 加载完成后初始化
     if (document.readyState === 'loading') {
