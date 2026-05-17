@@ -37,7 +37,7 @@ const translationsZH = {
   // 留言
   leave_message_h3: "留言",
   leave_message_p:
-    '如果你有任何问题或建议，欢迎<a href="https://blog.iletter.top/401.html" target="_blank">点击此链接</a>去我的博客下面给我留言！',
+    '如果你有任何问题或建议，欢迎<a href="https://blog.iletter.top/401.html" target="_blank">点击此链接</a>去我的博客下面给我留言，或者点击右上角的留言板进行留言哦！',
   leave_message_link: "点击此链接",
   // 小界面标题
   my_website_h2: "我的网站",
@@ -57,4 +57,17 @@ const translationsZH = {
   footer_text: "我虽然是个废物，但我仍然选择用自己喜欢的方式度过自己的余生",
   visitor_count_label: "本站访客数 :",
   visit_count_label: "本站总访问量 :",
+  // 留言板
+  guestbook_title: "留言板",
+  guestbook_placeholder: "说点什么吧...",
+  guestbook_nickname: "昵称（选填）",
+  guestbook_email: "邮箱（选填）",
+  guestbook_website: "网站（选填）",
+  guestbook_submit: "提交留言",
+  guestbook_loading: "正在加载留言...",
+  guestbook_no_data: "暂无留言，快来抢沙发吧！",
+  guestbook_load_error: "加载留言失败，请稍后重试",
+  guestbook_submit_success: "留言提交成功！",
+  guestbook_submit_error: "留言提交失败，请重试",
+  guestbook_required_nickname: "请输入昵称",
 };

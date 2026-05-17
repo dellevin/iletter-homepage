@@ -36,7 +36,7 @@ const translationsEN = {
   // 留言
   leave_message_h3: "Leave a Message",
   leave_message_p:
-    'If you have any questions or suggestions, feel free to <a href="https://blog.iletter.top/401.html" target="_blank">click here</a> to leave me a message on my blog!',
+    'If you have any questions or suggestions, feel free to <a href="https://blog.iletter.top/401.html" target="_blank">click here</a> to leave me a message on my blog, or click the guestbook link in the top right corner to leave a message!',
   leave_message_link: "click here",
   // 小界面标题
   my_website_h2: "My Websites",
@@ -57,4 +57,17 @@ const translationsEN = {
     "I still choose to spend the rest of my life in my own way although I am a failure.",
   visitor_count_label: "Visitors:",
   visit_count_label: "Total Visits:",
+  // Guestbook
+  guestbook_title: "Guestbook",
+  guestbook_placeholder: "Say something...",
+  guestbook_nickname: "Nickname (optional)",
+  guestbook_email: "Email (optional)",
+  guestbook_website: "Website (optional)",
+  guestbook_submit: "Submit",
+  guestbook_loading: "Loading messages...",
+  guestbook_no_data: "No messages yet, be the first to comment!",
+  guestbook_load_error: "Failed to load messages, please try again later",
+  guestbook_submit_success: "Message submitted successfully!",
+  guestbook_submit_error: "Failed to submit message, please try again",
+  guestbook_required_nickname: "Please enter a nickname",
 };

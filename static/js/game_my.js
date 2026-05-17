@@ -287,6 +287,11 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
   tooltipDiv.style.left = `${left}px`;
   tooltipDiv.style.display = "block";
 
+  // 触发重绘以启动过渡动画
+  void tooltipDiv.offsetWidth; 
+  tooltipDiv.style.opacity = "1";
+  tooltipDiv.style.transform = "translateY(0) scale(1)";
+
   // 记录当前打开的tooltip
   currentlyOpenTooltip = { element: tooltipDiv, index: gameIndex };
 
@@ -299,11 +304,13 @@ function toggleGameDetailTooltip(gameElement, gameIndex) {
 // ========== 隐藏Tooltip的辅助函数 ==========
 function hideTooltip(tooltipElement) {
   if (tooltipElement) {
-    tooltipElement.style.display = "none";
-    // 如果想完全移除DOM，可以取消下面两行注释，但通常隐藏即可
-    // if (tooltipElement.parentNode) {
-    //     tooltipElement.parentNode.removeChild(tooltipElement);
-    // }
+    tooltipElement.style.opacity = "0";
+    tooltipElement.style.transform = "translateY(10px) scale(0.95)";
+    
+    // 等待动画结束后再隐藏 display
+    setTimeout(() => {
+      tooltipElement.style.display = "none";
+    }, 600);
   }
 }
 
