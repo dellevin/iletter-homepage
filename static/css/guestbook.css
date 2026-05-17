@@ -924,7 +924,7 @@
 /* 加载更多按钮样式（用于留言板等实心弹窗） */
 .load-more-btn {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto 50px auto;
     background: #fff;
     border: 1px solid #e8e8e8;
     color: #666;
@@ -945,7 +945,7 @@
 /* 加载完成提示 */
 .load-complete {
     text-align: center;
-    padding: 20px 25px;
+    padding: 20px 25px 50px 25px;
     color: #bbb;
     font-size: 13px;
     font-style: italic;

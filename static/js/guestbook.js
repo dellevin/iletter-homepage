@@ -124,7 +124,7 @@
             guestbookBody.innerHTML = '<div class="guestbook-loading" data-i18n="guestbook_loading">正在加载留言...</div>';
         } else {
             // 添加加载更多按钮状态
-            const loadMoreBtn = document.querySelector('.load-more-btn');
+            const loadMoreBtn = guestbookBody.querySelector('.load-more-btn');
             if (loadMoreBtn) {
                 loadMoreBtn.disabled = true;
                 loadMoreBtn.textContent = '加载中...';
@@ -196,9 +196,8 @@
         // 判断是否还有更多数据
         if (hasMore) {
             html += `<button class="load-more-btn" onclick="window.loadMoreGuestbook()">点击加载更多</button>`;
-        } else {
-            html += `<div class="load-complete">已显示全部</div>`;
         }
+        // 否则不显示任何内容
 
         guestbookBody.innerHTML = html;
         
@@ -271,9 +270,8 @@
 
     // 追加留言
     function appendGuestbook(comments) {
-        const listContainer = document.querySelector('.guestbook-list');
-        const loadMoreBtn = document.querySelector('.load-more-btn');
-        const allDataTip = document.querySelector('.guestbook-body > div:last-child');
+        const listContainer = guestbookBody.querySelector('.guestbook-list');
+        const loadMoreBtn = guestbookBody.querySelector('.load-more-btn');
 
         if (!listContainer) return;
 
@@ -283,16 +281,12 @@
             listContainer.appendChild(div.firstElementChild);
         });
 
-        // 移除旧的加载更多按钮和提示
+        // 移除旧的加载更多按钮
         if (loadMoreBtn) {
             loadMoreBtn.remove();
         }
-        const oldTip = document.querySelector('.load-complete');
-        if (oldTip) {
-            oldTip.remove();
-        }
 
-        // 如果还有更多，添加新的加载更多按钮
+        // 如果还有更多，添加新的加载更多按钮；否则显示"已显示全部"
         if (hasMore) {
             const btn = document.createElement('button');
             btn.className = 'load-more-btn';
@@ -300,7 +294,6 @@
             btn.onclick = window.loadMoreGuestbook;
             listContainer.after(btn);
         } else {
-            // 没有更多数据，显示提示
             const tip = document.createElement('div');
             tip.className = 'load-complete';
             tip.textContent = '已显示全部';

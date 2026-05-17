@@ -116,6 +116,7 @@
             });
             html += '</div>';
 
+            // 只有在还有更多数据时才显示加载更多按钮
             if (hasMore) {
                 html += `<button class="load-more-btn" onclick="window.loadMoreBlogPosts()">点击加载更多</button>`;
             } else {
@@ -142,8 +143,6 @@
     // 追加文章
     function appendPosts(posts) {
         const containers = document.querySelectorAll('.blog-posts-container');
-        const loadMoreBtns = document.querySelectorAll('.load-more-btn');
-        const oldTips = document.querySelectorAll('.load-complete');
 
         if (containers.length === 0) {
             console.error('未找到 .blog-posts-container 容器');
@@ -157,29 +156,29 @@
                 div.innerHTML = renderPostItem(post);
                 container.appendChild(div.firstElementChild);
             });
-        });
 
-        // 移除所有旧的加载更多按钮和提示
-        loadMoreBtns.forEach(btn => btn.remove());
-        oldTips.forEach(tip => tip.remove());
+            // 移除当前容器后的旧按钮和提示（只操作当前容器的兄弟元素）
+            let nextSibling = container.nextElementSibling;
+            while (nextSibling && (nextSibling.classList.contains('load-more-btn') || nextSibling.classList.contains('load-complete'))) {
+                const toRemove = nextSibling;
+                nextSibling = nextSibling.nextElementSibling;
+                toRemove.remove();
+            }
 
-        // 向所有容器后添加新的加载更多按钮或提示
-        if (hasMore) {
-            containers.forEach(container => {
+            // 在当前容器后添加新的加载更多按钮或提示
+            if (hasMore) {
                 const btn = document.createElement('button');
                 btn.className = 'load-more-btn';
                 btn.textContent = '点击加载更多';
                 btn.onclick = window.loadMoreBlogPosts;
                 container.after(btn);
-            });
-        } else {
-            containers.forEach(container => {
+            } else {
                 const tip = document.createElement('div');
                 tip.className = 'load-complete';
                 tip.textContent = '已显示全部';
                 container.after(tip);
-            });
-        }
+            }
+        });
         
         console.log(`成功追加 ${posts.length} 篇文章到 ${containers.length} 个容器，当前页码: ${currentPage}`);
     }
