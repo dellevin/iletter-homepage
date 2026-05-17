@@ -226,7 +226,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.15);
     z-index: 10000;
     justify-content: center;
     align-items: center;
@@ -246,15 +246,106 @@
     }
 }
 
+/* 旅途剪影弹窗样式 - iOS 26 风格极致玻璃拟态 */
 .full-modal-content {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    backdrop-filter: blur(80px) saturate(250%);
+    -webkit-backdrop-filter: blur(80px) saturate(250%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 28px;
+    width: 95%;
+    max-width: 1400px;
+    max-height: 95vh;
+    overflow: hidden;
+    box-shadow: 
+        0 32px 100px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+        inset 0 1px 1px rgba(255, 255, 255, 0.6),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.15);
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    isolation: isolate;
+}
+
+/* 顶部高光反射 - 增强版 */
+.full-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(255, 255, 255, 0.2) 30%,
+        rgba(255, 255, 255, 0.05) 70%,
+        transparent 100%);
+    border-radius: 28px 28px 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 底部环境光反射 */
+.full-modal-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 80px;
+    background: radial-gradient(ellipse at center bottom, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 侧边边缘反光 */
+.full-modal-content .guestbook-header::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 0;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* 实心背景弹窗样式（留言板、博客文章专用） */
+.full-modal-content.solid-modal {
     background: #fff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
     border-radius: 12px;
     width: 92%;
     max-width: 850px;
     max-height: 92vh;
-    overflow: hidden;
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
-    animation: slideUp 0.3s ease;
+}
+
+/* 隐藏弹窗内部滚动条 */
+.guestbook-body {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(95vh - 70px);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.guestbook-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 @keyframes slideUp {
@@ -356,41 +447,55 @@
 }
 
 .guestbook-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 22px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .guestbook-header h2 {
     margin: 0;
-    font-size: 16px;
-    color: #333;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 24px;
+    color: #1a1a1a;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .guestbook-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #999;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 28px;
+    color: #444;
     cursor: pointer;
     line-height: 1;
     padding: 0;
-    width: 24px;
-    height: 24px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    z-index: 3;
 }
 
 .guestbook-close:hover {
-    color: #333;
+    background: rgba(255, 255, 255, 0.4);
+    color: #222;
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .guestbook-body {
@@ -731,10 +836,95 @@
     font-size: 14px;
 }
 
-/* 加载更多按钮 */
+/* 分页导航样式 - 极致玻璃拟态 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 30px 0;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.page-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.page-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.page-num {
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0 12px;
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.page-num:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.55);
+    transform: translateY(-2px);
+}
+
+.page-num.active {
+    background: rgba(255, 255, 255, 0.45);
+    color: #1a1a1a;
+    cursor: default;
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.7);
+    font-weight: 700;
+    transform: translateY(-1px);
+}
+
+.page-dots {
+    color: #777;
+    padding: 0 8px;
+}
+
+/* 加载更多按钮样式（用于留言板等实心弹窗） */
 .load-more-btn {
     display: block;
-    margin: 20px auto 20px auto;
+    margin: 20px auto;
     background: #fff;
     border: 1px solid #e8e8e8;
     color: #666;
@@ -750,12 +940,6 @@
     color: #333;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
-}
-
-.load-more-btn:disabled {
-    color: #ccc;
-    border-color: #eee;
-    cursor: not-allowed;
 }
 
 /* 加载完成提示 */
@@ -832,11 +1016,11 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 旅途剪影瀑布流布局 */
+/* 旅途剪影瀑布流布局 - 紧密贴住 */
 .photo-album-grid {
     column-count: 3;
-    column-gap: 15px;
-    padding: 20px;
+    column-gap: 0;
+    padding: 0;
 }
 
 @media (max-width: 1200px) {
@@ -848,28 +1032,25 @@
 @media (max-width: 768px) {
     .photo-album-grid {
         column-count: 2;
-        column-gap: 10px;
-        padding: 10px;
     }
 }
 
 .photo-album-item {
     break-inside: avoid;
-    margin-bottom: 15px;
+    margin-bottom: 0;
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 0;
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f0f0f0; /* 占位背景色 */
-    min-height: 200px; /* 最小高度，防止塌陷 */
+    transition: transform 0.3s ease;
+    box-shadow: none;
+    background-color: transparent;
+    min-height: 0;
 }
 
 .photo-album-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+    z-index: 1;
 }
 
 .photo-album-item img {
@@ -877,11 +1058,11 @@
     height: auto;
     display: block;
     opacity: 0; /* 初始隐藏，加载完再显示 */
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .photo-album-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
 
 /* 照片放大弹窗 */

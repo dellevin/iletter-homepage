@@ -14,7 +14,7 @@
     const PHOTO_BASE_PATH = './static/img/photos/';
     
     // 分页加载配置
-    const PAGE_SIZE = 10; // 每页加载数量
+    const PAGE_SIZE = 20; // 每页加载数量
     let currentPage = 1; // 当前页码
     let hasMore = true; // 是否还有更多数据
     let isLoading = false; // 是否正在加载中
@@ -95,42 +95,6 @@
             const endIndex = Math.min(currentPage * PAGE_SIZE, photos.length);
             const currentPhotos = photos.slice(startIndex, endIndex);
             
-            // 如果不是重置，先获取已有的网格容器
-            const existingGrid = !isReset ? document.querySelector('.photo-album-grid') : null;
-            
-            if (existingGrid && !isReset) {
-                // 1. 彻底清理旧的按钮和提示
-                const oldControls = document.querySelectorAll('.load-more-btn, .load-complete');
-                oldControls.forEach(el => el.remove());
-
-                // 2. 追加新照片到现有网格
-                currentPhotos.forEach((photo, index) => {
-                    const globalIndex = startIndex + index;
-                    const div = document.createElement('div');
-                    div.className = 'photo-album-item';
-                    div.onclick = () => window.openPhotoLightbox(globalIndex);
-                    div.innerHTML = `
-                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy" onload="this.style.opacity=1">
-                    `;
-                    existingGrid.appendChild(div);
-                });
-                
-                // 3. 添加新的按钮/提示
-                if (hasMore) {
-                    const btn = document.createElement('button');
-                    btn.className = 'load-more-btn';
-                    btn.textContent = '点击加载更多';
-                    btn.onclick = window.loadMorePhotos;
-                    existingGrid.after(btn);
-                } else {
-                    const tip = document.createElement('div');
-                    tip.className = 'load-complete';
-                    tip.textContent = '已显示全部';
-                    existingGrid.after(tip);
-                }
-                return; // 提前返回
-            }
-            
             // 首次渲染：创建完整的 HTML
             html = '<div class="photo-album-grid">';
             currentPhotos.forEach((photo, index) => {
@@ -143,11 +107,36 @@
             });
             html += '</div>';
             
-            // 添加加载更多按钮或提示
-            if (hasMore) {
-                html += `<button class="load-more-btn" onclick="window.loadMorePhotos()">点击加载更多</button>`;
-            } else {
-                html += '<div class="load-complete">已显示全部</div>';
+            // 分页导航
+            const totalPages = Math.ceil(photos.length / PAGE_SIZE);
+            if (totalPages > 1) {
+                html += '<div class="pagination-container">';
+                
+                // 上一页
+                if (currentPage > 1) {
+                    html += `<button class="page-btn" onclick="window.goToPhotoPage(${currentPage - 1})">&lt;</button>`;
+                }
+                
+                // 页码
+                for (let i = 1; i <= totalPages; i++) {
+                    if (i === currentPage) {
+                        html += `<span class="page-num active">${i}</span>`;
+                    } else {
+                        // 只显示当前页附近的页码，避免太多
+                        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                            html += `<span class="page-num" onclick="window.goToPhotoPage(${i})">${i}</span>`;
+                        } else if (i === currentPage - 3 || i === currentPage + 3) {
+                            html += `<span class="page-dots">...</span>`;
+                        }
+                    }
+                }
+                
+                // 下一页
+                if (currentPage < totalPages) {
+                    html += `<button class="page-btn" onclick="window.goToPhotoPage(${currentPage + 1})">&gt;</button>`;
+                }
+                
+                html += '</div>';
             }
         }
 
@@ -312,6 +301,15 @@
     };
 
 
+
+    // 跳转到指定页码
+    window.goToPhotoPage = function(page) {
+        if (page < 1 || page > Math.ceil(allPhotos.length / PAGE_SIZE)) return;
+        currentPage = page;
+        renderPhotos(allPhotos, false);
+        // 滚动到顶部
+        if (photoAlbumBody) photoAlbumBody.scrollTop = 0;
+    };
 
     // DOM 加载完成后初始化
     if (document.readyState === 'loading') {
