@@ -23,7 +23,7 @@ const websitesData = [
         items: [
             {
                 url: 'https://img.iletter.top/',
-                linkText_zh: '简单图床 - 私人图床工具',
+                linkText_zh: 'EsayImage2 - 私人图床工具',
                 linkText_en: 'EsayImage2 - Image Uploader Tool'
             },
             {
@@ -31,11 +31,6 @@ const websitesData = [
                 linkText_zh: 'Gitea - 私人git托管仓库',
                 linkText_en: 'Gitea - Private Git Repository'
             },
-            // {
-            //     url: 'http://openlist.iletter.top/',
-            //     linkText_zh: 'OpenList - 在线云盘合集',
-            //     linkText_en: 'OpenList - Online Cloud Disk Collection'
-            // },
             {
                 url: 'http://umami.iletter.top/',
                 linkText_zh: 'Umami - 网站访问分析',
@@ -47,10 +42,36 @@ const websitesData = [
                 linkText_en: 'Beszel - Server Monitoring'
             },
             {
-                url: 'http://py.iletter.top/en-de-code',
-                linkText_zh: 'Base64在线加密解密 - 自写demo',
-                linkText_en: 'Base64 Online Encryption and Decryption - My Demo'
+                url: 'https://memos.iletter.top/',
+                linkText_zh: 'Memos - 个人随想',
+                linkText_en: 'Memos - Personal Thoughts'
             },
+
+            {
+                url: 'http://frp.iletter.top/',
+                linkText_zh: 'FRP - 个人反向代理',
+                linkText_en: 'FRP - Personal Reverse Proxy'
+            },
+            {
+                url: 'https://bitwarden.iletter.top/',
+                linkText_zh: 'Bitwarden - 我的密码库',
+                linkText_en: 'Bitwarden - My Password Library'
+            },
+             {
+                url: 'http://docmost.iletter.top/',
+                linkText_zh: 'Docmost - 在线笔记',
+                linkText_en: 'Docmost - Online Notes'
+            },
+            {
+                url: 'http://openlist.iletter.top/',
+                linkText_zh: 'OpenList - 在线云盘合集',
+                linkText_en: 'OpenList - Online Cloud Disk Collection'
+            },
+            // {
+            //     url: 'http://py.iletter.top/en-de-code',
+            //     linkText_zh: 'Base64在线加密解密 - 自写demo',
+            //     linkText_en: 'Base64 Online Encryption and Decryption - My Demo'
+            // },
         ]
     }
     // 如果你想添加新分类，可以仿照上面的格式：
