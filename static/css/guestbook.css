@@ -14,6 +14,28 @@
     z-index: 999;
 }
 
+/* 人生相册按钮容器 */
+.photo-album-btn-container {
+    position: fixed;
+    top: 210px;
+    right: 80px;
+    z-index: 999;
+}
+
+/* 透明桥梁：向左延伸覆盖预览面板区域，确保鼠标滑入时 hover 不中断 */
+.guestbook-btn-container::after,
+.blog-posts-btn-container::after,
+.photo-album-btn-container::after {
+    content: '';
+    position: absolute;
+    right: 80px; /* 从容器的左边缘开始 */
+    top: 0;
+    width: 200px; /* 15px 间距 + 380px 预览面板宽度 */
+    height: 80px; /* 与按钮高度一致 */
+    background: transparent;
+    pointer-events: auto;
+}
+
 
 .guestbook-btn {
     background: #fff;
@@ -32,6 +54,22 @@
 }
 
 .blog-posts-btn {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.photo-album-btn {
     background: #fff;
     border: 1px solid #e8e8e8;
     border-radius: 50%;
@@ -78,7 +116,8 @@
 
 /* Hover 浮动预览面板 */
 .guestbook-preview,
-.blog-posts-preview {
+.blog-posts-preview,
+.photo-album-preview {
     visibility: hidden;
     position: absolute;
     top: 0;
@@ -103,7 +142,8 @@
 
 /* 当鼠标悬停在容器上时显示预览面板 */
 .guestbook-btn-container:hover .guestbook-preview,
-.blog-posts-btn-container:hover .blog-posts-preview {
+.blog-posts-btn-container:hover .blog-posts-preview,
+.photo-album-btn-container:hover .photo-album-preview {
     visibility: visible;
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -768,6 +808,194 @@
     font-size: 10px;
 }
 
+/* 人生相册预览面板样式 - 列表模式 */
+.photo-album-container {
+    padding: 10px;
+}
+
+.photo-preview-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-preview-item:hover {
+    transform: scale(1.05);
+}
+
+.photo-preview-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 人生相册瀑布流布局 */
+.photo-album-grid {
+    column-count: 3;
+    column-gap: 15px;
+    padding: 20px;
+}
+
+@media (max-width: 1200px) {
+    .photo-album-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-album-grid {
+        column-count: 2;
+        column-gap: 10px;
+        padding: 10px;
+    }
+}
+
+.photo-album-item {
+    break-inside: avoid;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-album-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.photo-album-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-album-item:hover img {
+    transform: scale(1.1);
+}
+
+/* 照片放大弹窗 */
+.photo-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.photo-lightbox.active {
+    display: flex;
+}
+
+.photo-lightbox img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: opacity 0.3s ease;
+}
+
+.photo-lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10001;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.photo-lightbox-close:hover {
+    transform: rotate(90deg);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 左右切换按钮 */
+.photo-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10001;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    user-select: none;
+}
+
+.photo-lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.photo-lightbox-prev {
+    left: 40px;
+}
+
+.photo-lightbox-next {
+    right: 40px;
+}
+
+/* 图片计数器 */
+.photo-lightbox-counter {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 20px;
+    border-radius: 20px;
+    z-index: 10001;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .guestbook-btn-container {
@@ -780,9 +1008,15 @@
         top: 90px;
     }
     
+    .photo-album-btn-container {
+        right: 15px;
+        top: 165px;
+    }
+    
     /* 移动端预览面板调整位置，避免超出屏幕 */
     .guestbook-preview,
-    .blog-posts-preview {
+    .blog-posts-preview,
+    .photo-album-preview {
         right: auto;
         left: calc(100% + 10px);
         transform-origin: center left;
@@ -790,7 +1024,8 @@
     }
 
     .guestbook-btn-container:hover .guestbook-preview,
-    .blog-posts-btn-container:hover .blog-posts-preview {
+    .blog-posts-btn-container:hover .blog-posts-preview,
+    .photo-album-btn-container:hover .photo-album-preview {
         transform: translateX(0) scale(1);
     }
     

@@ -29,20 +29,6 @@
         
         // 关闭按钮
         blogPostsClose.addEventListener('click', closeFullModal);
-        
-        // 点击背景关闭
-        blogPostsFullModal.addEventListener('click', function(e) {
-            if (e.target === blogPostsFullModal) {
-                closeFullModal();
-            }
-        });
-        
-        // ESC 键关闭
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && blogPostsFullModal.classList.contains('active')) {
-                closeFullModal();
-            }
-        });
 
         // 页面加载时自动加载数据（用于 Hover 预览）
         loadBlogPosts(true);
@@ -94,12 +80,13 @@
             const result = await response.json();
             const posts = result.data.dataSet || [];
             const totalPages = result.data.pages || 0;
+            const totalCount = result.data.count || 0; // 获取总数
             
             // 判断是否还有更多数据
             hasMore = currentPage < totalPages;
             
             if (reset) {
-                renderPosts(posts, true);
+                renderPosts(posts, true, totalCount);
             } else {
                 appendPosts(posts);
             }
@@ -117,7 +104,7 @@
     }
 
     // 渲染文章列表
-    function renderPosts(posts, isReset = false) {
+    function renderPosts(posts, isReset = false, totalCount = 0) {
         let html = '';
         
         if (!posts || posts.length === 0) {
@@ -138,6 +125,18 @@
 
         if (blogPostsList) blogPostsList.innerHTML = html;
         if (blogPostsFullBody) blogPostsFullBody.innerHTML = html;
+        
+        // 更新预览面板标题显示总数
+        const previewHeader = document.querySelector('#blog-posts-preview .preview-header h3');
+        if (previewHeader && totalCount > 0) {
+            const lang = localStorage.getItem('preferred_language') || 'zh';
+            const translations = {
+                'zh': typeof translationsZH !== 'undefined' ? translationsZH : {},
+                'en': typeof translationsEN !== 'undefined' ? translationsEN : {}
+            };
+            const titleText = translations[lang]['blog_latest_posts'] || '最新文章';
+            previewHeader.textContent = `${titleText} (${totalCount})`;
+        }
     }
 
     // 追加文章

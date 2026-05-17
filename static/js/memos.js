@@ -32,7 +32,7 @@
 
         let html = "";
         memos.forEach((memo) => {
-            const formattedDate = formatDate(memo.displayTime);
+            const formattedDate = formatDate(memo.createTime);
             const tagsHtml =
                 memo.tags && memo.tags.length > 0
                     ? `<div class="memo-tags">${memo.tags

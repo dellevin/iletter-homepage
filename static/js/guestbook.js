@@ -5,7 +5,7 @@
     'use strict';
 
     // Flask API 地址
-    const API_BASE_URL = 'http://localhost:8360';
+    const API_BASE_URL = 'https://comments.iletter.top';
     const PAGE_SIZE = 10;
 
     let currentPage = 1;
@@ -62,20 +62,6 @@
         
         // 关闭按钮
         guestbookClose.addEventListener('click', closeFullModal);
-        
-        // 点击背景关闭
-        guestbookFullModal.addEventListener('click', function(e) {
-            if (e.target === guestbookFullModal) {
-                closeFullModal();
-            }
-        });
-        
-        // ESC 键关闭
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && guestbookFullModal.classList.contains('active')) {
-                closeFullModal();
-            }
-        });
         
         // 预览面板触底加载
         if (previewBody) {
@@ -217,12 +203,29 @@
         guestbookBody.innerHTML = html;
         
         // 同时更新 Hover 预览面板（使用累积的所有留言）
-        renderPreview(allComments);
+        renderPreview(allComments, totalCount);
     }
 
     // 渲染 Hover 预览面板
-    function renderPreview(comments) {
-        if (!previewBody || !comments || comments.length === 0) return;
+    function renderPreview(comments, totalCount = 0) {
+        if (!previewBody) return;
+        
+        if (!comments || comments.length === 0) {
+            previewBody.innerHTML = '<div class="guestbook-empty">暂无留言，快来抢沙发吧！</div>';
+            return;
+        }
+        
+        // 更新标题显示总数
+        const previewHeader = document.querySelector('#guestbook-preview .preview-header h3');
+        if (previewHeader && totalCount > 0) {
+            const lang = localStorage.getItem('preferred_language') || 'zh';
+            const translations = {
+                'zh': typeof translationsZH !== 'undefined' ? translationsZH : {},
+                'en': typeof translationsEN !== 'undefined' ? translationsEN : {}
+            };
+            const titleText = translations[lang]['guestbook_title'] || '留言板';
+            previewHeader.textContent = `${titleText} (${totalCount})`;
+        }
         
         let html = '';
         comments.forEach(comment => {
@@ -305,7 +308,7 @@
         }
         
         // 更新预览面板
-        renderPreview(allComments);
+        renderPreview(allComments, allComments.length);
     }
 
     // 渲染单个留言项
