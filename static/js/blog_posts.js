@@ -40,8 +40,11 @@
         }
     }
 
-    // 处理滚动事件
+    // 处理滚动事件（仅针对预览面板）
     function handleScroll(e) {
+        // 如果滚动的是全屏弹窗，则不触发自动加载
+        if (e.target.closest('#blog-posts-full-modal')) return;
+
         const { scrollTop, scrollHeight, clientHeight } = e.target;
         // 距离底部 50px 时触发加载
         if (scrollHeight - scrollTop - clientHeight < 50) {
@@ -140,6 +143,7 @@
             }
             
             fullHtml = containerHtml;
+            // 弹窗界面保留“点击加载更多”按钮
             if (hasMore) {
                 fullHtml += `<button class="load-more-btn" onclick="window.loadMoreBlogPosts()">点击加载更多</button>`;
             } else {
@@ -188,18 +192,29 @@
                 toRemove.remove();
             }
 
-            // 在当前容器后添加新的加载更多按钮或提示
-            if (hasMore) {
-                const btn = document.createElement('button');
-                btn.className = 'load-more-btn';
-                btn.textContent = '点击加载更多';
-                btn.onclick = window.loadMoreBlogPosts;
-                container.after(btn);
+            // 区分预览面板和全屏弹窗：预览面板不显示按钮，全屏弹窗显示按钮
+            const isPreview = container.closest('#blog-posts-preview');
+            if (!isPreview) {
+                if (hasMore) {
+                    const btn = document.createElement('button');
+                    btn.className = 'load-more-btn';
+                    btn.textContent = '点击加载更多';
+                    btn.onclick = window.loadMoreBlogPosts;
+                    container.after(btn);
+                } else {
+                    const tip = document.createElement('div');
+                    tip.className = 'load-complete';
+                    tip.textContent = '已显示全部';
+                    container.after(tip);
+                }
             } else {
-                const tip = document.createElement('div');
-                tip.className = 'load-complete';
-                tip.textContent = '已显示全部';
-                container.after(tip);
+                // 预览面板仅显示完成提示
+                if (!hasMore) {
+                    const tip = document.createElement('div');
+                    tip.className = 'load-complete';
+                    tip.textContent = '已显示全部';
+                    container.after(tip);
+                }
             }
         });
         
