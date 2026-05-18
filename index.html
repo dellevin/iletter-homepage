@@ -203,6 +203,9 @@
                         data-i18n-attr="href">知乎</a>
                     <a href="https://space.bilibili.com/403551212" target="_blank" data-i18n="social_link4"
                         data-i18n-attr="href">B站</a>
+                    <a href="https://www.xiaohongshu.com/user/profile/65aabb99000000000e0271f1" target="_blank" 
+                        data-i18n="social_link6"
+                        data-i18n-attr="href">小红书</a>
                     <a href="https://www.52pojie.cn/home.php?mod=space&uid=2059006" target="_blank"
                         data-i18n="social_link5" data-i18n-attr="href">52pojie</a>
                 </div>
@@ -232,6 +235,54 @@
                     <div class="memo-loading" data-i18n="loading_website"></div>
                 </div>
             </div>
+        </div>
+
+        <!-- MookNote 作品详情弹窗 -->
+        <div id="mooknote-modal" class="guestbook-full-modal">
+            <div class="full-modal-content solid-modal mooknote-modal-content">
+                <div class="guestbook-header">
+                    <h2>MookNote：为记录而生</h2>
+                    <button id="mooknote-close" class="guestbook-close" title="关闭">&times;</button>
+                </div>
+                <div class="guestbook-body mooknote-body">
+                    <div class="mooknote-banner-carousel">
+                        <div class="carousel-container">
+                            <img src="./static/img/my_work/mooknote/banner.jpg" alt="MookNote Banner" class="carousel-image active" onclick="openMooknoteLightbox(0)">
+                            <img src="./static/img/my_work/mooknote/1.jpg" alt="MookNote Screenshot 1" class="carousel-image" onclick="openMooknoteLightbox(1)">
+                            <img src="./static/img/my_work/mooknote/2.jpg" alt="MookNote Screenshot 2" class="carousel-image" onclick="openMooknoteLightbox(2)">
+                            <img src="./static/img/my_work/mooknote/3.jpg" alt="MookNote Screenshot 3" class="carousel-image" onclick="openMooknoteLightbox(3)">
+                            <img src="./static/img/my_work/mooknote/4.jpg" alt="MookNote Screenshot 4" class="carousel-image" onclick="openMooknoteLightbox(4)">
+                            <img src="./static/img/my_work/mooknote/5.jpg" alt="MookNote Screenshot 5" class="carousel-image" onclick="openMooknoteLightbox(5)">
+                            <img src="./static/img/my_work/mooknote/6.jpg" alt="MookNote Screenshot 6" class="carousel-image" onclick="openMooknoteLightbox(6)">
+                        </div>
+                        <button class="carousel-btn carousel-prev" onclick="prevMooknoteImage()">&#10094;</button>
+                        <button class="carousel-btn carousel-next" onclick="nextMooknoteImage()">&#10095;</button>
+                        <div class="carousel-indicators"></div>
+                    </div>
+                    <div class="mooknote-content">
+                        <p class="mooknote-intro">一款专注于个人记录的极简工具，让每一份感动与思考都有迹可循。</p>
+                        <p>在这个信息爆炸的时代，我们每天都在消费大量的内容——看一部电影、读一本书、产生一个灵感。然而，这些内容往往如流水般逝去，留下的只有模糊的记忆。</p>
+                        <p><strong>MookNote 诞生于对简洁工具的追求。</strong></p>
+                        <p>我相信，好的工具应该像纸笔一样自然，不打扰思考，只记录生活。它不应该有繁琐的注册流程，不应该将你的数据存储在陌生的服务器上，更不应该用花哨的功能分散你的注意力。</p>
+                        <p>我厌烦了一款软件让用户不断地注册来注册去，使用手机号验证来验证去，数据不于自己，甚至自己写的笔记也不属于自己，我不喜欢这样，我想一款优秀的软件应该抛去繁杂的设计，就像太极一般的黑白两色。就像专业的人做专业的事情一样，MookNote主打记录生活一切有迹可循的影视娱乐，想法笔记。</p>
+                        <p>MookNote名字的由来也是让我冥思苦想，Mo取自Movie的前两个字母ok取自book的后两个字母，Note则名为笔记，名字就这么来了。影视，书籍，笔记的三项生活记录，因为热爱，所以记录，因为想法，所以书写。</p>
+                        <p>目前笔记还处于基础功能的版本，希望各位能多给我提提建议，我也会在其中做一些取舍，能与不能我都会一一记录下来的。在此，希望大家能多多帮助我这一个不知名的小开发者。</p>
+                        <p class="mooknote-thanks">最后的最后，感谢阿里千问的通义灵码，让我一个小小的java开发者接触到Android开发，帮了我的大忙，帮了我最纯真的梦想。</p>
+                        <div class="mooknote-download">
+                            <a href="https://mooknote.iletter.top/" target="_blank" class="download-btn">前往下载 / 了解更多</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MookNote 全屏图片预览 -->
+        <div id="mooknote-lightbox" class="photo-lightbox">
+            <button class="lightbox-close" onclick="closeMooknoteLightbox()">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="prevLightboxImage()">&#10094;</button>
+            <button class="lightbox-nav lightbox-next" onclick="nextLightboxImage()">&#10095;</button>
+            <div class="lightbox-counter"></div>
+            <img src="" alt="MookNote Fullscreen" class="lightbox-img">
         </div>
 
         <!-- 工具内容 -->

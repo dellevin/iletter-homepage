@@ -33,6 +33,8 @@ const translationsEN = {
   social_link3: "Zhihu",
   social_link4: "Bilibili",
   social_link5: "52pojie",
+  social_link6: "XiaoHongShu",
+  
   // 留言
   leave_message_h3: "Leave a Message",
   leave_message_p:

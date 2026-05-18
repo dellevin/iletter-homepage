@@ -185,13 +185,6 @@
             // 点击关闭按钮
             lightbox.querySelector('.photo-lightbox-close').addEventListener('click', closePhotoLightbox);
             
-            // 点击背景关闭
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    closePhotoLightbox();
-                }
-            });
-
             // 上一张按钮
             lightbox.querySelector('.photo-lightbox-prev').addEventListener('click', function(e) {
                 e.stopPropagation();

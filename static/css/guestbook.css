@@ -30,7 +30,7 @@
     position: absolute;
     right: 80px; /* 从容器的左边缘开始 */
     top: 0;
-    width: 200px; /* 15px 间距 + 380px 预览面板宽度 */
+    width: 50px; /* 15px 间距 + 380px 预览面板宽度 */
     height: 80px; /* 与按钮高度一致 */
     background: transparent;
     pointer-events: auto;
@@ -170,6 +170,21 @@
     padding: 0;
     overflow-y: auto;
     max-height: calc(400px - 50px);
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Firefox */
+}
+
+.preview-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.preview-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.preview-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
 }
 
 .preview-item {
@@ -270,6 +285,100 @@
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     isolation: isolate;
+}
+
+/* 顶部高光反射 - 增强版 */
+.full-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(255, 255, 255, 0.2) 30%,
+        rgba(255, 255, 255, 0.05) 70%,
+        transparent 100%);
+    border-radius: 28px 28px 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 底部环境光反射 */
+.full-modal-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 80px;
+    background: radial-gradient(ellipse at center bottom, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 侧边边缘反光 */
+.full-modal-content .guestbook-header::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 0;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* 旅途剪影弹窗样式 - iOS 26 风格极致玻璃拟态 */
+.full-modal-content {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    backdrop-filter: blur(80px) saturate(250%);
+    -webkit-backdrop-filter: blur(80px) saturate(250%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 28px;
+    width: 95%;
+    height: 95vh;
+    max-width: 1400px;
+    overflow: hidden;
+    box-shadow: 
+        0 32px 100px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+        inset 0 1px 1px rgba(255, 255, 255, 0.6),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.15);
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    isolation: isolate;
+}
+
+/* 针对旅途剪影弹窗的绝对全屏处理 */
+#photo-album-full-modal .full-modal-content {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+#photo-album-full-modal .full-modal-content::before {
+    border-radius: 0 !important;
+}
+
+#photo-album-full-modal .full-modal-content::after {
+    border-radius: 0 !important;
 }
 
 /* 顶部高光反射 - 增强版 */
@@ -455,6 +564,19 @@
     background: transparent;
     position: relative;
     z-index: 2;
+}
+
+/* 旅途剪影弹窗标题样式优化 */
+#photo-album-full-modal .guestbook-header h2 {
+    color: #1a1a1a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 旅途剪影弹窗关闭按钮样式优化 */
+#photo-album-full-modal .guestbook-close {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333;
 }
 
 .guestbook-header h2 {
@@ -973,6 +1095,17 @@
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-post-digest {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

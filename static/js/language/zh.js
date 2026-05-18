@@ -34,6 +34,8 @@ const translationsZH = {
   social_link3: "知乎",
   social_link4: "B站",
   social_link5: "52pojie",
+  social_link6: "小红书",
+  
   // 留言
   leave_message_h3: "留言",
   leave_message_p:
