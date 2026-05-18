@@ -101,7 +101,8 @@
                 const globalIndex = startIndex + index;
                 html += `
                     <div class="photo-album-item" onclick="window.openPhotoLightbox(${globalIndex})">
-                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy" onload="this.style.opacity=1">
+                        <div class="photo-loading-spinner"></div>
+                        <img src="${photo.src}" alt="照片 ${photo.id}" loading="lazy" onload="this.style.opacity=1; this.previousElementSibling.style.display='none'">
                     </div>
                 `;
             });
