@@ -17,7 +17,7 @@ const translationsZH = {
   about_me_p2:
     '平时的爱好也就是玩玩游戏，看看书，刷刷动漫，不爱出门，肥宅一个。讨厌重复简单的工作，会想办法偷懒写写自己的顺手的小工具什么的，毕竟懒惰是我的生产力。我也经常混迹于各大网络论坛博客并在各个技术博主下面直呼"大佬666"、"大佬牛牛牛"。自己的博客也在断断续续中更新。主要是记录生活随笔和碰到的技术难题。',
   about_me_p3:
-    '本站秉承简约风格，采用纯HTML，Umami做网站底部的uv/pv ，闲言碎语模块使用memos接口。同时使用堡塔云WAF防护，nginx缓存加速网站静态资源。如果您有兴趣，可以直接下载本站的 <a href="https://gitea.iletter.top/dellevin/BaiTu-homepage" target="_blank">https://gitea.iletter.top/dellevin/BaiTu-homepage </a> 并使用，或者通过F12查看网站源代码下载。',
+    '本站秉承简约风格，采用纯HTML，Umami做网站底部的uv/pv ，闲言碎语模块使用memos接口。同时使用堡塔云WAF防护，nginx缓存加速网站静态资源。如果您有兴趣，可以直接下载本站的 <a href="https://github.com/dellevin/iletter-homepage" target="_blank">https://github.com/dellevin/iletter-homepage </a> 并使用，或者通过F12查看网站源代码下载。',
   about_me_p4:
     "作为一个99年的码农，很庆幸我在工作之后还对技术有着极大的热情！如果你也对技术有着同样的兴趣，也很希望认识你！一同进步共同成长！",
   

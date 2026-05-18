@@ -17,7 +17,7 @@ const translationsEN = {
   about_me_p2:
     'My hobbies usually involve playing games, reading books, watching anime, and I prefer staying indoors. I hate repetitive and simple work, so I often write small tools to make life easier because laziness drives my productivity. I frequently lurk on various forums and blogs, shouting "666" or "Amazing" under tech bloggers. My own blog updates sporadically, mainly recording daily life notes and technical challenges encountered.',
   about_me_p3:
-    'This site follows a minimalist style, using pure HTML. Umami tracks UV/PV at the bottom. The Memos section uses the Memos API. It also employs Baota Cloud WAF protection and nginx caching for static resources. If you are interested, you can directly download the source code from <a href="https://gitea.iletter.top/dellevin/BaiTu-homepage" target="_blank">https://gitea.iletter.top/dellevin/BaiTu-homepage </a> and use it, or through F12 view website source code download.',
+    'This site follows a minimalist style, using pure HTML. Umami tracks UV/PV at the bottom. The Memos section uses the Memos API. It also employs Baota Cloud WAF protection and nginx caching for static resources. If you are interested, you can directly download the source code from <a href="https://github.com/dellevin/iletter-homepage" target="_blank">https://github.com/dellevin/iletter-homepage </a> and use it, or through F12 view website source code download.',
   about_me_p4:
     "As a 99er programmer, I am glad to still have great passion for technology after starting work! If you share the same interest in technology, I would love to meet you! Let's progress and grow together!",
   // 联系方式
