@@ -1423,12 +1423,12 @@
     
     .blog-posts-btn-container {
         right: 15px;
-        top: 90px;
+        top: 110px;
     }
     
     .photo-album-btn-container {
         right: 15px;
-        top: 165px;
+        top: 205px;
     }
     
     /* 移动端预览面板调整位置，避免超出屏幕 */
