@@ -20,6 +20,9 @@
     top: 210px;
     right: 80px;
     z-index: 999;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* 透明桥梁：向左延伸覆盖预览面板区域，确保鼠标滑入时 hover 不中断 */
@@ -76,13 +79,15 @@
     width: 80px;
     height: 80px;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .btn-label {
@@ -112,6 +117,102 @@
 .guestbook-btn:hover svg path,
 .blog-posts-btn:hover svg path {
     stroke: #333;
+}
+
+/* 自定义确认弹窗样式 */
+.custom-confirm-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.custom-confirm-modal.active {
+    display: flex;
+}
+
+.custom-confirm-content {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-confirm-message {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+
+.custom-confirm-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.confirm-btn-cancel,
+.confirm-btn-ok {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.confirm-btn-cancel {
+    background: rgba(0, 0, 0, 0.05);
+    color: #666;
+}
+
+.confirm-btn-cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.confirm-btn-ok {
+    background: #1a73e8;
+    color: #fff;
+}
+
+.confirm-btn-ok:hover {
+    background: #1557b0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Hover 浮动预览面板 */

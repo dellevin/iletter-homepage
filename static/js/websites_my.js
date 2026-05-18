@@ -100,7 +100,9 @@ function renderWebsites(websitesArray) {
                 } else {
                     linkElement.onclick = (e) => {
                         e.preventDefault();
-                        window.open(item.url, '_blank');
+                        showCustomConfirm(`确定要打开网站吗？\n${item.url}`, () => {
+                            window.open(item.url, '_blank');
+                        });
                     };
                 }
                 
@@ -126,7 +128,11 @@ function renderWebsites(websitesArray) {
                 if (item.url === 'https://mooknote.iletter.top/#/') {
                     card.onclick = () => openMookNoteModal();
                 } else {
-                    card.onclick = () => window.open(item.url, '_blank');
+                    card.onclick = () => {
+                        showCustomConfirm(`确定要打开网站吗？\n${item.url}`, () => {
+                            window.open(item.url, '_blank');
+                        });
+                    };
                 }
                 
                 const title = currentLang === 'en' ? item.linkText_en : item.linkText_zh;
@@ -220,7 +226,7 @@ window.nextMooknoteImage = function() {
 // 全屏预览功能
 window.openMooknoteLightbox = function(index) {
     lightboxImageIndex = index;
-    const lightbox = document.getElementById('mooknote-lightbox');
+    const lightbox = document.querySelector('.mooknote-lightbox');
     const img = lightbox.querySelector('.lightbox-img');
     const counter = lightbox.querySelector('.lightbox-counter');
     
@@ -230,7 +236,7 @@ window.openMooknoteLightbox = function(index) {
 };
 
 window.closeMooknoteLightbox = function() {
-    const lightbox = document.getElementById('mooknote-lightbox');
+    const lightbox = document.querySelector('.mooknote-lightbox');
     lightbox.classList.remove('active');
 };
 
@@ -245,7 +251,7 @@ window.nextLightboxImage = function() {
 };
 
 function updateLightboxImage() {
-    const lightbox = document.getElementById('mooknote-lightbox');
+    const lightbox = document.querySelector('.mooknote-lightbox');
     const img = lightbox.querySelector('.lightbox-img');
     const counter = lightbox.querySelector('.lightbox-counter');
     
@@ -255,8 +261,8 @@ function updateLightboxImage() {
 
 // 键盘事件支持
 document.addEventListener('keydown', (e) => {
-    const lightbox = document.getElementById('mooknote-lightbox');
-    if (!lightbox.classList.contains('active')) return;
+    const lightbox = document.querySelector('.mooknote-lightbox');
+    if (!lightbox || !lightbox.classList.contains('active')) return;
     
     if (e.key === 'Escape') {
         closeMooknoteLightbox();

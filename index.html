@@ -233,22 +233,22 @@
                 <h3 data-i18n="social_media_h3">社交媒体</h3>
                 <div class="website-links">
                     <a href="https://github.com/dellevin" target="_blank" data-i18n="social_link1"
-                        data-i18n-attr="href">GitHub</a>
+                        data-i18n-attr="href" onclick="return confirmLink(this.href)">GitHub</a>
                     <a href="https://weibo.com/u/6094785109999999999" target="_blank" data-i18n="social_link2"
-                        data-i18n-attr="href">微博</a>
+                        data-i18n-attr="href" onclick="return confirmLink(this.href)">微博</a>
                     <a href="https://www.zhihu.com/people/bing-xue-chen-xi-59" target="_blank" data-i18n="social_link3"
-                        data-i18n-attr="href">知乎</a>
+                        data-i18n-attr="href" onclick="return confirmLink(this.href)">知乎</a>
                     <a href="https://space.bilibili.com/403551212" target="_blank" data-i18n="social_link4"
-                        data-i18n-attr="href">B站</a>
+                        data-i18n-attr="href" onclick="return confirmLink(this.href)">B站</a>
                     <a href="https://www.xiaohongshu.com/user/profile/65aabb99000000000e0271f1" target="_blank" 
                         data-i18n="social_link6"
-                        data-i18n-attr="href">小红书</a>
+                        data-i18n-attr="href" onclick="return confirmLink(this.href)">小红书</a>
                     <a href="https://www.52pojie.cn/home.php?mod=space&uid=2059006" target="_blank"
-                        data-i18n="social_link5" data-i18n-attr="href">52pojie</a>
+                        data-i18n="social_link5" data-i18n-attr="href" onclick="return confirmLink(this.href)">52pojie</a>
                 </div>
                 <h3 data-i18n="leave_message_h3">留言</h3>
                 <p data-i18n="leave_message_p"><a href="https://blog.iletter.top/401.html" target="_blank"
-                        data-i18n="leave_message_link" data-i18n-attr="href">点击此链接</a>去我的博客下面给我留言！</p>
+                        data-i18n="leave_message_link" data-i18n-attr="href" onclick="return confirmLink(this.href)">点击此链接</a>去我的博客下面给我留言！</p>
             </div>
         </div>
 
@@ -270,6 +270,17 @@
                 <h2 data-i18n="my_website_h2"></h2>
                 <div class="website-links" id="dynamic-website-links">
                     <div class="memo-loading" data-i18n="loading_website"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自定义确认弹窗 -->
+        <div id="custom-confirm-modal" class="custom-confirm-modal">
+            <div class="custom-confirm-content">
+                <div class="custom-confirm-message"></div>
+                <div class="custom-confirm-buttons">
+                    <button class="confirm-btn-cancel">取消</button>
+                    <button class="confirm-btn-ok">确定</button>
                 </div>
             </div>
         </div>
@@ -306,7 +317,7 @@
                         <p>目前笔记还处于基础功能的版本，希望各位能多给我提提建议，我也会在其中做一些取舍，能与不能我都会一一记录下来的。在此，希望大家能多多帮助我这一个不知名的小开发者。</p>
                         <p class="mooknote-thanks">最后的最后，感谢阿里千问的通义灵码，让我一个小小的java开发者接触到Android开发，帮了我的大忙，帮了我最纯真的梦想。</p>
                         <div class="mooknote-download">
-                            <a href="https://mooknote.iletter.top/" target="_blank" class="download-btn">前往下载 / 了解更多</a>
+                            <a href="https://mooknote.iletter.top/" target="_blank" class="download-btn" onclick="return confirmLink(this.href)">前往下载 / 了解更多</a>
                         </div>
                     </div>
                 </div>
@@ -314,7 +325,7 @@
         </div>
 
         <!-- MookNote 全屏图片预览 -->
-        <div id="mooknote-lightbox" class="photo-lightbox">
+        <div id="mooknote-lightbox" class="photo-lightbox mooknote-lightbox">
             <button class="lightbox-close" onclick="closeMooknoteLightbox()">&times;</button>
             <button class="lightbox-nav lightbox-prev" onclick="prevLightboxImage()">&#10094;</button>
             <button class="lightbox-nav lightbox-next" onclick="nextLightboxImage()">&#10095;</button>
@@ -377,7 +388,7 @@
             </div>
         </div>
         <div class="copyright" style="margin-top: 15px;"><a href="http://beian.miit.gov.cn"
-                target="_blank">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del
+                target="_blank" onclick="return confirmLink(this.href)">冀ICP备2025122609号</a> &copy;<span>2024 - 2026</span> <span>Power BY</span> <span>Del
                 Levin </span>
         </div>
     </div>
@@ -441,6 +452,51 @@
             updateLanguageIcon(savedLang);
             document.documentElement.lang = savedLang;
             switchButton.addEventListener('click', switchLanguage);
+        });
+    </script>
+
+    <!-- 自定义确认弹窗逻辑 -->
+    <script>
+        // 链接跳转确认函数
+        function confirmLink(url) {
+            showCustomConfirm(`确定要打开网站吗？\n${url}`, () => {
+                window.open(url, '_blank');
+            });
+            return false; // 阻止默认跳转行为
+        }
+
+        // 自定义确认弹窗
+        let confirmCallback = null;
+        const customConfirmModal = document.getElementById('custom-confirm-modal');
+        const confirmMessage = customConfirmModal.querySelector('.custom-confirm-message');
+        const confirmBtnOk = customConfirmModal.querySelector('.confirm-btn-ok');
+        const confirmBtnCancel = customConfirmModal.querySelector('.confirm-btn-cancel');
+
+        function showCustomConfirm(message, onConfirm) {
+            confirmMessage.textContent = message;
+            confirmCallback = onConfirm;
+            customConfirmModal.classList.add('active');
+        }
+
+        function hideCustomConfirm() {
+            customConfirmModal.classList.remove('active');
+            confirmCallback = null;
+        }
+
+        confirmBtnOk.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback();
+            }
+            hideCustomConfirm();
+        });
+
+        confirmBtnCancel.addEventListener('click', hideCustomConfirm);
+
+        // 点击背景关闭
+        customConfirmModal.addEventListener('click', (e) => {
+            if (e.target === customConfirmModal) {
+                hideCustomConfirm();
+            }
         });
     </script>
     <script src="./static/js/anypage.js"></script>

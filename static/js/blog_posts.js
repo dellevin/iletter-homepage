@@ -213,7 +213,7 @@
         const category = post.categories && post.categories.length > 0 ? post.categories[0].name : '未分类';
         const digest = post.digest || '';
         
-        let html = `<div class="blog-post-item" onclick="window.open('${post.permalink}', '_blank')">`;
+        let html = `<div class="blog-post-item" onclick="showCustomConfirm('确定要打开网站吗？\\n${post.permalink}', () => window.open('${post.permalink}', '_blank'))">`;
         html += `<div class="blog-post-title">${escapeHtml(post.title)}</div>`;
         if (digest) {
             html += `<div class="blog-post-digest">${escapeHtml(digest)}</div>`;

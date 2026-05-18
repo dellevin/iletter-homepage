@@ -168,11 +168,11 @@
     window.openPhotoLightbox = function(photoIndex) {
         currentPhotoIndex = photoIndex;
         
-        // 检查是否已经存在 lightbox
-        let lightbox = document.querySelector('.photo-lightbox');
+        // 检查是否已经存在 lightbox（使用特定的类名避免与MookNote冲突）
+        let lightbox = document.querySelector('.photo-album-lightbox');
         if (!lightbox) {
             lightbox = document.createElement('div');
-            lightbox.className = 'photo-lightbox';
+            lightbox.className = 'photo-lightbox photo-album-lightbox'; // 同时保留两个类名以兼容CSS
             lightbox.innerHTML = `
                 <span class="photo-lightbox-close">&times;</span>
                 <span class="photo-lightbox-nav photo-lightbox-prev">&#10094;</span>
@@ -208,7 +208,7 @@
 
     // 更新 Lightbox 图片
     function updateLightboxImage() {
-        const lightbox = document.querySelector('.photo-lightbox');
+        const lightbox = document.querySelector('.photo-album-lightbox');
         if (!lightbox || !allPhotos[currentPhotoIndex]) return;
 
         const img = lightbox.querySelector('img');
@@ -255,6 +255,10 @@
 
     // 处理键盘事件
     function handleLightboxKeydown(e) {
+        // 只在旅途剪影的lightbox激活时处理
+        const albumLightbox = document.querySelector('.photo-album-lightbox');
+        if (!albumLightbox || !albumLightbox.classList.contains('active')) return;
+        
         if (e.key === 'ArrowLeft') {
             showPreviousPhoto();
         } else if (e.key === 'ArrowRight') {
@@ -266,7 +270,7 @@
 
     // 关闭照片放大查看器
     function closePhotoLightbox() {
-        const lightbox = document.querySelector('.photo-lightbox');
+        const lightbox = document.querySelector('.photo-album-lightbox');
         if (lightbox) {
             lightbox.classList.remove('active');
             
